@@ -12,7 +12,8 @@
     <string name="roommate">Roommate</string>
     <string name="market">Market</string>
     <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_chats">Chats</string>
+    <string name="title_blogs">Blogs</string>
+    <string name="title_roommate">Roommate</string>
+    <string name="title_market">Market </string>
 </resources>

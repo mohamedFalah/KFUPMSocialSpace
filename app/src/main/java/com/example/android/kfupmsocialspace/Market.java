@@ -5,11 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-public class Main2Activity extends AppCompatActivity {
-
-    private TextView mTextMessage;
+public class Market extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -26,11 +23,11 @@ public class Main2Activity extends AppCompatActivity {
                     return true;
 
                 case R.id.navigation_blogs:
-                    mTextMessage.setText(R.string.title_blogs);
+                    //mTextMessage.setText(R.string.title_blogs);
                     return true;
 
                 case R.id.navigation_roommate:
-                    mTextMessage.setText(R.string.title_roommate);
+                    //mTextMessage.setText(R.string.title_roommate);
                     return true;
 
                 case R.id.navigation_market:
@@ -46,13 +43,6 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //Change this to Course chat layout later
-        setContentView(R.layout.activity_main2);
-
-        mTextMessage = findViewById(R.id.message);
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        setContentView(R.layout.activity_market);
     }
-
 }
