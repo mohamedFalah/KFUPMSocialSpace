@@ -16,4 +16,9 @@
     <string name="title_blogs">Blogs</string>
     <string name="title_roommate">Roommate</string>
     <string name="title_market">Market </string>
+    <string name="profile">Profile</string>
+    <string name="utilities">Utilities</string>
+    <string name="files">Files</string>
+    <string name="log_out">Log out</string>
+    <string name="student_name">Student Name</string>
 </resources>

@@ -22,7 +22,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
 
-    //Added this design one from some tut dunno if i need it or not anymore :/
+    //Added this design one from https://www.youtube.com/watch?v=fGcMLu1GJEc
     implementation 'com.android.support:design:27.1.1'
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
