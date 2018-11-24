@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+
+    <!--https://www.youtube.com/watch?v=tPV8xA7m-iw-->
     <item
         android:id="@+id/navigation_chats"
         android:icon="@drawable/chats_icon"

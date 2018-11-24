@@ -2,7 +2,9 @@ package com.example.android.kfupmsocialspace;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,6 +16,24 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+
+    //Bottom Navigation bar Listener
+    private BottomNavigationView.OnNavigationItemSelectedListener botNavListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment selectedFragment = null;
+
+                    switch (item.getItemId()) {
+                        case (R.id.navigation_market):
+                            selectedFragment = new MarketFragment();
+                            break;
+                    }
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            selectedFragment).commit();
+                    return true;
+                }
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +51,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationview = findViewById(R.id.nav_view);
         //https://www.youtube.com/watch?v=bjYstsO1PgI 5:00 we implements the interface
         navigationview.setNavigationItemSelectedListener(this);
+
+        //adding the Listener to the bottom navigation bar
+        BottomNavigationView bottomnNav = findViewById(R.id.bottom_navigation);
+        bottomnNav.setOnNavigationItemSelectedListener(botNavListener);
+
 
         /*
         This is to show the action bar sliding. before that we add 2 strings in strings.xml
@@ -57,33 +82,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.nav_profile:
                 //getSupportFragmentManager shows the fragment in the framelayout
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).commit();
                 break;
 
             case R.id.nav_utilities:
                 //getSupportFragmentManager shows the fragment in the framelayout
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new UtilitiesFragment()).commit();
                 break;
 
             case R.id.nav_files:
                 //getSupportFragmentManager shows the fragment in the framelayout
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FilesFragment()).commit();
                 break;
 
             case R.id.nav_logout:
                 Toast.makeText(this, "Replace with Log out action", Toast.LENGTH_SHORT).show();
                 break;
         }
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new UtilitiesFragment()).commit();
 
         //After clicking an item we need to close the drawer so we can get to the page and see it
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
     }
-
 
     //if back is pressed it closes the toolbar first
     //START is for the left side
