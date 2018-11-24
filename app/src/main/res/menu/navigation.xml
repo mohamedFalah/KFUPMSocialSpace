@@ -14,6 +14,11 @@
         android:title="@string/title_blogs" />
 
     <item
+        android:id="@+id/navigation_news"
+        android:icon="@drawable/news_icon"
+        android:title="@string/news" />
+
+    <item
         android:id="@+id/navigation_roommate"
         android:icon="@drawable/roommate_icon"
         android:title="@string/title_roommate" />
