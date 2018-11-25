@@ -13,9 +13,43 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+
+    //Bottom Navigation bar Listener
+    public BottomNavigationView.OnNavigationItemSelectedListener botNavListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment selectedFragment = null;
+                    switch (item.getItemId()) {
+                        case (R.id.navigation_chats):
+                            selectedFragment = new ChatsFragment();
+                            break;
+                        case (R.id.navigation_blogs):
+                            selectedFragment = new BlogsFragment();
+                            break;
+                        case (R.id.navigation_news):
+                            selectedFragment = new NewsFragment();
+                            break;
+                        case (R.id.navigation_roommate):
+                            selectedFragment = new RoommateFragment();
+                            break;
+                        case (R.id.navigation_market):
+                            selectedFragment = new MarketFragment();
+                            break;
+                    }
+                    if (selectedFragment != null) {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                selectedFragment).commit();
+                    }
+
+                    return true;
+                }
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +76,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationview.setNavigationItemSelectedListener(this);
 
         //adding the Listener to the bottom navigation bar
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        BottomNavigationViewEx bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(botNavListener);
+
+        //removes the bad animation using the BottomNavigationViewEx https://github.com/ittianyu/BottomNavigationViewEx
+        for (int i = 0; i < bottomNav.getMenu().size(); i++) {
+            bottomNav.enableShiftingMode(false);
+        }
 
         //This is the first things you see when you open the app before clicking on any activity from the toolbar
         // https://www.youtube.com/watch?v=bjYstsO1PgI 9:20 when device rotates we don't call the method again
@@ -56,40 +95,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //just rotates the three line hamburger symbol with the device
         toggle.syncState();
     }
-    //Bottom Navigation bar Listener
-    private BottomNavigationView.OnNavigationItemSelectedListener botNavListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragment = null;
-                    switch (item.getItemId()) {
-                        case (R.id.navigation_chats):
-                            selectedFragment = new ChatsFragment();
-                            break;
-                        case (R.id.navigation_blogs):
-                            selectedFragment = new BlogsFragment();
-                            break;
-                        case (R.id.navigation_news):
-                            selectedFragment = new NewsFragment();
-                            break;
-                        case (R.id.navigation_roommate):
-                            selectedFragment = new RoommateFragment();
-                            break;
-                        case (R.id.navigation_market):
-                            selectedFragment = new MarketFragment();
-                            break;
-                    }
-                    if(selectedFragment != null) {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                selectedFragment).commit();
-                        if(item.isChecked()){
-
-                        }
-                    }
-
-                    return true;
-                }
-            };
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -106,8 +111,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 selectedFragment = new FilesFragment();
                 break;
             case (R.id.nav_logout):
-                item.setChecked(false);
-                Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
+                setContentView(R.layout.activity_sign_in);
+                Toast.makeText(this, "Logout Successfully", Toast.LENGTH_SHORT).show();
                 break;
         }
         if(selectedFragment != null) {

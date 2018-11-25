@@ -22,4 +22,9 @@
     <string name="log_out">Log out</string>
     <string name="student_name">Student Name</string>
     <string name="news">News</string>
+    <string name="password">Password</string>
+    <string name="id_number">ID Number</string>
+    <string name="sign_in">Sign In</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
