@@ -1,8 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <style name="AppTheme.NoActionBar">
+        <!--These two items can be merged into another style https://www.youtube.com/watch?v=fGcMLu1GJEc 9:00-->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <!-- Makes status bar transparent on API 21 or higher can be put in the normal styles file-->
+        <!--to see the notifications etc-->
+        <!--https://www.youtube.com/watch?v=zYVEMCiDcmY-->
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
 </resources>
