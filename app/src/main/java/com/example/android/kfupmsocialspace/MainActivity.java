@@ -13,10 +13,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    //Firebase for loging out
+    private FirebaseAuth firebaseAuth;
     private DrawerLayout drawer;
 
     //Bottom Navigation bar Listener
@@ -55,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Firebase auth
+        firebaseAuth = FirebaseAuth.getInstance();
 
         //Since we removed the defult action bar we have to tell the app to use the toolbar we created and select the 7th Toolbar
         Toolbar toolbar = findViewById(R.id.toolBar);
@@ -111,7 +118,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 selectedFragment = new FilesFragment();
                 break;
             case (R.id.nav_logout):
-                setContentView(R.layout.activity_sign_in);
+                firebaseAuth.signOut();
+                this.finish();
                 Toast.makeText(this, "Logout Successfully", Toast.LENGTH_SHORT).show();
                 break;
         }

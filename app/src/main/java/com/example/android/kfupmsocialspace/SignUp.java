@@ -1,5 +1,8 @@
 package com.example.android.kfupmsocialspace;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -56,12 +59,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         //check of an empty box
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "please enter your email", Toast.LENGTH_SHORT).show();
-            return;
 
         } else if (TextUtils.isEmpty(passwordtext)) {
             Toast.makeText(this, "please enter your password", Toast.LENGTH_SHORT).show();
-
-            return;
         }
 
         //show the prgress basr to user
@@ -99,10 +99,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         }
 
         if (view == SignIn) {
-            //go to the sign in page
-            Intent intent = new Intent(getApplicationContext(), SignIn.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+            this.finish();
+
         }
     }
 }
