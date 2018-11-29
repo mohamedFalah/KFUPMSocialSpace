@@ -13,24 +13,44 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    //Firebase for loging out
+    private FirebaseAuth firebaseAuth;
     private DrawerLayout drawer;
 
     //Bottom Navigation bar Listener
-    private BottomNavigationView.OnNavigationItemSelectedListener botNavListener =
+    public BottomNavigationView.OnNavigationItemSelectedListener botNavListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment selectedFragment = null;
-
                     switch (item.getItemId()) {
+                        case (R.id.navigation_chats):
+                            selectedFragment = new ChatsFragment();
+                            break;
+                        case (R.id.navigation_blogs):
+                            selectedFragment = new BlogsFragment();
+                            break;
+                        case (R.id.navigation_news):
+                            selectedFragment = new NewsFragment();
+                            break;
+                        case (R.id.navigation_roommate):
+                            selectedFragment = new RoommateFragment();
+                            break;
                         case (R.id.navigation_market):
                             selectedFragment = new MarketFragment();
                             break;
                     }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            selectedFragment).commit();
+                    if (selectedFragment != null) {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                selectedFragment).commit();
+                    }
+
                     return true;
                 }
             };
@@ -40,22 +60,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Firebase auth
+        firebaseAuth = FirebaseAuth.getInstance();
+
         //Since we removed the defult action bar we have to tell the app to use the toolbar we created and select the 7th Toolbar
         Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
 
         //Here is for the fragments after creating them to listen to the button clicks
         drawer = findViewById(R.id.drawer_layout);
-
-
-        NavigationView navigationview = findViewById(R.id.nav_view);
-        //https://www.youtube.com/watch?v=bjYstsO1PgI 5:00 we implements the interface
-        navigationview.setNavigationItemSelectedListener(this);
-
-        //adding the Listener to the bottom navigation bar
-        BottomNavigationView bottomnNav = findViewById(R.id.bottom_navigation);
-        bottomnNav.setOnNavigationItemSelectedListener(botNavListener);
-
 
         /*
         This is to show the action bar sliding. before that we add 2 strings in strings.xml
@@ -65,13 +78,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
 
+        NavigationView navigationview = findViewById(R.id.nav_view);
+        //https://www.youtube.com/watch?v=bjYstsO1PgI 5:00 we implements the interface
+        navigationview.setNavigationItemSelectedListener(this);
+
+        //adding the Listener to the bottom navigation bar
+        BottomNavigationViewEx bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnNavigationItemSelectedListener(botNavListener);
+
+        //removes the bad animation using the BottomNavigationViewEx https://github.com/ittianyu/BottomNavigationViewEx
+        for (int i = 0; i < bottomNav.getMenu().size(); i++) {
+            bottomNav.enableShiftingMode(false);
+        }
 
         //This is the first things you see when you open the app before clicking on any activity from the toolbar
         // https://www.youtube.com/watch?v=bjYstsO1PgI 9:20 when device rotates we don't call the method again
-        if (savedInstanceState == null)
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new ProfileFragment()).commit();
-        navigationview.setCheckedItem(R.id.nav_profile);
+                    new NewsFragment()).commit();
+            bottomNav.setSelectedItemId(R.id.navigation_news);
+        }
 
         //just rotates the three line hamburger symbol with the device
         toggle.syncState();
@@ -79,25 +105,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment selectedFragment = null;
+
         switch (item.getItemId()) {
-            case R.id.nav_profile:
-                //getSupportFragmentManager shows the fragment in the framelayout
+            case (R.id.nav_profile):
+                selectedFragment = new ProfileFragment();
                 break;
-
-            case R.id.nav_utilities:
-                //getSupportFragmentManager shows the fragment in the framelayout
+            case (R.id.nav_utilities):
+                selectedFragment = new UtilitiesFragment();
                 break;
-
-            case R.id.nav_files:
-                //getSupportFragmentManager shows the fragment in the framelayout
+            case (R.id.nav_files):
+                selectedFragment = new FilesFragment();
                 break;
-
-            case R.id.nav_logout:
-                Toast.makeText(this, "Replace with Log out action", Toast.LENGTH_SHORT).show();
+            case (R.id.nav_logout):
+                firebaseAuth.signOut();
+                this.finish();
+                Toast.makeText(this, "Logout Successfully", Toast.LENGTH_SHORT).show();
                 break;
         }
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new UtilitiesFragment()).commit();
+        if(selectedFragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    selectedFragment).commit();
+        }
 
         //After clicking an item we need to close the drawer so we can get to the page and see it
         drawer.closeDrawer(GravityCompat.START);

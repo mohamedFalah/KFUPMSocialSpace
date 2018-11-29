@@ -29,5 +29,4 @@
         android:id="@+id/navigation_market"
         android:icon="@drawable/market_icon"
         android:title="@string/title_market" />
-
 </menu>

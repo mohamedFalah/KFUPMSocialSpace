@@ -18,6 +18,10 @@ allprojects {
     repositories {
         google()
         jcenter()
+
+        //https://github.com/ittianyu/BottomNavigationViewEx
+        maven { url "https://jitpack.io" }
+        maven { url "https://maven.google.com" }
     }
 }
 
