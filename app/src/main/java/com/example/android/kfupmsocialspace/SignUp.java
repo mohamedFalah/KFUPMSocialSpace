@@ -78,7 +78,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                             progressDialog.hide();
 
                             //go to the sign in page
-                            Intent intent = new Intent(getApplicationContext(), ProfileFragment.class);
+                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
 

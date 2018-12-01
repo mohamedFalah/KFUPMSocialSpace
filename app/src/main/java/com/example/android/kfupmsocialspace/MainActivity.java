@@ -1,5 +1,6 @@
 package com.example.android.kfupmsocialspace;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -102,20 +103,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment selectedFragment = null;
-
+        Intent intent = null;
         switch (item.getItemId()) {
             case (R.id.nav_profile):
-                selectedFragment = new ProfileFragment();
+                intent = new Intent(this, ProfileActivity.class);
                 break;
             case (R.id.nav_utilities):
-                selectedFragment = new UtilitiesFragment();
+                intent = new Intent(this, UtilitiesActivity.class);
                 break;
             case (R.id.navigation_news):
-                selectedFragment = new NewsFragment();
+                intent = new Intent(this, NewsActivity.class);
                 break;
             case (R.id.nav_files):
-                selectedFragment = new FilesFragment();
+                intent = new Intent(this, FilesActivity.class);
                 break;
             case (R.id.nav_logout):
                 firebaseAuth.signOut();
@@ -123,11 +123,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Logout Successfully", Toast.LENGTH_SHORT).show();
                 break;
         }
-        if(selectedFragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    selectedFragment).commit();
-        }
 
+        if(intent != null) {
+            startActivity(intent);
+        }
         //After clicking an item we need to close the drawer so we can get to the page and see it
         drawer.closeDrawer(GravityCompat.START);
 

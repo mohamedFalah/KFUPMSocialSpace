@@ -21,9 +21,32 @@
             </intent-filter>
         </activity>
         <activity android:name=".chat_label_info_fragment" />
-        <!--https://stackoverflow.com/questions/28100472/how-can-i-create-an-android-activity-with-back-arrow-as-shown-in-the-picture-->
-        <activity android:name=".AddCourseActivity"
-            android:parentActivityName=".MainActivity"></activity>
+        <!-- https://stackoverflow.com/questions/28100472/how-can-i-create-an-android-activity-with-back-arrow-as-shown-in-the-picture -->
+
+        <activity
+            android:name=".AddCourseActivity"
+            android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity
+            android:name=".ProfileActivity"
+            android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".UtilitiesActivity"
+            android:label="@string/title_activity_utilities"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".NewsActivity"
+            android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".FilesActivity"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>
