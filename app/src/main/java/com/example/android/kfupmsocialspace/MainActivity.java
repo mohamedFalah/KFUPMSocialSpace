@@ -11,13 +11,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
 
     //Firebase for loging out
     private FirebaseAuth firebaseAuth;
@@ -35,9 +35,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             break;
                         case (R.id.navigation_blogs):
                             selectedFragment = new BlogsFragment();
-                            break;
-                        case (R.id.navigation_news):
-                            selectedFragment = new NewsFragment();
                             break;
                         case (R.id.navigation_roommate):
                             selectedFragment = new RoommateFragment();
@@ -95,8 +92,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // https://www.youtube.com/watch?v=bjYstsO1PgI 9:20 when device rotates we don't call the method again
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new NewsFragment()).commit();
-            bottomNav.setSelectedItemId(R.id.navigation_news);
+                    new ChatsFragment()).commit();
+            bottomNav.setSelectedItemId(R.id.navigation_chats);
         }
 
         //just rotates the three line hamburger symbol with the device
@@ -113,6 +110,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case (R.id.nav_utilities):
                 selectedFragment = new UtilitiesFragment();
+                break;
+            case (R.id.navigation_news):
+                selectedFragment = new NewsFragment();
                 break;
             case (R.id.nav_files):
                 selectedFragment = new FilesFragment();
@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return true;
     }
+
 
     //if back is pressed it closes the toolbar first
     //START is for the left side
