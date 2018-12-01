@@ -1,5 +1,6 @@
 package com.example.android.kfupmsocialspace;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -13,11 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private DrawerLayout drawer;
 
     //Bottom Navigation bar Listener
     public BottomNavigationView.OnNavigationItemSelectedListener botNavListener =
@@ -31,9 +31,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             break;
                         case (R.id.navigation_blogs):
                             selectedFragment = new BlogsFragment();
-                            break;
-                        case (R.id.navigation_news):
-                            selectedFragment = new NewsFragment();
                             break;
                         case (R.id.navigation_roommate):
                             selectedFragment = new RoommateFragment();
@@ -50,11 +47,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return true;
                 }
             };
+    //Firebase for loging out
+    private FirebaseAuth firebaseAuth;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Firebase auth
+        firebaseAuth = FirebaseAuth.getInstance();
 
         //Since we removed the defult action bar we have to tell the app to use the toolbar we created and select the 7th Toolbar
         Toolbar toolbar = findViewById(R.id.toolBar);
@@ -88,8 +91,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // https://www.youtube.com/watch?v=bjYstsO1PgI 9:20 when device rotates we don't call the method again
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new NewsFragment()).commit();
-            bottomNav.setSelectedItemId(R.id.navigation_news);
+                    new ChatsFragment()).commit();
+            bottomNav.setSelectedItemId(R.id.navigation_chats);
         }
 
         //just rotates the three line hamburger symbol with the device
@@ -98,33 +101,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment selectedFragment = null;
-
+        Intent intent = null;
         switch (item.getItemId()) {
             case (R.id.nav_profile):
-                selectedFragment = new ProfileFragment();
+                intent = new Intent(this, ProfileActivity.class);
                 break;
             case (R.id.nav_utilities):
-                selectedFragment = new UtilitiesFragment();
+                intent = new Intent(this, UtilitiesActivity.class);
+                break;
+            case (R.id.navigation_news):
+                intent = new Intent(this, NewsActivity.class);
                 break;
             case (R.id.nav_files):
-                selectedFragment = new FilesFragment();
+                intent = new Intent(this, FilesActivity.class);
                 break;
             case (R.id.nav_logout):
-                setContentView(R.layout.activity_sign_in);
+                firebaseAuth.signOut();
+                this.finish();
                 Toast.makeText(this, "Logout Successfully", Toast.LENGTH_SHORT).show();
                 break;
         }
-        if(selectedFragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    selectedFragment).commit();
-        }
 
+        if (intent != null) {
+            startActivity(intent);
+        }
         //After clicking an item we need to close the drawer so we can get to the page and see it
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
     }
+
 
     //if back is pressed it closes the toolbar first
     //START is for the left side
@@ -135,8 +141,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            drawer.openDrawer(GravityCompat.START);
+
+            // only logout from side bar logs you out for the moment
+            // in the future it should ask the user if they would like to log out or not.
+            // the same with the log out option or go with only one of these options
             //closes the activity
-            super.onBackPressed();
+            //super.onBackPressed();
+
+
         }
     }
 }
