@@ -12,17 +12,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    //Firebase for loging out
-    private FirebaseAuth firebaseAuth;
-    private DrawerLayout drawer;
 
     //Bottom Navigation bar Listener
     public BottomNavigationView.OnNavigationItemSelectedListener botNavListener =
@@ -52,6 +47,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return true;
                 }
             };
+    //Firebase for loging out
+    private FirebaseAuth firebaseAuth;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
 
-        if(intent != null) {
+        if (intent != null) {
             startActivity(intent);
         }
         //After clicking an item we need to close the drawer so we can get to the page and see it
@@ -143,8 +141,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            drawer.openDrawer(GravityCompat.START);
+
+            // only logout from side bar logs you out for the moment
+            // in the future it should ask the user if they would like to log out or not.
+            // the same with the log out option or go with only one of these options
             //closes the activity
-            super.onBackPressed();
+            //super.onBackPressed();
+
+
         }
     }
 }
