@@ -192,7 +192,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     //method to redirect the user to the sign in page after the registration.
     private void GoToSignInPage(){
 
-        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SignIn.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
 
