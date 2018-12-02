@@ -70,11 +70,12 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
+
+
                             Toast.makeText(SignUp.this, "Registered successfully", Toast.LENGTH_LONG).show();
                             progressDialog.hide();
 
-
-                            
                             //go to the sign in page
                             GoToSignInPage();
 
