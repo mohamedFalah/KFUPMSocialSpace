@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation 'com.google.firebase:firebase-auth:16.0.5'
     implementation 'com.google.firebase:firebase-database:16.0.5'
+    implementation 'com.google.firebase:firebase-database:16.0.5'
 
     //https://github.com/ittianyu/BottomNavigationViewEx
     implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.2'
