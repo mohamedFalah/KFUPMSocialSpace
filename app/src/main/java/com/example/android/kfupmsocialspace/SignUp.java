@@ -52,17 +52,13 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     // method to register the user into firebase auth
     private void registerUser() {
+
         //get the values of the editboxes
         String email = "s" + IDNumber.getText().toString().trim() + "@kfupm.edu.sa";
         String passwordtext = password.getText().toString().trim();
 
         //check of an empty box
-        if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "please enter your email", Toast.LENGTH_SHORT).show();
-
-        } else if (TextUtils.isEmpty(passwordtext)) {
-            Toast.makeText(this, "please enter your password", Toast.LENGTH_SHORT).show();
-        }
+        CheckFields(email, passwordtext);
 
         //show the prgress basr to user
         progressDialog.setMessage("Registering User");
@@ -89,6 +85,28 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                     }
                 });
     }
+
+
+
+
+    //method to check the input by the user.
+    private void CheckFields(String email, String password){
+        //email input
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(this, "please enter your email", Toast.LENGTH_LONG).show();
+
+        }
+
+        // password input
+        else if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "please enter your password", Toast.LENGTH_LONG).show();
+        }
+
+    }
+    
+
+
+
 
     @Override
     public void onClick(View view) {
