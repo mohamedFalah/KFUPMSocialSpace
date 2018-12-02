@@ -19,33 +19,53 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.nio.file.FileStore;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
+    //refrences to the view components
     private EditText IDNumber;
     private EditText password;
-    private Button SignUp;
-    private TextView SignIn;
+    private EditText FirstName;
+    private EditText LastName;
+    private EditText phone;
+
+    private Button      SignUp;
+    private TextView    SignIn;
 
     private ProgressDialog progressDialog;
 
-    private FirebaseAuth firebaseAuth;
+    //reference to the firebase auth and database
+    private FirebaseAuth      firebaseAuth;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        //initiate the firebase things!!
+        firebaseAuth        = FirebaseAuth.getInstance();
+        databaseReference   = FirebaseDatabase.getInstance().getReference();
 
-        firebaseAuth = FirebaseAuth.getInstance();
-
+        //dialog to tell the user what is going on
         progressDialog = new ProgressDialog(this);
 
-        SignUp = findViewById(R.id.SignUp);
-        IDNumber = findViewById(R.id.IDNumberSignIn);
-        password = findViewById(R.id.PasswordSignIn);
-        SignIn = findViewById(R.id.SignIn);
 
+        // link the the refrences to the view
+        IDNumber    = findViewById(R.id.IDNumberSignIn);
+        password    = findViewById(R.id.PasswordSignIn);
+        FirstName   = findViewById(R.id.FirstName);
+        LastName    = findViewById(R.id.LastName);
+        phone       = findViewById(R.id.phone);
+        SignUp      = findViewById(R.id.SignUp);
+        SignIn      = findViewById(R.id.SignIn);
+
+
+        //handle the clicks on view
         SignUp.setOnClickListener(this);
         SignIn.setOnClickListener(this);
     }
@@ -54,11 +74,16 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private void registerUser() {
 
         //get the values of the editboxes
-        String email = "s" + IDNumber.getText().toString().trim() + "@kfupm.edu.sa";
-        String passwordtext = password.getText().toString().trim();
+        final String email          = "s" + IDNumber.getText().toString().trim() + "@kfupm.edu.sa";
+        String passwordtext         = password.getText().toString().trim();
+        final String FirstNametext  = FirstName.getText().toString().trim();
+        final String LastNametext   = LastName.getText().toString().trim();
+        final String phoneNumber    = phone.getText().toString().trim();
 
         //check of an empty box
-        CheckFields(email, passwordtext);
+        CheckFields(email, passwordtext, FirstNametext, LastNametext);
+
+
 
         //show the prgress basr to user
         progressDialog.setMessage("Registering User");
@@ -71,9 +96,38 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
+                            //get the registered user ID
+                            String userID = task.getResult().getUser().getUid();
+
+                            //create user object
+                            User user;
+                            if(TextUtils.isEmpty(phoneNumber)){
+                                user = new User(
+                                  email,
+                                  FirstNametext,
+                                  LastNametext,
+                                  phoneNumber
 
 
+                                );
+                            }
+                            else {
+
+                                user = new User(
+                                        email,
+                                        FirstNametext,
+                                        LastNametext
+
+                                );
+
+                            }
+
+                            //add user method
+                            addUser(userID, user);
+                            //tell the user of the status
                             Toast.makeText(SignUp.this, "Registered successfully", Toast.LENGTH_LONG).show();
+
+                            //hide the dialog bar
                             progressDialog.hide();
 
                             //go to the sign in page
@@ -84,24 +138,52 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                             progressDialog.hide();
                         }
                     }
+
                 });
     }
 
 
+    //method to save the user information into the databse
+
+    private void addUser(String userID, User user){
+
+            databaseReference.child("User").child(userID).setValue(user);
+
+    }
+
 
 
     //method to check the input by the user.
-    private void CheckFields(String email, String password){
+    private void CheckFields(String email, String password, String FirstNametext, String LastNametext){
+
         //email input
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "please enter your email", Toast.LENGTH_LONG).show();
 
+            return;
         }
 
         // password input
         else if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "please enter your password", Toast.LENGTH_LONG).show();
+
+            return;
         }
+
+        //first name input
+        else if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "please enter your First Name", Toast.LENGTH_LONG).show();
+
+            return;
+        }
+
+        //last name input
+        else if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "please enter your Last Name", Toast.LENGTH_LONG).show();
+
+            return;
+        }
+
 
     }
 
@@ -118,7 +200,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
 
 
-
+    // handle clicks
     @Override
     public void onClick(View view) {
 
