@@ -9,11 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity android:name=".SignUp" />
         <activity android:name=".SignIn">
             <intent-filter>
@@ -28,27 +26,26 @@
         <activity
             android:name=".AddCourseActivity"
             android:parentActivityName=".MainActivity" />
-
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".ProfileActivity"
             android:parentActivityName=".MainActivity" />
-
         <activity
             android:name=".UtilitiesActivity"
             android:label="@string/title_activity_utilities"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".NewsActivity"
             android:parentActivityName=".MainActivity" />
-
         <activity
             android:name=".FilesActivity"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ChatActivity"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,6 @@
 package com.example.android.kfupmsocialspace;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -104,7 +103,7 @@ public class UtilitiesActivity extends AppCompatActivity {
             fragment.setArguments(args);
             return fragment;
         }
-        
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
