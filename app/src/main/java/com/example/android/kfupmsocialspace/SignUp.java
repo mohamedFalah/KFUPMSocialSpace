@@ -73,10 +73,10 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                             Toast.makeText(SignUp.this, "Registered successfully", Toast.LENGTH_LONG).show();
                             progressDialog.hide();
 
+
+                            
                             //go to the sign in page
-                            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
+                            GoToSignInPage();
 
                         } else {
                             Toast.makeText(SignUp.this, "ERROR! faild to register", Toast.LENGTH_LONG).show();
@@ -103,7 +103,17 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         }
 
     }
-    
+
+
+
+    //method to redirect the user to the sign in page after the registration.
+    private void GoToSignInPage(){
+
+        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+
+    }
 
 
 
