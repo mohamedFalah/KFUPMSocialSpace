@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
@@ -28,14 +29,27 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
     private ProgressDialog progressDialog;
 
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+
+
+        // check if the user already logged in
+        if(firebaseUser != null){
+            startActivity( new Intent(getApplicationContext(), MainActivity.class));
+        }
+
         setContentView(R.layout.activity_sign_in);
 
 
-        firebaseAuth = FirebaseAuth.getInstance();
+
+
+
 
         progressDialog = new ProgressDialog(this);
 

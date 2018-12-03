@@ -17,12 +17,10 @@ public class SessionControl extends Application {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
 
+        Intent intent = new Intent(getApplicationContext(), SignUp.class);
+
         if(firebaseUser != null){
-            startActivity(
-
-                    new Intent(SessionControl.this, SignIn.class)
-
-            );
+            startActivity(intent);
         }
 
     }
