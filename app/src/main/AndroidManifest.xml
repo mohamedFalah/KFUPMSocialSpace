@@ -33,11 +33,6 @@
             android:name=".ProfileActivity"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".UtilitiesActivity"
-            android:label="@string/title_activity_utilities"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".NewsActivity"
             android:parentActivityName=".MainActivity" />
         <activity
@@ -51,6 +46,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".UtilitiesActivity"
+            android:label="@string/title_activity_utilities"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.kfupmsocialspace.MainActivity" />
         </activity>
     </application>
 
