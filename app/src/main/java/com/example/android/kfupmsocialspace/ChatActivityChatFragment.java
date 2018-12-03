@@ -12,6 +12,7 @@ public class ChatActivityChatFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         //inflates sets or shows the fragment selected in the first param
         return inflater.inflate(R.layout.activity_chat_chat_fragment, container, false);
     }
