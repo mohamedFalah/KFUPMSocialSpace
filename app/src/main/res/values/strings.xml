@@ -32,9 +32,9 @@
     <string name="select_a_course">Select a course</string>
     <string name="request">Request</string>
     <string name="title_activity_utilities">UtilitiesActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
+    <string name="tab_text_1">KFUPM NUMBERS</string>
+    <string name="tab_text_2">Resturants</string>
+    <string name="tab_text_3">Useful Links</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_settings">Settings</string>
 

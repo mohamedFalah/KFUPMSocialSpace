@@ -9,6 +9,7 @@
         <!--to see the notifications etc-->
         <!--https://www.youtube.com/watch?v=zYVEMCiDcmY-->
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 
 </resources>
