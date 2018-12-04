@@ -26,17 +26,17 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/attach_file"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="4dp"
             android:layout_weight="0.1"
             android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
             android:src="@drawable/ic_attach_file" />
 
         <EditText
+            android:focusedByDefault="false"
             android:id="@+id/message_string"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -44,14 +44,13 @@
             android:hint="Type a message"
             android:textSize="24sp" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/send_message"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="4dp"
             android:layout_weight="0.1"
             android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
             android:src="@drawable/ic_send" />
     </LinearLayout>
 </RelativeLayout>
