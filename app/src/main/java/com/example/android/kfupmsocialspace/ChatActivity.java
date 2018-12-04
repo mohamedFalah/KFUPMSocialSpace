@@ -5,12 +5,14 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class ChatActivity extends AppCompatActivity {
+
 
     private RecyclerView mMessagesList;
 
@@ -43,7 +45,9 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+
         mMessagesList = findViewById(R.id.messages_list);
+
 
         BottomNavigationViewEx chatBottomNav = findViewById(R.id.chat_bottom_navigation);
         chatBottomNav.setOnNavigationItemSelectedListener(chatBotNavListener);
