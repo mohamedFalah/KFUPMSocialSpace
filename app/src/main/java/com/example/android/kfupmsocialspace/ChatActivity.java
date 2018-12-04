@@ -48,7 +48,7 @@ public class ChatActivity extends AppCompatActivity {
         BottomNavigationViewEx chatBottomNav = findViewById(R.id.chat_bottom_navigation);
         chatBottomNav.setOnNavigationItemSelectedListener(chatBotNavListener);
 
-        //the first thing you see when clicking on a chat is the chat and the messages
+        int x= 12;
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.chat_fragment_container,
                     new ChatsFragment()).commit();
