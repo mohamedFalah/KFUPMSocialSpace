@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
             android:hint="Type a message"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <ImageButton
             android:id="@+id/send_message"
