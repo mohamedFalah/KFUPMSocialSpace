@@ -56,6 +56,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.kfupmsocialspace.MainActivity" />
         </activity>
+        <activity android:name=".ChatActivityChatFragment" />
     </application>
 
 </manifest>
