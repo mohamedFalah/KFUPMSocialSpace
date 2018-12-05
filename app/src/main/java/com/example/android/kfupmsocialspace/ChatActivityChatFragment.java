@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
@@ -46,21 +45,19 @@ public class ChatActivityChatFragment extends Fragment {
 
         chatAttachFileBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getContext(), "This is", Toast.LENGTH_SHORT).show();
+
             }
         });
 
         chatSendBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
                 sendMsg();
-
             }
         });
 
         chatMsgField.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Do it.", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
