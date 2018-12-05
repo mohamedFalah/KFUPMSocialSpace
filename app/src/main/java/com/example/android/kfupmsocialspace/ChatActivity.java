@@ -18,16 +18,6 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 public class ChatActivity extends AppCompatActivity {
 
 
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference dbRef = database.getReference("Message");
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private String currentUserId = mAuth.getCurrentUser().getUid();
-
-
-
-    private ImageButton chatAttachFileBtn ;
-    private ImageButton chatSendBtn;
-    private EditText chatMsgField;
     private RecyclerView mMessagesList;
 
     public BottomNavigationView.OnNavigationItemSelectedListener chatBotNavListener =
@@ -69,5 +59,7 @@ public class ChatActivity extends AppCompatActivity {
                     new ChatsFragment()).commit();
             chatBottomNav.setSelectedItemId(R.id.chat);
         }
+
     }
+
 }

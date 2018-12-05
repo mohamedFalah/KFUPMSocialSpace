@@ -62,13 +62,21 @@ public class ChatActivityChatFragment extends Fragment {
         });
     }
 
+
+
+    // sending method
     private void sendMsg() {
+
+
         String msg = chatMsgField.getText().toString();
 
-        if (!TextUtils.isEmpty(msg)) {
+
+        if(!TextUtils.isEmpty(msg)){
+
             DatabaseReference push = dbRef.push();
             String push_Id = push.getKey();
 
+            //Aranging the strucure of the data
             Map msgMap = new HashMap();
             msgMap.put("id", currentUserId);
             msgMap.put("msg", msg);
