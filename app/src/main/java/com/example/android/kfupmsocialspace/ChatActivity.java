@@ -4,43 +4,24 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ChatActivity extends AppCompatActivity {
 
 
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference dbRef = database.getReference("Message");
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private String currentUserId = mAuth.getCurrentUser().getUid();
-
-
-
-    private ImageButton chatAttachFileBtn ;
-    private ImageButton chatSendBtn;
-    private EditText chatMsgField;
     private RecyclerView mMessagesList;
 
 
@@ -82,12 +63,14 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+<<<<<<< HEAD
 
-
+=======
+        mMessagesList = findViewById(R.id.messages_list);
+>>>>>>> 4d4ac3abd3e4ddbbabbfe850ed15c00ba4c4db59
 
         BottomNavigationViewEx chatBottomNav = findViewById(R.id.chat_bottom_navigation);
         chatBottomNav.setOnNavigationItemSelectedListener(chatBotNavListener);
-
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.chat_fragment_container,
@@ -95,10 +78,15 @@ public class ChatActivity extends AppCompatActivity {
             chatBottomNav.setSelectedItemId(R.id.chat);
         }
 
+<<<<<<< HEAD
 
 
     }
 
 
 
+=======
+    }
+
+>>>>>>> 4d4ac3abd3e4ddbbabbfe850ed15c00ba4c4db59
 }

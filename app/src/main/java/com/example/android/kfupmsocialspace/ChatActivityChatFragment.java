@@ -1,6 +1,5 @@
 package com.example.android.kfupmsocialspace;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,9 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -33,11 +29,15 @@ import java.util.Map;
 
 public class ChatActivityChatFragment extends AppCompatActivity {
 
+    ImageButton chatAttachFileBtn;
+    ImageButton chatSendBtn;
+    EditText chatMsgField;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference("Message");
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private String currentUserId = mAuth.getCurrentUser().getUid();
 
+<<<<<<< HEAD
 
 
     private final List<Message> messageList = new ArrayList<>();
@@ -107,6 +107,8 @@ public class ChatActivityChatFragment extends AppCompatActivity {
 
 
 /*
+=======
+>>>>>>> 4d4ac3abd3e4ddbbabbfe850ed15c00ba4c4db59
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -127,9 +129,9 @@ public class ChatActivityChatFragment extends AppCompatActivity {
 /*
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-         chatAttachFileBtn =  view.findViewById(R.id.attach_file);
-         chatSendBtn = view.findViewById(R.id.send_message);
-         chatMsgField =  view.findViewById(R.id.message_string);
+        chatAttachFileBtn = view.findViewById(R.id.attach_file);
+        chatSendBtn = view.findViewById(R.id.send_message);
+        chatMsgField = view.findViewById(R.id.message_string);
 
 
 
@@ -138,26 +140,24 @@ public class ChatActivityChatFragment extends AppCompatActivity {
         getMessages();
         chatAttachFileBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getContext(), "This is", Toast.LENGTH_SHORT).show();
+
             }
         });
 
         chatSendBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
                 sendMsg();
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 4d4ac3abd3e4ddbbabbfe850ed15c00ba4c4db59
             }
-
-
-
-
         });
 
         chatMsgField.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Do it.", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -206,34 +206,40 @@ public class ChatActivityChatFragment extends AppCompatActivity {
 
 
 
+    // sending method
     private void sendMsg() {
+
 
         String msg = chatMsgField.getText().toString();
 
+
         if(!TextUtils.isEmpty(msg)){
+
             DatabaseReference push = dbRef.push();
             String push_Id = push.getKey();
 
+            //Aranging the strucure of the data
             Map msgMap = new HashMap();
+<<<<<<< HEAD
             msgMap.put("senderID", currentUserId);
             msgMap.put("Text" , msg);
+=======
+            msgMap.put("id", currentUserId);
+            msgMap.put("msg", msg);
+>>>>>>> 4d4ac3abd3e4ddbbabbfe850ed15c00ba4c4db59
 
             Map map2 = new HashMap();
-            map2.put("section2/"+push_Id,msgMap);
+            map2.put("section2/" + push_Id, msgMap);
 
             dbRef.updateChildren(map2, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                    if(databaseError!= null){
-                        Log.d("CHAT_LOG", databaseError.getMessage().toString());
+                    if (databaseError != null) {
+                        Log.d("CHAT_LOG", databaseError.getMessage());
                     }
                 }
             });
-
             chatMsgField.setText("");
         }
-
-
     }
-
 }

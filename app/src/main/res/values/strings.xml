@@ -35,7 +35,8 @@
     <string name="tab_text_1">KFUPM NUMBERS</string>
     <string name="tab_text_2">Resturants</string>
     <string name="tab_text_3">Useful Links</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <!--Hello World from section: %1$d-->
+    <string name="section_format">Utility lists here</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
