@@ -20,7 +20,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
-
     private EditText IDNumber;
     private EditText password;
     private Button SignIn;
@@ -38,18 +37,12 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-
         // check if the user already logged in
-        if(firebaseUser != null){
-            startActivity( new Intent(getApplicationContext(), MainActivity.class));
+        if (firebaseUser != null) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
         setContentView(R.layout.activity_sign_in);
-
-
-
-
-
 
         progressDialog = new ProgressDialog(this);
 
@@ -63,37 +56,28 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-
     private void loginUser() {
-
         String email = "s" + IDNumber.getText().toString().trim() + "@kfupm.edu.sa";
         String passwordtext = password.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-
             Toast.makeText(this, "please enter your email", Toast.LENGTH_SHORT).show();
-
             return;
 
         } else if (TextUtils.isEmpty(passwordtext)) {
             Toast.makeText(this, "please enter your password", Toast.LENGTH_SHORT).show();
-
             return;
         }
 
-
         progressDialog.setMessage("Signing In");
         progressDialog.show();
-
 
         firebaseAuth.signInWithEmailAndPassword(email, passwordtext).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()) {
-
                     Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
-                    progressDialog.hide();
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -101,14 +85,12 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
                 } else {
                     Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
                 }
-
-
+                progressDialog.hide();
             }
         });
-
     }
-
 
     @Override
     public void onClick(View view) {

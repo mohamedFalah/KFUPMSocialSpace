@@ -150,7 +150,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //closes the activity
             //super.onBackPressed();
 
-
         }
     }
 }
