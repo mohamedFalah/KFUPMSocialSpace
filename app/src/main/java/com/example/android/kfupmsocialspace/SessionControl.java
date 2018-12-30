@@ -10,7 +10,7 @@ public class SessionControl extends Application {
 
 
     @Override
-    public void onCreate(){
+    public void onCreate() {
         super.onCreate();
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -19,14 +19,11 @@ public class SessionControl extends Application {
 
         Intent intent = new Intent(getApplicationContext(), SignUp.class);
 
-        if(firebaseUser != null){
+        if (firebaseUser != null) {
             startActivity(intent);
         }
 
     }
-
-
-
 
 
 }

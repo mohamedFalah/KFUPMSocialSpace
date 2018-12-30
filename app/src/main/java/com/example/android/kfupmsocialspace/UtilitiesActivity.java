@@ -80,6 +80,12 @@ public class UtilitiesActivity extends AppCompatActivity {
 
     */
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        NavUtils.navigateUpFromSameTask(this);
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -110,6 +116,7 @@ public class UtilitiesActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_utilities, container, false);
             TextView textView = rootView.findViewById(R.id.section_label);
+            //setText param getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER))
             textView.setText("Hello SWE417");
             return rootView;
         }
@@ -137,11 +144,5 @@ public class UtilitiesActivity extends AppCompatActivity {
             // Show 3 total pages.
             return 3;
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        NavUtils.navigateUpFromSameTask(this);
     }
 }

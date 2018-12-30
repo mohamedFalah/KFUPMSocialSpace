@@ -36,11 +36,11 @@
             android:src="@drawable/ic_attach_file" />
 
         <EditText
-            android:focusedByDefault="false"
             android:id="@+id/message_string"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
+            android:focusedByDefault="false"
             android:hint="Type a message"
             android:textSize="20sp" />
 

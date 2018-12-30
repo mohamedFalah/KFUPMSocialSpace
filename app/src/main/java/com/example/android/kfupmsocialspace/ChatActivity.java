@@ -7,18 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.ImageButton;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class ChatActivity extends AppCompatActivity {
 
-
-    private RecyclerView mMessagesList;
 
     public BottomNavigationView.OnNavigationItemSelectedListener chatBotNavListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,6 +36,7 @@ public class ChatActivity extends AppCompatActivity {
                     return true;
                 }
             };
+    private RecyclerView mMessagesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

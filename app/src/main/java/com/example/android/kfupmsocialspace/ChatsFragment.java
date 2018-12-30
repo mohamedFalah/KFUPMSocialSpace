@@ -21,6 +21,7 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
 
         return view;
     }
+
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(getContext(), AddCourseActivity.class);
