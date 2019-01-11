@@ -1,8 +1,5 @@
 package com.example.android.kfupmsocialspace;
 
-import android.app.Activity;
-import android.app.ActivityOptions;
-import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,8 +19,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.nio.file.FileStore;
-
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     //refrences to the view components
@@ -33,13 +28,13 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private EditText LastName;
     private EditText phone;
 
-    private Button      SignUp;
-    private TextView    SignIn;
+    private Button SignUp;
+    private TextView SignIn;
 
     private ProgressDialog progressDialog;
 
     //reference to the firebase auth and database
-    private FirebaseAuth      firebaseAuth;
+    private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
 
     @Override
@@ -48,21 +43,21 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_sign_up);
 
         //initiate the firebase things!!
-        firebaseAuth        = FirebaseAuth.getInstance();
-        databaseReference   = FirebaseDatabase.getInstance().getReference();
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         //dialog to tell the user what is going on
         progressDialog = new ProgressDialog(this);
 
 
         // link the the refrences to the view
-        IDNumber    = findViewById(R.id.IDNumberSignIn);
-        password    = findViewById(R.id.PasswordSignIn);
-        FirstName   = findViewById(R.id.FirstName);
-        LastName    = findViewById(R.id.LastName);
-        phone       = findViewById(R.id.phone);
-        SignUp      = findViewById(R.id.SignUp);
-        SignIn      = findViewById(R.id.SignIn);
+        IDNumber = findViewById(R.id.IDNumberSignIn);
+        password = findViewById(R.id.PasswordSignIn);
+        FirstName = findViewById(R.id.FirstName);
+        LastName = findViewById(R.id.LastName);
+        phone = findViewById(R.id.phone);
+        SignUp = findViewById(R.id.SignUp);
+        SignIn = findViewById(R.id.SignIn);
 
 
         //handle the clicks on view
@@ -74,15 +69,14 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private void registerUser() {
 
         //get the values of the editboxes
-        final String email          = "s" + IDNumber.getText().toString().trim() + "@kfupm.edu.sa";
-        String passwordtext         = password.getText().toString().trim();
-        final String FirstNametext  = FirstName.getText().toString().trim();
-        final String LastNametext   = LastName.getText().toString().trim();
-        final String phoneNumber    = phone.getText().toString().trim();
+        final String email = "s" + IDNumber.getText().toString().trim() + "@kfupm.edu.sa";
+        String passwordtext = password.getText().toString().trim();
+        final String FirstNametext = FirstName.getText().toString().trim();
+        final String LastNametext = LastName.getText().toString().trim();
+        final String phoneNumber = phone.getText().toString().trim();
 
         //check of an empty box
         CheckFields(email, passwordtext, FirstNametext, LastNametext);
-
 
 
         //show the prgress basr to user
@@ -101,17 +95,16 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
                             //create user object
                             User user;
-                            if(TextUtils.isEmpty(phoneNumber)){
+                            if (TextUtils.isEmpty(phoneNumber)) {
                                 user = new User(
-                                  email,
-                                  FirstNametext,
-                                  LastNametext,
-                                  phoneNumber
+                                        email,
+                                        FirstNametext,
+                                        LastNametext,
+                                        phoneNumber
 
 
                                 );
-                            }
-                            else {
+                            } else {
 
                                 user = new User(
                                         email,
@@ -145,16 +138,15 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     //method to save the user information into the databse
 
-    private void addUser(String userID, User user){
+    private void addUser(String userID, User user) {
 
-            databaseReference.child("User").child(userID).setValue(user);
+        databaseReference.child("User").child(userID).setValue(user);
 
     }
 
 
-
     //method to check the input by the user.
-    private void CheckFields(String email, String password, String FirstNametext, String LastNametext){
+    private void CheckFields(String email, String password, String FirstNametext, String LastNametext) {
 
         //email input
         if (TextUtils.isEmpty(email)) {
@@ -188,16 +180,14 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-
     //method to redirect the user to the sign in page after the registration.
-    private void GoToSignInPage(){
+    private void GoToSignInPage() {
 
         Intent intent = new Intent(getApplicationContext(), SignIn.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
 
     }
-
 
 
     // handle clicks
