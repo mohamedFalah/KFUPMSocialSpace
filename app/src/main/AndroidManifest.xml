@@ -38,9 +38,23 @@
         <activity
             android:name=".FilesActivity"
             android:parentActivityName=".MainActivity" />
+
         <activity
             android:name=".ChatActivity"
             android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".ChatInfoActivity"
+            android:parentActivityName=".ChatActivity" />
+
+        <activity
+            android:name=".ChatFilesActivity"
+            android:parentActivityName=".ChatActivity" />
+
+        <activity
+            android:name=".ChatGroupActivity"
+            android:parentActivityName=".ChatActivity" />
+
         <activity
             android:name=".UtilitiesActivity"
             android:label="@string/title_activity_utilities"
@@ -50,8 +64,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.kfupmsocialspace.MainActivity" />
         </activity>
-        <activity android:name=".EditProfileActivity"
-            android:parentActivityName=".ProfileActivity"/>
+        <activity
+            android:name=".EditProfileActivity"
+            android:parentActivityName=".ProfileActivity" />
+
     </application>
 
 </manifest>

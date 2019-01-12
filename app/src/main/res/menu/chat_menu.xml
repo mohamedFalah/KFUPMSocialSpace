@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    tools:context="com.example.android.kfupmsocialspace.ChatActivity">
 
     <item
-        android:id="@+id/chat"
-        android:icon="@drawable/ic_chat"
-        android:title="Chat" />
+        android:id="@+id/chat_info"
+        android:orderInCategory="1"
+        android:title="Chat info"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/chat_files"
-        android:icon="@drawable/ic_file"
-        android:title="Files" />
+        android:orderInCategory="2"
+        android:title="Chat Files"
+        app:showAsAction="never" />
 
     <item
-        android:id="@+id/group"
-        android:icon="@drawable/ic_group"
-        android:title="Group" />
+        android:id="@+id/chat_group"
+        android:orderInCategory="3"
+        android:title="Group"
+        app:showAsAction="never" />
 </menu>
