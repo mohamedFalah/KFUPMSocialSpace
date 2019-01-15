@@ -38,23 +38,18 @@
         <activity
             android:name=".FilesActivity"
             android:parentActivityName=".MainActivity" />
-
         <activity
             android:name=".ChatActivity"
             android:parentActivityName=".MainActivity" />
-
         <activity
             android:name=".ChatInfoActivity"
             android:parentActivityName=".ChatActivity" />
-
         <activity
             android:name=".ChatFilesActivity"
             android:parentActivityName=".ChatActivity" />
-
         <activity
             android:name=".ChatGroupActivity"
             android:parentActivityName=".ChatActivity" />
-
         <activity
             android:name=".UtilitiesActivity"
             android:label="@string/title_activity_utilities"
@@ -67,7 +62,10 @@
         <activity
             android:name=".EditProfileActivity"
             android:parentActivityName=".ProfileActivity" />
-
+        <activity
+            android:name=".AddMarketItemActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".ItemPreviewActivity"></activity>
     </application>
 
 </manifest>

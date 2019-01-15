@@ -16,7 +16,7 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.chats_fragment, container, false);
-        FloatingActionButton fab = view.findViewById(R.id.fab);
+        FloatingActionButton fab = view.findViewById(R.id.floating_btn_add_course);
         fab.setOnClickListener(this);
 
         return view;
