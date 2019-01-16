@@ -10,8 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".NewsActivity"
+            android:label="@string/title_activity_news"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.kfupmsocialspace.MainActivity" />
+        </activity>
+        <activity
             android:name=".AddRoommateRequestActivity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".AddNewBlogActivity"
             android:parentActivityName=".MainActivity" />
@@ -35,9 +44,6 @@
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".ProfileActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".NewsActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".FilesActivity"
