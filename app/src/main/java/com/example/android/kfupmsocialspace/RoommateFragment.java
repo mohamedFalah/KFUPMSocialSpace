@@ -1,18 +1,41 @@
 package com.example.android.kfupmsocialspace;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class RoommateFragment extends Fragment {
+public class RoommateFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //inflates sets or shows the fragment selected in the first param
-        return inflater.inflate(R.layout.roommate_fragment, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.roommate_fragment, container, false);
+        FloatingActionButton fab = view.findViewById(R.id.floating_btn_add_roommate_request);
+        fab.setOnClickListener(this);
+
+        return view;
     }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(getContext(), AddRoommateRequestActivity.class);
+        startActivity(intent);
+    }
+
+    /*
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        RelativeLayout ongoing = view.findViewById(R.id.enter_chat);
+        ongoing.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ChatActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    */
 }

@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".AddRoommateRequestActivity"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".AddNewBlogActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SignUp" />
@@ -20,9 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".chat_label_info_fragment" />
-        <!-- https://stackoverflow.com/questions/28100472/how-can-i-create-an-android-activity-with-back-arrow-as-shown-in-the-picture -->
-
+        <activity android:name=".chat_label_info_fragment" /> <!-- https://stackoverflow.com/questions/28100472/how-can-i-create-an-android-activity-with-back-arrow-as-shown-in-the-picture -->
         <activity
             android:name=".AddCourseActivity"
             android:parentActivityName=".MainActivity" />
@@ -65,7 +69,7 @@
         <activity
             android:name=".AddMarketItemActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".ItemPreviewActivity"></activity>
+        <activity android:name=".ItemPreviewActivity" />
     </application>
 
 </manifest>
