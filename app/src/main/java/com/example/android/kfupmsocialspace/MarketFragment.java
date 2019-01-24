@@ -46,7 +46,7 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
         lstItems.add(new MarketItem("Selling PS4", 120, "Gaming", "New PS4 for sell", R.drawable.ps4));
 
         RecyclerView myrv = view.findViewById(R.id.recycler_market_items_list);
-        RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(getContext(), lstItems);
+        MarketRecyclerViewAdapter myAdapter = new MarketRecyclerViewAdapter(getContext(), lstItems);
         myrv.setLayoutManager(new GridLayoutManager(getContext(), 2));
         myrv.setAdapter(myAdapter);
     }

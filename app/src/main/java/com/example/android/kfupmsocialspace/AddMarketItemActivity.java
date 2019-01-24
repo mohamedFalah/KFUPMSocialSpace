@@ -19,8 +19,4 @@ public class AddMarketItemActivity extends AppCompatActivity {
             }
         });
     }
-
-    protected void startActivityForResult(){
-
-    }
 }

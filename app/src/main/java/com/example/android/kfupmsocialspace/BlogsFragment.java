@@ -5,11 +5,21 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BlogsFragment extends Fragment implements View.OnClickListener {
+
+    List<Blog> lstBlogs;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,15 +37,14 @@ public class BlogsFragment extends Fragment implements View.OnClickListener {
         startActivity(intent);
     }
 
-    /*
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        RelativeLayout ongoing = view.findViewById(R.id.enter_chat);
-        ongoing.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ChatActivity.class);
-                startActivity(intent);
-            }
-        });
+        lstBlogs = new ArrayList<>();
+        lstBlogs.add(new Blog("How to Study", "Education", "Hi everyone my name is ali and i would like to...", "Ali"));
+        lstBlogs.add(new Blog("How to Play the game: abc", "Gaming", "Hi everyone my name is mohammed and i would like to...", "Mohammed"));
+
+        RecyclerView my_recyclerview = view.findViewById(R.id.recycler_blogs_list);
+        BlogRecyclerViewAdapter myAdapter = new BlogRecyclerViewAdapter(getContext(), lstBlogs);
+        my_recyclerview.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        my_recyclerview.setAdapter(myAdapter);
     }
-    */
 }

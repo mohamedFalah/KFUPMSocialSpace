@@ -1,17 +1,8 @@
 <resources>
     <string name="app_name">KFUPM Social Space</string>
-    <string name="title_activity_main_screen">MainScreen</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="chats">Chats</string>
-    <string name="blogs">Blogs</string>
-    <string name="roommate">Roommate</string>
-    <string name="market">Market</string>
-    <string name="title_activity_main2">Main2Activity</string>
     <string name="title_chats">Chats</string>
     <string name="title_blogs">Blogs</string>
     <string name="title_roommate">Roommate</string>
@@ -96,8 +87,6 @@
         <item>2</item>
         <item>3</item>
     </string-array>
-
-    <string-array name="multi_select_list_preference_default_value" />
 
     <string name="pref_title_system_sync_settings">System sync settings</string>
 

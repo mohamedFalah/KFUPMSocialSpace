@@ -14,12 +14,12 @@ import android.widget.TextView;
 import java.util.List;
 
 //https://www.youtube.com/watch?v=SD2t75T5RdY
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecyclerViewAdapter.MyViewHolder> {
 
     private Context mContext;
     private List<MarketItem> mData;
 
-    public RecyclerViewAdapter(Context mContext, List<MarketItem> mData) {
+    public MarketRecyclerViewAdapter(Context mContext, List<MarketItem> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
