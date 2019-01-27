@@ -36,7 +36,6 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
 
         myViewHolder.blog_title.setText(mData.get(i).getBlog_title());
-        myViewHolder.blog_subject.setText(mData.get(i).getBlog_subject());
         myViewHolder.blog_writer.setText(mData.get(i).getBlog_writer());
         myViewHolder.blog_category.setText(mData.get(i).getBlog_category());
 
@@ -48,7 +47,6 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
 
                 // passing data to the BlogViewActivity
                 intent.putExtra("Title", mData.get(i).getBlog_title());
-                intent.putExtra("Subject", mData.get(i).getBlog_subject());
                 intent.putExtra("Writer", mData.get(i).getBlog_writer());
                 intent.putExtra("Category", mData.get(i).getBlog_category());
                 // start the activity
@@ -66,7 +64,6 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
 
 //        TextView blog_id;
         TextView blog_title;
-        TextView blog_subject;
         TextView blog_writer;
         TextView blog_category;
         CardView cardView;
@@ -74,13 +71,12 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
         public MyViewHolder(View itemView) {
             super(itemView);
 
-//            blog_id = itemView.findViewById(R.id.cardview_blog_id);
-            blog_title = itemView.findViewById(R.id.cardview_blog_title_id);
-            blog_subject = itemView.findViewById(R.id.cardview_blog_subject_id);
-            blog_writer = itemView.findViewById(R.id.cardview_blog_writer_name_id);
-            blog_category = itemView.findViewById(R.id.cardview_blog_category_id);
+//            blog_id = itemView.findViewById(R.id.card_view_blog_id);
+            blog_title = itemView.findViewById(R.id.card_view_blog_title_id);
+            blog_writer = itemView.findViewById(R.id.card_view_blog_writer_name_id);
+            blog_category = itemView.findViewById(R.id.card_view_blog_category_id);
 
-            cardView = itemView.findViewById(R.id.cardview_blog);
+            cardView = itemView.findViewById(R.id.card_view_blog);
         }
     }
 }

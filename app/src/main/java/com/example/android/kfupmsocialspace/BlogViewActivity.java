@@ -15,10 +15,10 @@ public class BlogViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blog_view);
 
-        blogTitle = findViewById(R.id.cardview_blog_title_id);
-        blogSubject = findViewById(R.id.cardview_blog_subject_id);
-        blogWriterName = findViewById(R.id.cardview_blog_writer_name_id);
-        blogCategory = findViewById(R.id.cardview_blog_category_id);
+        blogTitle = findViewById(R.id.card_view_blog_title_id);
+//        blogSubject = findViewById(R.id.card_view_blog_subject_id);
+        blogWriterName = findViewById(R.id.card_view_blog_writer_name_id);
+        blogCategory = findViewById(R.id.card_view_blog_category_id);
 
         // Recieve data
         Intent intent = getIntent();

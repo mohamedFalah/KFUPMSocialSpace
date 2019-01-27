@@ -22,7 +22,7 @@ public class MarketItemViewActivity extends AppCompatActivity {
         itemDescription = findViewById(R.id.item_description);
         itemImg = findViewById(R.id.item_thumbnail);
 
-        // Recieve data
+        // Receive data
         Intent intent = getIntent();
         String Title = intent.getExtras().getString("Title");
 //        String Price = intent.getExtras().getString("Price");

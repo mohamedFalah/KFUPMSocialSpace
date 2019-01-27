@@ -73,7 +73,7 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
             item_name = itemView.findViewById(R.id.item_name_id);
             item_price = itemView.findViewById(R.id.item_price_id);
             item_thumbnail = itemView.findViewById(R.id.item_image_id);
-            cardView = itemView.findViewById(R.id.cardview_market_item);
+            cardView = itemView.findViewById(R.id.card_view_market_item);
         }
     }
 }

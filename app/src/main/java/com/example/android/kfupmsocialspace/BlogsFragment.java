@@ -40,11 +40,13 @@ public class BlogsFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         lstBlogs = new ArrayList<>();
         lstBlogs.add(new Blog("How to Study", "Education", "Hi everyone my name is ali and i would like to...", "Ali"));
-        lstBlogs.add(new Blog("How to Play the game: abc", "Gaming", "Hi everyone my name is mohammed and i would like to...", "Mohammed"));
+        lstBlogs.add(new Blog("How to Play the game: abc", "Gaming", "Hi everyone my name is mohammad and i would like to...", "Mohammad"));
+        lstBlogs.add(new Blog("How to Study", "Education", "Hi everyone my name is ali and i would like to...", "Ali"));
+        lstBlogs.add(new Blog("How to Swim", "Education", "Hi ...", "Ali"));
 
-        RecyclerView my_recyclerview = view.findViewById(R.id.recycler_blogs_list);
+        RecyclerView my_blogs_recycler_view = view.findViewById(R.id.recycler_blogs_list);
         BlogRecyclerViewAdapter myAdapter = new BlogRecyclerViewAdapter(getContext(), lstBlogs);
-        my_recyclerview.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        my_recyclerview.setAdapter(myAdapter);
+        my_blogs_recycler_view.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        my_blogs_recycler_view.setAdapter(myAdapter);
     }
 }

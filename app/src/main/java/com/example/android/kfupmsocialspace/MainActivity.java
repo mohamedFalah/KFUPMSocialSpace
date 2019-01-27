@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             };
 
-    //Firebase for loging out
+    //Firebase for login out
     private FirebaseAuth firebaseAuth;
     private DrawerLayout drawer;
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
 
-        //Since we removed the defult action bar we have to tell the app to use the toolbar we created and select the 7th Toolbar
+        //Since we removed the default action bar we have to tell the app to use the toolbar we created and select the 7th Toolbar
         Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
 

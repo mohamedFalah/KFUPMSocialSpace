@@ -91,7 +91,7 @@ public class ChatActivity extends AppCompatActivity {
                 Message message = dataSnapshot.getValue(Message.class);
 
                 messageList.add(message);
-
+                linearLayoutManager.scrollToPosition(messageList.size()-1);
                 messageAdapter.notifyDataSetChanged();
 
             }
@@ -131,7 +131,7 @@ public class ChatActivity extends AppCompatActivity {
             DatabaseReference push = dbRef.push();
             String push_Id = push.getKey();
 
-            //Aranging the strucure of the data
+            //Arranging the structure of the data
             Map msgMap = new HashMap();
             msgMap.put("SenderID", currentUserId);
             msgMap.put("Message", msg);
