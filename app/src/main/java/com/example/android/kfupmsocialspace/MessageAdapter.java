@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,13 +24,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     public class MessageViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView senderMessage, receiverMessage;
-
+        public TextView senderMessage, receiverName, receiverMessage;
+        public LinearLayout receiverMessageHolder;
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
-
             senderMessage = itemView.findViewById(R.id.sender_message);
+
+            receiverMessageHolder  = itemView.findViewById(R.id.receiver_message_holder);
+            receiverName = itemView.findViewById(R.id.receiver_name);
             receiverMessage = itemView.findViewById(R.id.receiver_message);
         }
     }
@@ -55,14 +58,23 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         String fromUserID = message.getSenderID();
 
-        holder.receiverMessage.setVisibility(View.INVISIBLE);
+        //This should hide the name of the user and the message
+//        holder.receiverName.setVisibility(View.INVISIBLE);
+//        holder.receiverMessage.setVisibility(View.INVISIBLE);
+        holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
 
         if(fromUserID != null && fromUserID.equals(messageSenderID)){
+            holder.senderMessage.setVisibility(View.VISIBLE);
             holder.senderMessage.setText(message.getMessage());
+            holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
         }
         else {
             holder.senderMessage.setVisibility(View.INVISIBLE);
-            holder.receiverMessage.setVisibility(View.VISIBLE);
+
+            holder.receiverMessageHolder.setVisibility(View.VISIBLE);
+//            holder.receiverName.setVisibility(View.VISIBLE);
+//            holder.receiverMessage.setVisibility(View.VISIBLE);
+            holder.receiverName.setText(message.getSenderID());
             holder.receiverMessage.setText(message.getMessage());
         }
     }

@@ -30,19 +30,14 @@ import java.util.List;
 import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
+    private final List<Message> messageList = new ArrayList<>();
     ImageButton chatAttachFileBtn;
     ImageButton chatSendBtn;
     EditText chatMsgField;
-
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference("Message");
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private String currentUserId = mAuth.getCurrentUser().getUid();
-
-
-
-    private final List<Message> messageList = new ArrayList<>();
-
     private LinearLayoutManager linearLayoutManager;
 
     private MessageAdapter messageAdapter;
@@ -80,7 +75,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     //getting the messages
-    protected void onStart(){
+    protected void onStart() {
 
         super.onStart();
 
@@ -91,7 +86,7 @@ public class ChatActivity extends AppCompatActivity {
                 Message message = dataSnapshot.getValue(Message.class);
 
                 messageList.add(message);
-                linearLayoutManager.scrollToPosition(messageList.size()-1);
+                linearLayoutManager.scrollToPosition(messageList.size() - 1);
                 messageAdapter.notifyDataSetChanged();
 
             }
@@ -117,10 +112,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-
     }
-
-
 
 
     // sending method
