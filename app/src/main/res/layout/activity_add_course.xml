@@ -10,7 +10,7 @@
 
     <!--https://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list-->
     <TextView
-        android:id="@+id/select_dep_textview"
+        android:id="@+id/select_dep_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -32,10 +32,10 @@
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/select_dep_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/select_dep_text_view" />
 
     <TextView
-        android:id="@+id/select_course_textview"
+        android:id="@+id/select_course_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -58,7 +58,7 @@
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/select_course_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/select_course_text_view" />
 
     <Button
         android:id="@+id/request_button"

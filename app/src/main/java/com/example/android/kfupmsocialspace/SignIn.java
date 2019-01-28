@@ -63,7 +63,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
     private void loginUser() {
 
         String email = "s" + IDNumber.getText().toString().trim() + "@kfupm.edu.sa";
-        String passwordtext = password.getText().toString().trim();
+        String password_text = password.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
 
@@ -71,7 +71,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
             return;
 
-        } else if (TextUtils.isEmpty(passwordtext)) {
+        } else if (TextUtils.isEmpty(password_text)) {
             Toast.makeText(this, "please enter your password", Toast.LENGTH_SHORT).show();
 
             return;
@@ -82,7 +82,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         progressDialog.show();
 
 
-        firebaseAuth.signInWithEmailAndPassword(email, passwordtext).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithEmailAndPassword(email, password_text).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 

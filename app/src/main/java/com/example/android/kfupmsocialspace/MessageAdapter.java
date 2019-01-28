@@ -14,9 +14,7 @@ import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder>{
 
-
     private List<Message> userMessageList;
-
     private FirebaseAuth firebaseAuth;
 
     public MessageAdapter(List<Message> userMessageList) {
@@ -28,17 +26,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         public TextView senderMessage, receiverMessage;
 
 
-
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
 
             senderMessage = itemView.findViewById(R.id.sender_message);
             receiverMessage = itemView.findViewById(R.id.receiver_message);
-
-
         }
     }
-
 
     @NonNull
     @Override
@@ -48,7 +42,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         firebaseAuth = FirebaseAuth.getInstance();
         return new MessageViewHolder(view);
-
     }
 
     @Override
@@ -62,42 +55,20 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         String fromUserID = message.getSenderID();
 
-
         holder.receiverMessage.setVisibility(View.INVISIBLE);
 
         if(fromUserID != null && fromUserID.equals(messageSenderID)){
-            holder.senderMessage.setBackgroundResource(R.drawable.sender_message);
-            holder.senderMessage.setTextColor(Color.WHITE);
             holder.senderMessage.setText(message.getMessage());
-
         }
         else {
             holder.senderMessage.setVisibility(View.INVISIBLE);
-
             holder.receiverMessage.setVisibility(View.VISIBLE);
-
-
-            holder.receiverMessage.setBackgroundResource(R.drawable.message_text_background);
-            holder.receiverMessage.setTextColor(Color.WHITE);
             holder.receiverMessage.setText(message.getMessage());
-
-
         }
-
-
-
-
-
     }
 
     @Override
     public int getItemCount() {
         return userMessageList.size();
     }
-
-
-
-
-
-
 }

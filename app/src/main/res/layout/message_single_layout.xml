@@ -10,10 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:background="@drawable/message_text_background"
+        android:background="@drawable/received_message"
         android:padding="8dp"
         android:text="dummy text"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="16sp" />
 
     <TextView
@@ -25,7 +25,7 @@
         android:background="@drawable/sender_message"
         android:padding="8dp"
         android:text="dummy text"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="16sp" />
 
 </RelativeLayout>

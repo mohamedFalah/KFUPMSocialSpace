@@ -21,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
-    //refrences to the view components
+    //references to the view components
     private EditText IDNumber;
     private EditText password;
     private EditText FirstName;
@@ -50,7 +50,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         progressDialog = new ProgressDialog(this);
 
 
-        // link the the refrences to the view
+        // link the the references to the view
         IDNumber = findViewById(R.id.IDNumberSignIn);
         password = findViewById(R.id.PasswordSignIn);
         FirstName = findViewById(R.id.FirstName);
@@ -68,23 +68,23 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     // method to register the user into firebase auth
     private void registerUser() {
 
-        //get the values of the editboxes
+        //get the values of the edit boxes
         final String email = "s" + IDNumber.getText().toString().trim() + "@kfupm.edu.sa";
-        String passwordtext = password.getText().toString().trim();
-        final String FirstNametext = FirstName.getText().toString().trim();
-        final String LastNametext = LastName.getText().toString().trim();
+        String password_text = password.getText().toString().trim();
+        final String first_name_text = FirstName.getText().toString().trim();
+        final String last_name_text = LastName.getText().toString().trim();
         final String phoneNumber = phone.getText().toString().trim();
 
         //check of an empty box
-        CheckFields(email, passwordtext, FirstNametext, LastNametext);
+        CheckFields(email, password_text, first_name_text, last_name_text);
 
 
-        //show the prgress basr to user
+        //show the progress bar to user
         progressDialog.setMessage("Registering User");
         progressDialog.show();
 
         //method to create the user from firebase
-        firebaseAuth.createUserWithEmailAndPassword(email, passwordtext)
+        firebaseAuth.createUserWithEmailAndPassword(email, password_text)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -98,8 +98,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                             if (TextUtils.isEmpty(phoneNumber)) {
                                 user = new User(
                                         email,
-                                        FirstNametext,
-                                        LastNametext,
+                                        first_name_text,
+                                        last_name_text,
                                         phoneNumber
 
 
@@ -108,8 +108,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
                                 user = new User(
                                         email,
-                                        FirstNametext,
-                                        LastNametext
+                                        first_name_text,
+                                        last_name_text
 
                                 );
 
@@ -127,7 +127,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                             GoToSignInPage();
 
                         } else {
-                            Toast.makeText(SignUp.this, "ERROR! faild to register", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUp.this, "ERROR! failed to register", Toast.LENGTH_LONG).show();
                             progressDialog.hide();
                         }
                     }
@@ -136,7 +136,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-    //method to save the user information into the databse
+    //method to save the user information into the database
 
     private void addUser(String userID, User user) {
 
@@ -146,7 +146,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
 
     //method to check the input by the user.
-    private void CheckFields(String email, String password, String FirstNametext, String LastNametext) {
+    private void CheckFields(String email, String password, String FirstName_text, String LastName_text) {
 
         //email input
         if (TextUtils.isEmpty(email)) {
