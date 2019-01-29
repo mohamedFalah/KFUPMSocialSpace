@@ -33,12 +33,10 @@ public class User implements UserContract.IModel {
     }
 
 
-    //setters
     public String getEmail() {
         return email;
     }
 
-    //setters
     public void setEmail(String email) {
         this.email = email;
     }
@@ -48,7 +46,7 @@ public class User implements UserContract.IModel {
     }
 
     public void setFirstName(String firstName) {
-        firstName = firstName;
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -56,7 +54,7 @@ public class User implements UserContract.IModel {
     }
 
     public void setLastName(String lastName) {
-        lastName = lastName;
+        this.lastName = lastName;
     }
 
     public String getPhone() {

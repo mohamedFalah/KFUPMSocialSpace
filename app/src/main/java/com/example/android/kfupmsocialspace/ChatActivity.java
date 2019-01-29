@@ -50,7 +50,7 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
     private RecyclerView userMessagesList;
 
     //user presenter
-    private userPresenter userPresenter;
+    private userPresenter userpresenter;
     private String SenderName = "";
 
     @Override
@@ -66,8 +66,7 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
         userMessagesList.setAdapter(messageAdapter);
 
         //initilaize user presenter
-
-        userPresenter = new userPresenter(this, currentUserId);
+        userpresenter = new userPresenter(this, currentUserId);
 
 
         chatAttachFileBtn = findViewById(R.id.attach_file);
@@ -82,7 +81,6 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
 
         chatSendBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                userPresenter.onSendClick();
                 sendMsg();
             }
         });
@@ -92,6 +90,7 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
     protected void onStart() {
 
         super.onStart();
+
 
         dbRef.child("section2").addChildEventListener(new ChildEventListener() {
             @Override
@@ -135,6 +134,12 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
     private void sendMsg() {
 
         String msg = chatMsgField.getText().toString();
+
+        //to get the user name
+        userpresenter.onSendClick();
+
+        Toast.makeText(ChatActivity.this, SenderName, Toast.LENGTH_SHORT).show();
+
         if (!TextUtils.isEmpty(msg)) {
 
             DatabaseReference push = dbRef.push();

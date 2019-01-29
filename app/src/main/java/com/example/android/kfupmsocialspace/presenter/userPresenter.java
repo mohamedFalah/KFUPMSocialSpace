@@ -1,6 +1,8 @@
 package com.example.android.kfupmsocialspace.presenter;
 
+import android.os.Debug;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.android.kfupmsocialspace.model.User;
 import com.example.android.kfupmsocialspace.model.UserContract;
@@ -12,6 +14,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import static java.lang.System.in;
 
 public class userPresenter implements UserContract.IPresenter {
 
@@ -37,6 +41,7 @@ public class userPresenter implements UserContract.IPresenter {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userModel = dataSnapshot.getValue(User.class);
+
             }
 
             @Override
@@ -45,8 +50,8 @@ public class userPresenter implements UserContract.IPresenter {
             }
         });}
 
-
         view = newView;
+
 
     }
 
