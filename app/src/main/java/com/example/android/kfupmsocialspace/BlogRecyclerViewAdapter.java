@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.android.kfupmsocialspace.model.Blog;
+
 import java.util.List;
 
 //https://www.youtube.com/watch?v=SD2t75T5RdY

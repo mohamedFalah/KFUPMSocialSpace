@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.example.android.kfupmsocialspace.R;
+
 //https://www.youtube.com/watch?v=SD2t75T5RdY
 public class BlogViewActivity extends AppCompatActivity {
 
