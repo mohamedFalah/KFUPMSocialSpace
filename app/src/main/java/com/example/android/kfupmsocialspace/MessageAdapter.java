@@ -1,6 +1,5 @@
 package com.example.android.kfupmsocialspace;
 
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.android.kfupmsocialspace.model.Message;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
@@ -74,7 +74,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             holder.receiverMessageHolder.setVisibility(View.VISIBLE);
 //            holder.receiverName.setVisibility(View.VISIBLE);
 //            holder.receiverMessage.setVisibility(View.VISIBLE);
-            holder.receiverName.setText(message.getSenderID());
+            holder.receiverName.setText(message.getSenderName());
             holder.receiverMessage.setText(message.getMessage());
         }
     }

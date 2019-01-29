@@ -1,34 +1,34 @@
-package com.example.android.kfupmsocialspace;
+package com.example.android.kfupmsocialspace.model;
 
-public class User {
+public class User implements UserContract.IModel {
 
     private String email;
-    private String FirstName;
-    private String LastName;
+    private String firstName;
+    private String lastName;
 
     //maybe converted to Number later
     private String phone;
 
     /// empty constructor for a reason not aware of now:))
-    User() {
+    public User() {
 
     }
 
-    User(String email, String FirstName, String LastName, String phone) {
+    public User(String email, String FirstName, String LastName, String phone) {
 
         this.email = email;
-        this.FirstName = FirstName;
-        this.LastName = LastName;
+        this.firstName = FirstName;
+        this.lastName = LastName;
         this.phone = phone;
 
     }
 
     // user object without the user phone number
-    User(String email, String FirstName, String LastName) {
+    public User(String email, String FirstName, String LastName) {
 
         this.email = email;
-        this.FirstName = FirstName;
-        this.LastName = LastName;
+        this.firstName = FirstName;
+        this.lastName = LastName;
 
     }
 
@@ -44,19 +44,19 @@ public class User {
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
-        FirstName = firstName;
+        firstName = firstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        lastName = lastName;
     }
 
     public String getPhone() {
@@ -65,5 +65,11 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+
+    @Override
+    public String getUserFullName() {
+        return getFirstName() + " " + getLastName();
     }
 }

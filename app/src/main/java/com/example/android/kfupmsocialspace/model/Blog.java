@@ -1,4 +1,4 @@
-package com.example.android.kfupmsocialspace;
+package com.example.android.kfupmsocialspace.model;
 
 public class Blog {
 

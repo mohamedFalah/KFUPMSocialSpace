@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.kfupmsocialspace.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -95,7 +96,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
                             //create user object
                             User user;
-                            if (TextUtils.isEmpty(phoneNumber)) {
+                            if (!TextUtils.isEmpty(phoneNumber)) {
                                 user = new User(
                                         email,
                                         first_name_text,

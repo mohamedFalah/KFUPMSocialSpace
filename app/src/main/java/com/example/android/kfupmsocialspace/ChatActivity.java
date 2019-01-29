@@ -17,19 +17,24 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.android.kfupmsocialspace.model.Message;
+import com.example.android.kfupmsocialspace.model.UserContract;
+import com.example.android.kfupmsocialspace.presenter.userPresenter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity implements UserContract.IView {
     private final List<Message> messageList = new ArrayList<>();
     ImageButton chatAttachFileBtn;
     ImageButton chatSendBtn;
@@ -44,6 +49,10 @@ public class ChatActivity extends AppCompatActivity {
 
     private RecyclerView userMessagesList;
 
+    //user presenter
+    private userPresenter userPresenter;
+    private String SenderName = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +64,10 @@ public class ChatActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         userMessagesList.setLayoutManager(linearLayoutManager);
         userMessagesList.setAdapter(messageAdapter);
+
+        //initilaize user presenter
+
+        userPresenter = new userPresenter(this, currentUserId);
 
 
         chatAttachFileBtn = findViewById(R.id.attach_file);
@@ -69,6 +82,7 @@ public class ChatActivity extends AppCompatActivity {
 
         chatSendBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                userPresenter.onSendClick();
                 sendMsg();
             }
         });
@@ -112,20 +126,25 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
 
     // sending method
     private void sendMsg() {
+
         String msg = chatMsgField.getText().toString();
         if (!TextUtils.isEmpty(msg)) {
 
             DatabaseReference push = dbRef.push();
             String push_Id = push.getKey();
 
+
             //Arranging the structure of the data
             Map msgMap = new HashMap();
             msgMap.put("SenderID", currentUserId);
+            msgMap.put("SenderName", SenderName);
             msgMap.put("Message", msg);
 
             Map map2 = new HashMap();
@@ -178,5 +197,11 @@ public class ChatActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         NavUtils.navigateUpFromSameTask(this);
+    }
+
+    @Override
+    public void onDataRecived(String userData) {
+        SenderName = userData;
+
     }
 }

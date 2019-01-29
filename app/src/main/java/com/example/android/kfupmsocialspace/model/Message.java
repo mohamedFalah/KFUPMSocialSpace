@@ -1,17 +1,18 @@
-package com.example.android.kfupmsocialspace;
+package com.example.android.kfupmsocialspace.model;
 
 public class Message {
 
 
     private String SenderID;
+    private String SenderName;
     private String Message;
 
 
-    Message(){
+    public Message(){
 
     }
 
-    Message(String senderID, String message){
+    public Message(String senderID, String message){
 
         this.SenderID = senderID;
         this.Message = message;
@@ -21,6 +22,8 @@ public class Message {
     public String getSenderID() {
         return SenderID;
     }
+
+    public String getSenderName() { return SenderName; }
 
     public String getMessage() {
         return Message;
@@ -34,4 +37,5 @@ public class Message {
         Message = message;
     }
 
+    public void setSenderName(String senderName) { SenderName = senderName; }
 }
