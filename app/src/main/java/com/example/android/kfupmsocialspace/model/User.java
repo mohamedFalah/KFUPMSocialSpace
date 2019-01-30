@@ -1,5 +1,7 @@
 package com.example.android.kfupmsocialspace.model;
 
+import com.example.android.kfupmsocialspace.contract.UserContract;
+
 public class User implements UserContract.IModel {
 
     private String email;
