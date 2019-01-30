@@ -54,6 +54,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         if(firebaseAuth.getCurrentUser() != null)
             messageSenderID= firebaseAuth.getCurrentUser().getUid();
+
         Message message = userMessageList.get(i);
 
         String fromUserID = message.getSenderID();

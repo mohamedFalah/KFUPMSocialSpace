@@ -1,21 +1,15 @@
 package com.example.android.kfupmsocialspace.presenter;
 
-import android.os.Debug;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.example.android.kfupmsocialspace.model.User;
-import com.example.android.kfupmsocialspace.model.UserContract;
+import com.example.android.kfupmsocialspace.contract.UserContract;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import static java.lang.System.in;
 
 public class userPresenter implements UserContract.IPresenter {
 
@@ -30,12 +24,9 @@ public class userPresenter implements UserContract.IPresenter {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
-
-
     public userPresenter(UserContract.IView newView, String UserID){
 
-        //private String currentUserID = mAuth.getCurrentUser().getUid();
-
+        //create user object with exitsting data from database
         if(UserID != null){
         dbRef.child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -46,15 +37,18 @@ public class userPresenter implements UserContract.IPresenter {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                //error should be handled here
             }
         });}
 
+        //create new view no idea why
         view = newView;
 
 
     }
 
+
+    //return full name of the user
     @Override
     public void onSendClick() {
 

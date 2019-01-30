@@ -17,9 +17,9 @@ public class MarketItemViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_market_item_view);
 
-        itemName = findViewById(R.id.item_name);
+        itemName = findViewById(R.id.itemName);
 //        itemPrice = (TextView) findViewById(R.id.item_price_id);
-        itemDescription = findViewById(R.id.item_description);
+        itemDescription = findViewById(R.id.itemDescription);
         itemImg = findViewById(R.id.item_thumbnail);
 
         // Receive data

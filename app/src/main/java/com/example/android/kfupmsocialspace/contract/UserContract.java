@@ -1,7 +1,6 @@
-package com.example.android.kfupmsocialspace.model;
+package com.example.android.kfupmsocialspace.contract;
 
 public class UserContract {
-
 
 
     public interface IView{

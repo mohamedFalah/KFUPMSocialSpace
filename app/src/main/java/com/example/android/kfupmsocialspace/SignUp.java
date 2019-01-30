@@ -137,6 +137,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     }
 
 
+
     //method to save the user information into the database
 
     private void addUser(String userID, User user) {

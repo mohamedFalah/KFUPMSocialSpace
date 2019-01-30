@@ -18,16 +18,14 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.android.kfupmsocialspace.model.Message;
-import com.example.android.kfupmsocialspace.model.UserContract;
+import com.example.android.kfupmsocialspace.contract.UserContract;
 import com.example.android.kfupmsocialspace.presenter.userPresenter;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity implements UserContract.IView {
-    private final List<Message> messageList = new ArrayList<>();
+
     ImageButton chatAttachFileBtn;
     ImageButton chatSendBtn;
     EditText chatMsgField;
@@ -45,8 +43,9 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
     private String currentUserId = mAuth.getCurrentUser().getUid();
     private LinearLayoutManager linearLayoutManager;
 
-    private MessageAdapter messageAdapter;
 
+    private final List<Message> messageList = new ArrayList<>();
+    private MessageAdapter messageAdapter;
     private RecyclerView userMessagesList;
 
     //user presenter
@@ -91,7 +90,6 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
 
         super.onStart();
 
-
         dbRef.child("section2").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -103,30 +101,15 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
                 messageAdapter.notifyDataSetChanged();
 
             }
-
             @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) { }
             @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) { }
             @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) { }
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
-
-
-
     }
 
 
@@ -204,9 +187,10 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
         NavUtils.navigateUpFromSameTask(this);
     }
 
+
     @Override
-    public void onDataRecived(String userData) {
-        SenderName = userData;
+    public void onDataRecived(String userFullName) {
+        SenderName = userFullName;
 
     }
 }
