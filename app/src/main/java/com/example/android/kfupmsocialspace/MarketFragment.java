@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,15 +68,28 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
         */
 
 
-
-        marketItemList.add(new MarketItem("Selling PS4", "120", "Gaming", "New PS4 for sell"));
-
-
         market_recycler_view = view.findViewById(R.id.recycler_market_items_list);
         marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList);
         gridLayoutManager = new GridLayoutManager(getContext(),2);
         market_recycler_view.setLayoutManager(gridLayoutManager);
         market_recycler_view.setAdapter(marketItemAdapter);
+
+        //click event and pass data.
+        marketItemAdapter.SetOnItemClickListener(new MarketRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+                MarketItem marketItem = marketItemList.get(position);
+
+                Intent intent = new Intent(getActivity(), MarketItemViewActivity.class);
+
+                intent.putExtra("clickedItem", marketItem);
+
+                startActivity(intent);
+
+            }
+        });
+
     }
 
 

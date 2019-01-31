@@ -1,7 +1,10 @@
 package com.example.android.kfupmsocialspace.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 //https://www.youtube.com/watch?v=SD2t75T5RdY
-public class MarketItem {
+public class MarketItem implements Parcelable {
 
     private String itemName;
     private String itemPrice;
@@ -28,6 +31,26 @@ public class MarketItem {
     }
 
 
+    protected MarketItem(Parcel in) {
+        itemName = in.readString();
+        itemPrice = in.readString();
+        itemCategory = in.readString();
+        itemDescription = in.readString();
+        thumbnail = in.readInt();
+    }
+
+    public static final Creator<MarketItem> CREATOR = new Creator<MarketItem>() {
+        @Override
+        public MarketItem createFromParcel(Parcel in) {
+            return new MarketItem(in);
+        }
+
+        @Override
+        public MarketItem[] newArray(int size) {
+            return new MarketItem[size];
+        }
+    };
+
     public String getItemName() { return itemName; }
 
     public void setItemName(String itemName) { this.itemName = itemName; }
@@ -47,4 +70,18 @@ public class MarketItem {
     public int getThumbnail() { return thumbnail; }
 
     public void setThumbnail(int thumbnail) { this.thumbnail = thumbnail; }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(itemName);
+        dest.writeString(itemPrice);
+        dest.writeString(itemCategory);
+        dest.writeString(itemDescription);
+        dest.writeInt(thumbnail);
+    }
 }
