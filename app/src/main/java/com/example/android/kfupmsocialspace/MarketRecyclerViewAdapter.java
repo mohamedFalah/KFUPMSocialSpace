@@ -18,6 +18,8 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
 
     private List<MarketItem> marketItemList;
 
+    private OnItemClickListener listener;
+
     public MarketRecyclerViewAdapter(List<MarketItem> marketItemList) {
         this.marketItemList = marketItemList;
     }
@@ -29,13 +31,35 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
 
         CardView cardView;
 
-        public marketItemViewHolder(View itemView) {
+        public marketItemViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
 
             itemName = itemView.findViewById(R.id.item_name_id);
             itemPrice = itemView.findViewById(R.id.item_price_id);
             itemThumbnail = itemView.findViewById(R.id.item_image_id);
             cardView = itemView.findViewById(R.id.card_view_market_item);
+
+
+            //on the click event
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(listener != null) {
+
+                        int position = getAdapterPosition();
+
+                        if(position != RecyclerView.NO_POSITION){
+
+                            listener.onItemClick(position);
+
+
+                        }
+                    }
+
+                }
+            });
+
         }
     }
 
@@ -47,7 +71,7 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
         View view;
         LayoutInflater mInflater = LayoutInflater.from(viewGroup.getContext());
         view = mInflater.inflate(R.layout.cardview_market_item, viewGroup, false);
-        return new marketItemViewHolder(view);
+        return new marketItemViewHolder(view, listener);
     }
 
     @Override
@@ -64,6 +88,22 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
     @Override
     public int getItemCount() {
         return marketItemList.size();
+    }
+
+
+
+    /// interface for handling the click event on recycle view
+    public interface OnItemClickListener{
+
+        void onItemClick(int position);
+
+    }
+
+    // a method will be explained later
+    public void SetOnItemClickListener(OnItemClickListener listener){
+
+        this.listener = listener;
+
     }
 
 
