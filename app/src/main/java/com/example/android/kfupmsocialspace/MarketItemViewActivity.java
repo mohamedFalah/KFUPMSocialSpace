@@ -3,8 +3,10 @@ package com.example.android.kfupmsocialspace;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.kfupmsocialspace.model.MarketItem;
 
@@ -29,24 +31,21 @@ public class MarketItemViewActivity extends AppCompatActivity {
 
         marketItem = (MarketItem) getIntent().getParcelableExtra("clickedItem");
 
-
-
-        /*
-        // Receive data
-        Intent intent = getIntent();
-
-
-        String Title = intent.getExtras().getString("Title");
-//        String Price = intent.getExtras().getString("Price");
-        String Description = intent.getExtras().getString("Description");
-        int image = intent.getExtras().getInt("Thumbnail");
-
-        // Setting values
-        */
         itemName.setText(marketItem.getItemName());
 //        itemPrice.setText(marketItem.getItemPrice());
         itemDescription.setText(marketItem.getItemDescription());
         itemImg.setImageResource(marketItem.getThumbnail());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onBackPressed();
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                break;
+        }
+        return true;
     }
     
 }

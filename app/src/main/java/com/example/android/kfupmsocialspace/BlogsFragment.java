@@ -20,8 +20,6 @@ import java.util.List;
 
 public class BlogsFragment extends Fragment implements View.OnClickListener {
 
-    List<Blog> lstBlogs;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
