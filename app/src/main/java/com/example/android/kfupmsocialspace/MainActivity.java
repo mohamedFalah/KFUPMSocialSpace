@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -47,10 +48,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return true;
                 }
             };
-
     //Firebase for login out
     private FirebaseAuth firebaseAuth;
     private DrawerLayout drawer;
+
+    //This part adds the three dots on the top right
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // Handle action bar item clicks here.
+        Intent intent = null;
+        switch (item.getItemId()) {
+            case R.id.my_market_items:
+                intent = new Intent(this, MyMarketItemsActivity.class);
+                break;
+            case R.id.my_blogs:
+                intent = new Intent(this, MyBlogsActivity.class);
+                break;
+            case R.id.my_roommate_request:
+                intent = new Intent(this, MyRoommateRequestActivity.class);
+                break;
+        }
+        if (intent != null) {
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,14 +172,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         } else {
             drawer.openDrawer(GravityCompat.START);
-
-            // only logout from side bar logs you out for the moment
-            // in the future it should ask the user if they would like to log out or not.
-            // the same with the log out option or go with only one of these options
-            //closes the activity
-            //super.onBackPressed();
-
-
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        NavigationView navigationview = findViewById(R.id.nav_view);
+        for (int i = 0; i < navigationview.getMenu().size(); i++)
+            navigationview.getMenu().getItem(i).setChecked(false);
     }
 }

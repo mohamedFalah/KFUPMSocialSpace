@@ -11,7 +11,6 @@ import com.example.android.kfupmsocialspace.R;
 public class BlogViewActivity extends AppCompatActivity {
 
     private TextView blogTitle, blogSubject, blogWriterName, blogCategory;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,10 +30,10 @@ public class BlogViewActivity extends AppCompatActivity {
 
         // Setting values
 
-        blogTitle.setText(Title);
-        blogSubject.setText(Subject);
-        blogWriterName.setText(Writer);
-        blogCategory.setText(Category);
+//        blogTitle.setText(Title);
+//        blogSubject.setText(Subject);
+//        blogWriterName.setText(Writer);
+//        blogCategory.setText(Category);
 
     }
 }

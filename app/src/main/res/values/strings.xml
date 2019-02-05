@@ -103,4 +103,7 @@
     <string name="tab_text_news">News</string>
     <string name="tab_text_events">Events</string>
     <string name="tab_text_club_events">Clubs Events</string>
+    <string name="title_activity_my_market_items">MyMarketItemsActivity</string>
+    <string name="placed_market_items">Placed Items</string>
+    <string name="reserved_market_items">Reserved Items</string>
 </resources>

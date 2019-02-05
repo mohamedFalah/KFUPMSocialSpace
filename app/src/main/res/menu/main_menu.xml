@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/my_market_items"
+        android:title="My Market Items" />
+    <item
+        android:id="@+id/my_blogs"
+        android:title="My Blogs" />
+    <item
+        android:id="@+id/my_roommate_request"
+        android:title="My Roommate Request" />
+</menu>

@@ -9,7 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ChatroomRequestActivity"></activity>
+        <activity
+            android:name=".MyMarketItemsActivity"
+            android:label="@string/title_activity_my_market_items"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.kfupmsocialspace.MainActivity" />
+        </activity>
+        <activity
+            android:name=".MyRoommateRequestActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".MyBlogsActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MarketItemViewActivity"
             android:parentActivityName=".MainActivity" />
@@ -34,6 +49,9 @@
         <activity
             android:name=".CategoryBlogsViewActivity"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".BlogViewActivity"
+            android:parentActivityName=".CategoryBlogsViewActivity" />
         <activity android:name=".SignUp" />
         <activity android:name=".SignIn">
             <intent-filter>
@@ -82,6 +100,9 @@
         <activity
             android:name=".AddMarketItemActivity"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Placeholder"
+            android:theme="@style/SplashTheme" />
     </application>
 
 </manifest>
