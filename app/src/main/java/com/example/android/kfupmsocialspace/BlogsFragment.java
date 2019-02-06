@@ -14,9 +14,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 
-import com.example.android.kfupmsocialspace.model.Blog;
-
-import java.util.List;
+import com.example.android.kfupmsocialspace.Adapter.CategoryAdapter;
 
 public class BlogsFragment extends Fragment implements View.OnClickListener {
 

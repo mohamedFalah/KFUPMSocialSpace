@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.android.kfupmsocialspace.Adapter.MessageAdapter;
 import com.example.android.kfupmsocialspace.model.Message;
 import com.example.android.kfupmsocialspace.contract.UserContract;
 import com.example.android.kfupmsocialspace.presenter.userPresenter;

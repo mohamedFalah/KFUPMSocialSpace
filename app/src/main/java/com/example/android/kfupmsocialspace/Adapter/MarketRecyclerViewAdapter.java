@@ -1,4 +1,4 @@
-package com.example.android.kfupmsocialspace;
+package com.example.android.kfupmsocialspace.Adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.kfupmsocialspace.R;
 import com.example.android.kfupmsocialspace.model.MarketItem;
 
 import java.util.List;

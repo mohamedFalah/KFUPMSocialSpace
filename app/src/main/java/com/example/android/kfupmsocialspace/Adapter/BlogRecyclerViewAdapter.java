@@ -1,4 +1,4 @@
-package com.example.android.kfupmsocialspace;
+package com.example.android.kfupmsocialspace.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.android.kfupmsocialspace.BlogViewActivity;
+import com.example.android.kfupmsocialspace.R;
 import com.example.android.kfupmsocialspace.model.Blog;
 
 import java.util.List;

@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.android.kfupmsocialspace.Adapter.BlogRecyclerViewAdapter;
 import com.example.android.kfupmsocialspace.model.Blog;
 
 import java.util.ArrayList;
