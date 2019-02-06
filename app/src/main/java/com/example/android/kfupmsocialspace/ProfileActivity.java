@@ -18,19 +18,18 @@ public class ProfileActivity extends AppCompatActivity {
         Button button = findViewById(R.id.edit_button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), EditProfileActivity.class);
+                Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
                 startActivity(intent);
             }
         });
     }
 
-
+    //https://stackoverflow.com/questions/14437745/how-to-override-action-bar-back-button-in-android
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onBackPressed();
         switch (item.getItemId()) {
             case android.R.id.home:
-//                NavUtils.navigateUpFromSameTask(this);
                 this.finish();
                 break;
         }
