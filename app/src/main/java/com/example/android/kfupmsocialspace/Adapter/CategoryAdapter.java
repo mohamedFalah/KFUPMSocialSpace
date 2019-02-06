@@ -1,4 +1,4 @@
-package com.example.android.kfupmsocialspace;
+package com.example.android.kfupmsocialspace.Adapter;
 
 import android.content.Context;
 import android.view.View;

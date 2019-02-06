@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.example.android.kfupmsocialspace.presenter.RoomChatRequestPresenter;
+
 public class ChatsFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override

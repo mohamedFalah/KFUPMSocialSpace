@@ -1,6 +1,7 @@
 package com.example.android.kfupmsocialspace.presenter;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.android.kfupmsocialspace.model.User;
 import com.example.android.kfupmsocialspace.contract.UserContract;
@@ -11,6 +12,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class userPresenter implements UserContract.IPresenter {
 
 
@@ -20,7 +23,7 @@ public class userPresenter implements UserContract.IPresenter {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference("User");
 
-
+    //not used yet.
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
@@ -37,7 +40,7 @@ public class userPresenter implements UserContract.IPresenter {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                //error should be handled here
+                Log.i(TAG, "onCancelled", databaseError.toException());
             }
         });}
 
