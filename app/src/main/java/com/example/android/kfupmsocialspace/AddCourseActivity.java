@@ -17,27 +17,22 @@ import com.example.android.kfupmsocialspace.presenter.RoomChatRequestPresenter;
 
 import java.util.ArrayList;
 
-public class AddCourseActivity extends AppCompatActivity implements RoomChatRequestContarct.IView, View.OnClickListener{
+public class AddCourseActivity extends AppCompatActivity implements RoomChatRequestContarct.IView, View.OnClickListener {
 
-
-    private RoomChatRequestPresenter roomChatRequestPresenter;
-    private ArrayList<String> Departments = new ArrayList<String>();
-    private ArrayList<String> Courses = new ArrayList<String>();
-
-
-    private Spinner departmentSpinner;
-    private Spinner departmentCoursesSpinner;
-    private Button RequestButton;
 
     public String departmentSpinnerValue;
     public String CourseSpinnerValue;
-
+    private RoomChatRequestPresenter roomChatRequestPresenter;
+    private ArrayList<String> Departments = new ArrayList<String>();
+    private ArrayList<String> Courses = new ArrayList<String>();
+    private Spinner departmentSpinner;
+    private Spinner departmentCoursesSpinner;
+    private Button RequestButton;
     private ProgressDialog progressDialog;
 
 
     private ArrayAdapter<String> departmentsAdapter;
     private ArrayAdapter<String> CoursesAdapter;
-
 
 
     @Override
@@ -84,14 +79,10 @@ public class AddCourseActivity extends AppCompatActivity implements RoomChatRequ
         departmentCoursesSpinner.setAdapter(CoursesAdapter);
 
 
-
-
-
-
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
 
         departmentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -113,9 +104,10 @@ public class AddCourseActivity extends AppCompatActivity implements RoomChatRequ
                         progressDialog.hide();
 
                     }
-                }, 4666);
+                }, 2000);
 
-
+                CoursesAdapter.clear();
+                roomChatRequestPresenter.coursesModel.add("Choose course");
                 CoursesAdapter.notifyDataSetChanged();
 
             }
@@ -148,7 +140,6 @@ public class AddCourseActivity extends AppCompatActivity implements RoomChatRequ
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onBackPressed();
@@ -171,12 +162,11 @@ public class AddCourseActivity extends AppCompatActivity implements RoomChatRequ
     @Override
     public void onClick(View v) {
 
-        if(CourseSpinnerValue != null) {
+        if (CourseSpinnerValue != null) {
             roomChatRequestPresenter.CreateRoomchatJoinRequest(CourseSpinnerValue);
             Toast.makeText(this, "requested", Toast.LENGTH_SHORT).show();
             this.finish();
-        }
-        else
+        } else
             Toast.makeText(this, "Choose course and department", Toast.LENGTH_SHORT).show();
     }
 }
