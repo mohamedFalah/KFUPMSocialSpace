@@ -4,7 +4,7 @@
     android:id="@+id/card_view_market_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
+    android:layout_margin="8dp"
     android:background="?attr/selectableItemBackground"
     android:clickable="true"
     cardview:cardCornerRadius="16dp">
@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
+        android:layout_margin="8dp"
         android:orientation="vertical">
 
         <ImageView
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ps4" />
+            android:background="@android:color/black" />
 
         <TextView
             android:id="@+id/cardview_news_title_id"
@@ -28,14 +28,13 @@
             android:layout_height="wrap_content"
             android:maxLength="17"
             android:text="Title"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            style="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
             android:id="@+id/item_price_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Description"
-            android:textSize="18sp" />
+            style="@style/TextAppearance.AppCompat.Medium" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

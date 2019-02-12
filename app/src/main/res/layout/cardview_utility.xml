@@ -11,14 +11,18 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/card_view_utility_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Large"
             android:text="Utility Name" />
 
         <TextView
+            android:id="@+id/card_view_utility_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="phone"
+            style="@style/TextAppearance.AppCompat.Medium"
             android:text="01385555555" />
 
     </LinearLayout>

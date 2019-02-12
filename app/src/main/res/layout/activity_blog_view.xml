@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white">
 
     <TextView
-        android:textSize="18sp"
-        android:textStyle="bold"
+        style="@style/TextAppearance.AppCompat.Large"
         android:id="@+id/blog_title_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,13 +26,13 @@
         android:layout_marginTop="8dp"
         android:background="@android:color/holo_green_light"
         android:text="Category"
+        style="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toBottomOf="@+id/blog_title_id" />
 
     <TextView
-        android:textSize="16sp"
-        android:fontFamily=""
+        style="@style/TextAppearance.AppCompat.Medium"
         android:id="@+id/blog_subject_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            style="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small"
             android:text="Date" />
 
         <TextView
@@ -74,6 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            style="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small"
             android:text="Writer Name" />
     </LinearLayout>
 
