@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         case (R.id.navigation_blogs):
                             selectedFragment = new BlogsFragment();
                             break;
+                        case (R.id.navigation_news):
+                            selectedFragment = new NewsFragment();
+                            break;
                         case (R.id.navigation_roommate):
                             selectedFragment = new RoommateFragment();
                             break;
@@ -140,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent = new Intent(this, UtilitiesActivity.class);
                 break;
             case (R.id.navigation_news):
-                intent = new Intent(this, NewsActivity.class);
+                intent = new Intent(this, NewsFragment.class);
                 break;
             case (R.id.nav_files):
                 intent = new Intent(this, FilesActivity.class);

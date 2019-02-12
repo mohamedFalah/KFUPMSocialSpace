@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +35,7 @@ public class CategoryBlogsViewActivity extends AppCompatActivity implements View
 
         RecyclerView my_blogs_recycler_view = findViewById(R.id.recycler_blogs_list);
         BlogRecyclerViewAdapter myAdapter = new BlogRecyclerViewAdapter(this, lstBlogs);
-        my_blogs_recycler_view.setLayoutManager(new GridLayoutManager(this, 1));
+        my_blogs_recycler_view.setLayoutManager(new LinearLayoutManager(this));
         my_blogs_recycler_view.setAdapter(myAdapter);
     }
 

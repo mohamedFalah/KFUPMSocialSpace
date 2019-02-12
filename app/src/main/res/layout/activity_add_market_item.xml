@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="44dp"
-        android:padding="32dp"
+        android:padding="64dp"
         app:srcCompat="@drawable/ic_photo_camera" />
 
     <LinearLayout
@@ -29,6 +29,7 @@
             android:text="Title" />
 
         <EditText
+            android:id="@+id/title_string"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Enter Item Title Here" />
@@ -44,6 +45,7 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/price_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal" />
@@ -54,6 +56,15 @@
                 android:text="(In Riyals)" />
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category" />
+
+        <Spinner
+            android:id="@+id/category_spinner_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,6 +72,7 @@
             android:text="Description" />
 
         <EditText
+            android:id="@+id/description_string"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
