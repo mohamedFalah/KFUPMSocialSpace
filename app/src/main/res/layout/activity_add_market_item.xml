@@ -87,6 +87,7 @@
                 android:text="Category" />
 
             <Spinner
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:id="@+id/category_spinner_string"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
