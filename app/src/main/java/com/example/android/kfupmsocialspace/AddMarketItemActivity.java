@@ -1,5 +1,6 @@
 package com.example.android.kfupmsocialspace;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,30 +8,38 @@ import android.content.pm.FeatureInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.example.android.kfupmsocialspace.contract.MarketitemContract;
+import com.example.android.kfupmsocialspace.presenter.MarketItemPresenter;
 
-public class AddMarketItemActivity extends AppCompatActivity {
+public class AddMarketItemActivity extends AppCompatActivity implements MarketitemContract.IView {
 
     static final int PICK_IMAGE_REQUEST = 1;
 
     private ImageView myItemImage;
+    private EditText imageName, imagePrice;
+    private Button addMarketItemButton;
+    private Spinner spinner;
+    private ProgressBar progressBar;
+    private Uri ImageUri;
 
-    private Uri ImageURi;
+    //presenter
+
+    private MarketItemPresenter marketItemPresenter;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -65,23 +74,31 @@ public class AddMarketItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_market_item);
 
+        ///intialze presenter
+        marketItemPresenter = new MarketItemPresenter(this);
+        addMarketItemButton = findViewById(R.id.add_item_to_market);
+        spinner = (Spinner) findViewById(R.id.category_spinner_string);
+        progressBar = findViewById(R.id.progress_bar);
+        myItemImage = findViewById(R.id.item_picture);
+        imageName =  findViewById(R.id.title_string);
+        imagePrice = findViewById(R.id.price_value);
+
         //Add item to the category spinner
         //https://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android
         String[] arraySpinner = new String[]{
                 "-Category-", "Books", "Gaming", "Tools"
         };
 
-        Spinner s = (Spinner) findViewById(R.id.category_spinner_string);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, arraySpinner);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        s.setAdapter(adapter);
+        spinner.setAdapter(adapter);
 
         //For adding an image to item from camera or gallery.
         //https://developer.android.com/training/camera/photobasics#TaskPath
-        myItemImage = findViewById(R.id.item_picture);
+
 
         myItemImage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -90,9 +107,10 @@ public class AddMarketItemActivity extends AppCompatActivity {
             }
         });
 
-        Button addMarketItemButton = findViewById(R.id.add_item_to_market);
-        addMarketItemButton.setOnClickListener(new View.OnClickListener() {
+        addMarketItemButton.setOnClickListener(
+                new View.OnClickListener() {
             public void onClick(View v) {
+                uploadMarketItem();
                 finish();
             }
         });
@@ -166,38 +184,43 @@ public class AddMarketItemActivity extends AppCompatActivity {
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null
                 && data.getData() != null){
 
-            ImageURi = data.getData();
+            ImageUri = data.getData();
 
-            myItemImage.setImageURI(ImageURi);
+            myItemImage.setImageURI(ImageUri);
 
 
         }
     }
 
 
+    private String getFileExtension(Uri uri){
 
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton().getSingleton();
+        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
 
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
     }
 
-    private void galleryAddPic() {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = new File(mCurrentPhotoPath);
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        this.sendBroadcast(mediaScanIntent);
+
+    private void uploadMarketItem(){
+
+        if(ImageUri != null){
+
+            marketItemPresenter.uploadItemImage(System.currentTimeMillis() + "." +getFileExtension(ImageUri),
+                    ImageUri);
+
+        }else{
+
+            Toast.makeText(this, "Select Image First", Toast.LENGTH_SHORT).show();
+
+        }
+
+
     }
 
+
+    @Override
+    public void progressBarValue(int progress) {
+        progressBar.setProgress(progress);
+    }
 }

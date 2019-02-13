@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -71,12 +70,9 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
 
         market_recycler_view = view.findViewById(R.id.recycler_market_items_list);
         marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList);
-        gridLayoutManager = new GridLayoutManager(getContext(),2);
-        marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList);
         gridLayoutManager = new GridLayoutManager(getContext(),calculateNoOfColumns(getContext()));
         market_recycler_view.setLayoutManager(gridLayoutManager);
         market_recycler_view.setAdapter(marketItemAdapter);
-        marketItemAdapter.notifyDataSetChanged();
 
         //click event and pass data.
         marketItemAdapter.SetOnItemClickListener(new MarketRecyclerViewAdapter.OnItemClickListener() {
