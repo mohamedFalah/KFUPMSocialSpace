@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,7 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
     RecyclerView market_recycler_view ;
     MarketRecyclerViewAdapter marketItemAdapter;
     GridLayoutManager gridLayoutManager;
+
 
 
     @Nullable
@@ -66,10 +68,11 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
 
 
         market_recycler_view = view.findViewById(R.id.recycler_market_items_list);
-        marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList, getContext());
+        marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList);
         gridLayoutManager = new GridLayoutManager(getContext(),2);
         market_recycler_view.setLayoutManager(gridLayoutManager);
         market_recycler_view.setAdapter(marketItemAdapter);
+        marketItemAdapter.notifyDataSetChanged();
 
         //click event and pass data.
         marketItemAdapter.SetOnItemClickListener(new MarketRecyclerViewAdapter.OnItemClickListener() {
@@ -87,6 +90,8 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+
+
     }
 
 
@@ -99,7 +104,7 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 MarketItem marketItem = dataSnapshot.getValue(MarketItem.class);
-
+                marketItemList.clear();
                 marketItemList.add(marketItem);
                 gridLayoutManager.scrollToPosition(marketItemList.size() - 1);
                 marketItemAdapter.notifyDataSetChanged();

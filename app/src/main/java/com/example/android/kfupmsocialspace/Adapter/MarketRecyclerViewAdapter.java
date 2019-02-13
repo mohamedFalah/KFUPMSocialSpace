@@ -30,9 +30,9 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
     private Context mContext;
     private OnItemClickListener listener;
 
-    public MarketRecyclerViewAdapter(List<MarketItem> marketItemList, Context mContext) {
+    public MarketRecyclerViewAdapter(List<MarketItem> marketItemList) {
         this.marketItemList = marketItemList;
-        this.mContext = mContext;
+      ///  this.mContext = mContext;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPopupMenu(holder.overflow);
+               // showPopupMenu(holder.overflow);
             }
         });
     }
@@ -54,15 +54,16 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
     @NonNull
     @Override
     public marketItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view;
-        LayoutInflater mInflater = LayoutInflater.from(viewGroup.getContext());
-        view = mInflater.inflate(R.layout.cardview_market_item, viewGroup, false);
+
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.cardview_market_item,viewGroup,false);
+
         return new marketItemViewHolder(view, listener);
     }
 
     /**
      * Showing popup menu when tapping on 3 dots
-     */
+
     private void showPopupMenu(View view) {
         // inflate menu
         PopupMenu popup = new PopupMenu(mContext, view);
@@ -71,6 +72,7 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
         popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
         popup.show();
     }
+     */
 
     public static class marketItemViewHolder extends RecyclerView.ViewHolder {
         public TextView itemName, itemPrice;
