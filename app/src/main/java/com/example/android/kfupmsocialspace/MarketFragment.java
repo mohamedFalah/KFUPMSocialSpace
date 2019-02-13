@@ -70,13 +70,10 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
 
 
         market_recycler_view = view.findViewById(R.id.recycler_market_items_list);
-<<<<<<< HEAD
         marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList);
         gridLayoutManager = new GridLayoutManager(getContext(),2);
-=======
-        marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList, getContext());
+        marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList);
         gridLayoutManager = new GridLayoutManager(getContext(),calculateNoOfColumns(getContext()));
->>>>>>> f82897fa11bbb742d7fd9102a4edac70aeab5763
         market_recycler_view.setLayoutManager(gridLayoutManager);
         market_recycler_view.setAdapter(marketItemAdapter);
         marketItemAdapter.notifyDataSetChanged();
