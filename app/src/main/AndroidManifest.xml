@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.kfupmsocialspace">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,15 +35,15 @@
         <activity
             android:name=".MarketItemViewActivity"
             android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".NewsActivity"
-            android:label="@string/title_activity_news"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.kfupmsocialspace.MainActivity" />
-        </activity>
+        <!--<activity-->
+        <!--android:name=".NewsFragment"-->
+        <!--android:label="@string/title_activity_news"-->
+        <!--android:parentActivityName=".MainActivity"-->
+        <!--android:theme="@style/AppTheme.NoActionBar">-->
+        <!--<meta-data-->
+        <!--android:name="android.support.PARENT_ACTIVITY"-->
+        <!--android:value="com.example.android.kfupmsocialspace.MainActivity" />-->
+        <!--</activity>-->
         <activity
             android:name=".AddRoommateRequestActivity"
             android:parentActivityName=".MainActivity" />
