@@ -1,5 +1,6 @@
 package com.example.android.kfupmsocialspace;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,8 +70,13 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
 
 
         market_recycler_view = view.findViewById(R.id.recycler_market_items_list);
+<<<<<<< HEAD
         marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList);
         gridLayoutManager = new GridLayoutManager(getContext(),2);
+=======
+        marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList, getContext());
+        gridLayoutManager = new GridLayoutManager(getContext(),calculateNoOfColumns(getContext()));
+>>>>>>> f82897fa11bbb742d7fd9102a4edac70aeab5763
         market_recycler_view.setLayoutManager(gridLayoutManager);
         market_recycler_view.setAdapter(marketItemAdapter);
         marketItemAdapter.notifyDataSetChanged();
@@ -94,6 +101,17 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    //https://stackoverflow.com/questions/29579811/changing-number-of-columns-with-gridlayoutmanager-and-recyclerview
+    public static int calculateNoOfColumns(Context context) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        int scalingFactor = 200; // You can vary the value held by the scalingFactor
+        // variable. The smaller it is the more no. of columns you can display, and the
+        // larger the value the less no. of columns will be calculated. It is the scaling
+        // factor to tweak to your needs.
+        int columnCount = (int) (dpWidth / scalingFactor);
+        return (columnCount>=2?columnCount:2); // if column no. is less than 2, we still display 2 columns
+    }
 
     public void onStart() {
 
