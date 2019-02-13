@@ -38,6 +38,7 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
     GridLayoutManager gridLayoutManager;
 
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,7 +69,7 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
 
 
         market_recycler_view = view.findViewById(R.id.recycler_market_items_list);
-        marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList, getContext());
+        marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList);
         gridLayoutManager = new GridLayoutManager(getContext(),calculateNoOfColumns(getContext()));
         market_recycler_view.setLayoutManager(gridLayoutManager);
         market_recycler_view.setAdapter(marketItemAdapter);
@@ -88,6 +89,8 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
 
             }
         });
+
+
 
     }
 
@@ -112,7 +115,7 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 MarketItem marketItem = dataSnapshot.getValue(MarketItem.class);
-
+                marketItemList.clear();
                 marketItemList.add(marketItem);
                 gridLayoutManager.scrollToPosition(marketItemList.size() - 1);
                 marketItemAdapter.notifyDataSetChanged();
