@@ -8,6 +8,7 @@ import android.content.pm.FeatureInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -31,11 +32,12 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
     static final int PICK_IMAGE_REQUEST = 1;
 
     private ImageView myItemImage;
-    private EditText imageName, imagePrice;
+    private EditText imageName, imagePrice, itemDescription;
     private Button addMarketItemButton;
     private Spinner spinner;
     private ProgressBar progressBar;
     private Uri ImageUri;
+
 
     //presenter
 
@@ -77,11 +79,12 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
         ///intialze presenter
         marketItemPresenter = new MarketItemPresenter(this);
         addMarketItemButton = findViewById(R.id.add_item_to_market);
-        spinner = (Spinner) findViewById(R.id.category_spinner_string);
+        spinner = (Spinner) findViewById(R.id.itemCategory);
         progressBar = findViewById(R.id.progress_bar);
         myItemImage = findViewById(R.id.item_picture);
         imageName =  findViewById(R.id.title_string);
         imagePrice = findViewById(R.id.price_value);
+        itemDescription = findViewById(R.id.itemDescription);
 
         //Add item to the category spinner
         //https://stackoverflow.com/questions/5241660/how-can-i-add-items-to-a-spinner-in-android
@@ -110,8 +113,16 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
         addMarketItemButton.setOnClickListener(
                 new View.OnClickListener() {
             public void onClick(View v) {
+
                 uploadMarketItem();
-                finish();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 18000);
+
             }
         });
     }
@@ -146,9 +157,6 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
         });
 
         builder.show();
-
-
-
     }
 
     /*
@@ -204,14 +212,19 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
 
     private void uploadMarketItem(){
 
-        if(ImageUri != null){
+        if(ImageUri != null && imageName != null && imagePrice != null && itemDescription != null && spinner != null){
+
+            String itemName = imageName.getText().toString().trim();
+            String itemPrice = imagePrice.getText().toString().trim();
+            String itemCategory = spinner.getSelectedItem().toString();
+            String itemDescription  = this.itemDescription.getText().toString().trim();
 
             marketItemPresenter.uploadItemImage(System.currentTimeMillis() + "." +getFileExtension(ImageUri),
-                    ImageUri);
+                    ImageUri, itemName, itemPrice, itemCategory, itemDescription );
 
         }else{
 
-            Toast.makeText(this, "Select Image First", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Fill All Fields ", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -223,4 +236,6 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
     public void progressBarValue(int progress) {
         progressBar.setProgress(progress);
     }
+
+
 }

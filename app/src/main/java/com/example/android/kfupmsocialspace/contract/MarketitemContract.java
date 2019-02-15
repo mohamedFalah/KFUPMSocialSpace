@@ -16,7 +16,7 @@ public class MarketitemContract {
 
     public interface IPresenter{
 
-        void uploadItemImage(String name, Uri uri);
+        void uploadItemImage(String name, Uri uri, String itemName, String price, String category, String itemDescription );
         void uploadMarketItem(MarketItem marketItem);
 
     }

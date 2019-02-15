@@ -26,28 +26,36 @@ public class userPresenter implements UserContract.IPresenter {
     //not used yet.
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
+    public userPresenter(String UserID){
+        getUserObject(UserID);
+    };
+
 
     public userPresenter(UserContract.IView newView, String UserID){
 
         //create user object with exitsting data from database
-        if(UserID != null){
-        dbRef.child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userModel = dataSnapshot.getValue(User.class);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.i(TAG, "onCancelled", databaseError.toException());
-            }
-        });}
+        getUserObject(UserID);
 
         //create new view no idea why
         view = newView;
 
 
+    }
+
+    public void getUserObject(String UserID){
+        if(UserID != null){
+            dbRef.child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    userModel = dataSnapshot.getValue(User.class);
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.i(TAG, "onCancelled", databaseError.toException());
+                }
+            });}
     }
 
 
