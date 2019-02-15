@@ -6,13 +6,23 @@ import android.os.Parcelable;
 //https://www.youtube.com/watch?v=SD2t75T5RdY
 public class MarketItem implements Parcelable {
 
+    public static final Creator<MarketItem> CREATOR = new Creator<MarketItem>() {
+        @Override
+        public MarketItem createFromParcel(Parcel in) {
+            return new MarketItem(in);
+        }
+
+        @Override
+        public MarketItem[] newArray(int size) {
+            return new MarketItem[size];
+        }
+    };
     private String itemName;
     private String itemPrice;
     private String itemCategory;
     private String itemDescription;
     private String itemPicture;
     private int thumbnail;
-
     //item owner information
     private String itemOwner;
     private String ownerID;
@@ -37,6 +47,7 @@ public class MarketItem implements Parcelable {
         this.itemDescription = itemDescription;
     }
 
+
     //constructor with item picture and item owner and id
     public MarketItem(String itemName, String itemPrice, String itemCategory, String itemDescription, String itemPicture,
                       String itemOwner, String ownerID) {
@@ -50,7 +61,6 @@ public class MarketItem implements Parcelable {
 
     }
 
-
     protected MarketItem(Parcel in) {
         itemName = in.readString();
         itemPrice = in.readString();
@@ -63,49 +73,69 @@ public class MarketItem implements Parcelable {
 
     }
 
-    public static final Creator<MarketItem> CREATOR = new Creator<MarketItem>() {
-        @Override
-        public MarketItem createFromParcel(Parcel in) {
-            return new MarketItem(in);
-        }
+    public String getItemName() {
+        return itemName;
+    }
 
-        @Override
-        public MarketItem[] newArray(int size) {
-            return new MarketItem[size];
-        }
-    };
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
 
-    public String getItemName() { return itemName; }
+    public String getItemPrice() {
+        return itemPrice;
+    }
 
-    public void setItemName(String itemName) { this.itemName = itemName; }
+    public void setItemPrice(String itemPrice) {
+        this.itemPrice = itemPrice;
+    }
 
-    public String getItemPrice() { return itemPrice; }
+    public String getItemCategory() {
+        return itemCategory;
+    }
 
-    public void setItemPrice(String itemPrice) { this.itemPrice = itemPrice; }
+    public void setItemCategory(String itemCategory) {
+        this.itemCategory = itemCategory;
+    }
 
-    public String getItemCategory() { return itemCategory; }
+    public String getItemDescription() {
+        return itemDescription;
+    }
 
-    public void setItemCategory(String itemCategory) { this.itemCategory = itemCategory; }
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }
 
-    public String getItemDescription() { return itemDescription; }
+    public String getItemPicture() {
+        return itemPicture;
+    }
 
-    public void setItemDescription(String itemDescription) { this.itemDescription = itemDescription; }
+    public void setItemPicture(String itemPicture) {
+        this.itemPicture = itemPicture;
+    }
 
-    public String getItemPicture() { return itemPicture; }
+    public int getThumbnail() {
+        return thumbnail;
+    }
 
-    public void setItemPicture(String itemPicture) { this.itemPicture = itemPicture; }
+    public void setThumbnail(int thumbnail) {
+        this.thumbnail = thumbnail;
+    }
 
-    public int getThumbnail() { return thumbnail; }
+    public String getItemOwner() {
+        return itemOwner;
+    }
 
-    public void setThumbnail(int thumbnail) { this.thumbnail = thumbnail; }
+    public void setItemOwner(String itemOwner) {
+        this.itemOwner = itemOwner;
+    }
 
-    public String getItemOwner() { return itemOwner; }
+    public String getOwnerID() {
+        return ownerID;
+    }
 
-    public void setItemOwner(String itemOwner) { this.itemOwner = itemOwner; }
-
-    public String getOwnerID() { return ownerID; }
-
-    public void setOwnerID(String ownerID) { this.ownerID = ownerID; }
+    public void setOwnerID(String ownerID) {
+        this.ownerID = ownerID;
+    }
 
     @Override
     public int describeContents() {

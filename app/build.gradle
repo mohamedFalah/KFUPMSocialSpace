@@ -56,8 +56,6 @@ dependencies {
     //load image from url
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
-
-
 }
 
 // for the firebase
