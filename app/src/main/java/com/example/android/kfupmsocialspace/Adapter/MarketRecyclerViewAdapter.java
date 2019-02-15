@@ -1,6 +1,7 @@
 package com.example.android.kfupmsocialspace.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.android.kfupmsocialspace.R;
 import com.example.android.kfupmsocialspace.model.MarketItem;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -30,9 +32,9 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
     private Context mContext;
     private OnItemClickListener listener;
 
-    public MarketRecyclerViewAdapter(List<MarketItem> marketItemList) {
+    public MarketRecyclerViewAdapter(List<MarketItem> marketItemList, Context mContext) {
         this.marketItemList = marketItemList;
-      ///  this.mContext = mContext;
+        this.mContext = mContext;
     }
 
     @Override
@@ -42,7 +44,14 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
 
         holder.itemName.setText(marketItem.getItemName());
         holder.itemPrice.setText(String.valueOf(marketItem.getItemPrice()));
-        holder.itemThumbnail.setImageResource(R.drawable.ps4);
+
+        if(marketItem.getItemPicture() != null){
+            Uri imageUri = Uri.parse(marketItem.getItemPicture());
+            Picasso.with(mContext).load(imageUri).fit().centerCrop().into(holder.itemThumbnail);
+        }else{
+            holder.itemThumbnail.setImageResource(R.drawable.ps4);
+        }
+
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

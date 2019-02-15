@@ -69,10 +69,11 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
 
 
         market_recycler_view = view.findViewById(R.id.recycler_market_items_list);
-        marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList);
+        marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList, getContext());
         gridLayoutManager = new GridLayoutManager(getContext(),calculateNoOfColumns(getContext()));
         market_recycler_view.setLayoutManager(gridLayoutManager);
         market_recycler_view.setAdapter(marketItemAdapter);
+        marketItemAdapter.notifyDataSetChanged();
 
         //click event and pass data.
         marketItemAdapter.SetOnItemClickListener(new MarketRecyclerViewAdapter.OnItemClickListener() {
@@ -110,25 +111,30 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
 
         super.onStart();
 
+        marketItemList.clear();
+
         dbRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 MarketItem marketItem = dataSnapshot.getValue(MarketItem.class);
-                marketItemList.clear();
                 marketItemList.add(marketItem);
                 gridLayoutManager.scrollToPosition(marketItemList.size() - 1);
                 marketItemAdapter.notifyDataSetChanged();
 
             }
             @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) { }
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
             @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) { }
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+            }
             @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) { }
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
         });
     }
 
