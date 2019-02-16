@@ -125,9 +125,7 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
     }
 
     /*
-     *
      * this a dialog to choose from gallery or take picure with camera
-     *
      */
 
     private void chooseImage() {
@@ -191,7 +189,6 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
 
             myItemImage.setImageURI(ImageUri);
 
-
         }
     }
 
@@ -209,10 +206,13 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
 
         if (ImageUri != null && imageName != null && imagePrice != null && itemDescription != null && spinner != null) {
 
+            //addMarketItemButton.setClickable(false);
+
             String itemName = imageName.getText().toString().trim();
             String itemPrice = imagePrice.getText().toString().trim();
             String itemCategory = spinner.getSelectedItem().toString();
             String itemDescription = this.itemDescription.getText().toString().trim();
+
 
             marketItemPresenter.uploadItemImage(System.currentTimeMillis() + "." + getFileExtension(ImageUri),
                     ImageUri, itemName, itemPrice, itemCategory, itemDescription);
@@ -223,14 +223,12 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
 
         }
 
-
     }
-
 
     @Override
     public void progressBarValue(int progress) {
         progressBar.setProgress(progress);
-    }
 
+    }
 
 }

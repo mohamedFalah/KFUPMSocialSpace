@@ -116,7 +116,8 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
 
                 MarketItem marketItem = dataSnapshot.getValue(MarketItem.class);
                 marketItemList.add(marketItem);
-                gridLayoutManager.scrollToPosition(marketItemList.size() - 1);
+                //no need to scroll here, this isn't the chat.
+                //gridLayoutManager.scrollToPosition(marketItemList.size() - 1);
                 marketItemAdapter.notifyDataSetChanged();
 
             }

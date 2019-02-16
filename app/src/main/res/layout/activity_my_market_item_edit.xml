@@ -9,7 +9,7 @@
     android:fillViewport="true"
     android:scrollbarStyle="outsideInset"
     android:visibility="visible"
-    tools:context=".AddMarketItemActivity">
+    tools:context=".MyMarketItemEditActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/add_item_to_market"
+            app:layout_constraintBottom_toTopOf="@+id/confirm_item_edit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_picture">
@@ -117,20 +117,34 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/add_item_to_market"
+            app:layout_constraintBottom_toTopOf="@+id/confirm_item_edit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <Button
-            android:id="@+id/add_item_to_market"
+            android:id="@+id/confirm_item_edit"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Add to Market"
+            android:text="Confirm"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@+id/cancel_item_edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/cancel_item_edit"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Cancel"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
