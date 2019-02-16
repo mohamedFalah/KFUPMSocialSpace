@@ -3,8 +3,8 @@ package com.example.android.kfupmsocialspace.presenter;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.android.kfupmsocialspace.model.User;
 import com.example.android.kfupmsocialspace.contract.UserContract;
+import com.example.android.kfupmsocialspace.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,12 +26,14 @@ public class userPresenter implements UserContract.IPresenter {
     //not used yet.
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-    public userPresenter(String UserID){
+    public userPresenter(String UserID) {
         getUserObject(UserID);
-    };
+    }
+
+    ;
 
 
-    public userPresenter(UserContract.IView newView, String UserID){
+    public userPresenter(UserContract.IView newView, String UserID) {
 
         //create user object with exitsting data from database
         getUserObject(UserID);
@@ -42,8 +44,8 @@ public class userPresenter implements UserContract.IPresenter {
 
     }
 
-    public void getUserObject(String UserID){
-        if(UserID != null){
+    public void getUserObject(String UserID) {
+        if (UserID != null) {
             dbRef.child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -55,7 +57,8 @@ public class userPresenter implements UserContract.IPresenter {
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     Log.i(TAG, "onCancelled", databaseError.toException());
                 }
-            });}
+            });
+        }
     }
 
 
@@ -69,9 +72,3 @@ public class userPresenter implements UserContract.IPresenter {
 
     }
 }
-
-
-
-
-
-

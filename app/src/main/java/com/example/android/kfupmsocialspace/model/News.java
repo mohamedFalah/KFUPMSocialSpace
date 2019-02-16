@@ -7,11 +7,11 @@ public class News {
     private String image;
 
 
-    News(){
+    News() {
 
     }
 
-    News(String title, String image){
+    News(String title, String image) {
 
         this.title = title;
         this.image = image;
@@ -24,12 +24,12 @@ public class News {
         return title;
     }
 
-    public String getImage() {
-        return image;
-    }
-
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     public void setImage(String image) {

@@ -30,31 +30,17 @@ import com.example.android.kfupmsocialspace.presenter.MarketItemPresenter;
 public class AddMarketItemActivity extends AppCompatActivity implements MarketitemContract.IView {
 
     static final int PICK_IMAGE_REQUEST = 1;
-
+    String mCurrentPhotoPath;
     private ImageView myItemImage;
     private EditText imageName, imagePrice, itemDescription;
     private Button addMarketItemButton;
     private Spinner spinner;
     private ProgressBar progressBar;
-    private Uri ImageUri;
 
 
     //presenter
-
+    private Uri ImageUri;
     private MarketItemPresenter marketItemPresenter;
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onBackPressed();
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                break;
-        }
-        return true;
-    }
-
-    String mCurrentPhotoPath;
 
     //https://stackoverflow.com/questions/5263068/how-to-get-android-device-features-using-package-manager
     //https://developer.android.com/reference/android/content/pm/PackageManager#hasSystemFeature(java.lang.String)
@@ -72,6 +58,17 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onBackPressed();
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                break;
+        }
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_market_item);
@@ -82,7 +79,7 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
         spinner = (Spinner) findViewById(R.id.itemCategory);
         progressBar = findViewById(R.id.progress_bar);
         myItemImage = findViewById(R.id.item_picture);
-        imageName =  findViewById(R.id.title_string);
+        imageName = findViewById(R.id.title_string);
         imagePrice = findViewById(R.id.price_value);
         itemDescription = findViewById(R.id.itemDescription);
 
@@ -112,28 +109,26 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
 
         addMarketItemButton.setOnClickListener(
                 new View.OnClickListener() {
-            public void onClick(View v) {
+                    public void onClick(View v) {
 
-                uploadMarketItem();
+                        uploadMarketItem();
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        finish();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                finish();
+                            }
+                        }, 18000);
+
                     }
-                }, 18000);
-
-            }
-        });
+                });
     }
 
     /*
-    *
-    * this a dialog to choose from gallery or take picure with camera
-    *
-    */
+     * this a dialog to choose from gallery or take picure with camera
+     */
 
-    private void chooseImage(){
+    private void chooseImage() {
 
         final CharSequence[] items = {"CAMERA", "GALLERY", "CANCEL"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -142,13 +137,11 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                if(items[item].equals("CAMERA")){
+                if (items[item].equals("CAMERA")) {
                     FromCamera();
-                }
-                else if (items[item].equals("GALLERY")){
+                } else if (items[item].equals("GALLERY")) {
                     FromGallery();
-                }
-                else{
+                } else {
 
                     dialog.dismiss();
 
@@ -165,7 +158,7 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
      *
      */
 
-    private void FromGallery(){
+    private void FromGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
@@ -175,7 +168,7 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
      * run the camera method
      *
      */
-    private void FromCamera(){
+    private void FromCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
@@ -189,19 +182,18 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null
-                && data.getData() != null){
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null
+                && data.getData() != null) {
 
             ImageUri = data.getData();
 
             myItemImage.setImageURI(ImageUri);
 
-
         }
     }
 
 
-    private String getFileExtension(Uri uri){
+    private String getFileExtension(Uri uri) {
 
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton().getSingleton();
@@ -210,32 +202,33 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
     }
 
 
-    private void uploadMarketItem(){
+    private void uploadMarketItem() {
 
-        if(ImageUri != null && imageName != null && imagePrice != null && itemDescription != null && spinner != null){
+        if (ImageUri != null && imageName != null && imagePrice != null && itemDescription != null && spinner != null) {
+
+            //addMarketItemButton.setClickable(false);
 
             String itemName = imageName.getText().toString().trim();
             String itemPrice = imagePrice.getText().toString().trim();
             String itemCategory = spinner.getSelectedItem().toString();
-            String itemDescription  = this.itemDescription.getText().toString().trim();
+            String itemDescription = this.itemDescription.getText().toString().trim();
 
-            marketItemPresenter.uploadItemImage(System.currentTimeMillis() + "." +getFileExtension(ImageUri),
-                    ImageUri, itemName, itemPrice, itemCategory, itemDescription );
 
-        }else{
+            marketItemPresenter.uploadItemImage(System.currentTimeMillis() + "." + getFileExtension(ImageUri),
+                    ImageUri, itemName, itemPrice, itemCategory, itemDescription);
+
+        } else {
 
             Toast.makeText(this, "Fill All Fields ", Toast.LENGTH_SHORT).show();
 
         }
 
-
     }
-
 
     @Override
     public void progressBarValue(int progress) {
         progressBar.setProgress(progress);
-    }
 
+    }
 
 }

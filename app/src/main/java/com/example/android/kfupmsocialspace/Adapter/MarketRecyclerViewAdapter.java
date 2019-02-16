@@ -3,10 +3,8 @@ package com.example.android.kfupmsocialspace.Adapter;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +53,7 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // showPopupMenu(holder.overflow);
+                // showPopupMenu(holder.overflow);
             }
         });
     }
@@ -73,14 +71,14 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
     /**
      * Showing popup menu when tapping on 3 dots
 
-    private void showPopupMenu(View view) {
-        // inflate menu
-        PopupMenu popup = new PopupMenu(mContext, view);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_market_cardview, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
-        popup.show();
-    }
+     private void showPopupMenu(View view) {
+     // inflate menu
+     PopupMenu popup = new PopupMenu(mContext, view);
+     MenuInflater inflater = popup.getMenuInflater();
+     inflater.inflate(R.menu.menu_market_cardview, popup.getMenu());
+     popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
+     popup.show();
+     }
      */
 
     public static class marketItemViewHolder extends RecyclerView.ViewHolder {
