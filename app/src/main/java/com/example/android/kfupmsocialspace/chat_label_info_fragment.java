@@ -8,6 +8,6 @@ public class chat_label_info_fragment extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_label_info_fragment);
+        setContentView(R.layout.cardview_chat_label);
     }
 }

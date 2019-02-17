@@ -10,10 +10,9 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/activity_chat_label_info_fragment"
+            layout="@layout/cardview_chat_label"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
