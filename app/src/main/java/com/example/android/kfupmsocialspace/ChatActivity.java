@@ -8,6 +8,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -84,12 +85,43 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
                 sendMsg();
             }
         });
+
+
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+
+                int itemPosition = viewHolder.getAdapterPosition();
+                messageAdapter.notifyItemChanged(itemPosition);
+
+            }
+        });
+
     }
 
     //getting the messages
     protected void onStart() {
 
         super.onStart();
+
+
+        userMessagesList.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft,
+                                       int oldTop, int oldRight, int oldBottom) {
+
+                if(bottom < oldBottom)
+                    linearLayoutManager.smoothScrollToPosition(userMessagesList,null, messageAdapter.getItemCount());
+
+            }
+        });
 
         dbRef.child("section2").addChildEventListener(new ChildEventListener() {
             @Override
@@ -103,7 +135,9 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
 
             }
             @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) { }
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
+            }
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) { }
             @Override
