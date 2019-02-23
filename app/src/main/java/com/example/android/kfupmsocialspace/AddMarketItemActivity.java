@@ -113,12 +113,13 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
 
                         uploadMarketItem();
 
+
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 finish();
                             }
-                        }, 18000);
+                        }, 25000);
 
                     }
                 });
@@ -228,6 +229,11 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
     @Override
     public void progressBarValue(int progress) {
         progressBar.setProgress(progress);
+
+    }
+
+    @Override
+    public void reservationStatus(boolean status) {
 
     }
 
