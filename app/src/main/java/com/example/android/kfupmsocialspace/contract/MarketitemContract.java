@@ -8,13 +8,17 @@ public class MarketitemContract {
 
     public interface IView {
         void progressBarValue(int progress);
+        void reservationStatus(boolean status);
     }
 
     public interface IPresenter {
         void uploadItemImage(String name, Uri uri, String itemName, String price, String category, String itemDescription);
         void uploadMarketItem(MarketItem marketItem);
+        void reserveItem(MarketItem marketItem);
     }
 
     public interface IModel {
+
     }
+
 }

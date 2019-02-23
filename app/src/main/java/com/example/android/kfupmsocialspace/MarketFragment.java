@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.example.android.kfupmsocialspace.Adapter.MarketRecyclerViewAdapter;
 import com.example.android.kfupmsocialspace.model.MarketItem;
+import com.example.android.kfupmsocialspace.presenter.userPresenter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -76,6 +77,8 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
         marketItemList.add(new MarketItem("Selling PS4", 90, "Gaming", "New PS4 for sell", R.drawable.ps4));
         marketItemList.add(new MarketItem("Selling PS4", 120, "Gaming", "New PS4 for sell"));
         */
+
+
 
 
         market_recycler_view = view.findViewById(R.id.recycler_market_items_list);

@@ -17,6 +17,8 @@ public class MarketItem implements Parcelable {
             return new MarketItem[size];
         }
     };
+
+    private String itemID;
     private String itemName;
     private String itemPrice;
     private String itemCategory;
@@ -26,31 +28,38 @@ public class MarketItem implements Parcelable {
     //item owner information
     private String itemOwner;
     private String ownerID;
+    //Reservation status
+    private boolean status;
 
     public MarketItem() {
     }
 
     //constructor with thumbnail
-    public MarketItem(String itemName, String itemPrice, String itemCategory, String itemDescription, int thumbnail) {
+    public MarketItem(String itemName, String itemPrice, String itemCategory, String itemDescription, int thumbnail, boolean status) {
+        this.itemID = itemID;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.itemCategory = itemCategory;
         this.itemDescription = itemDescription;
         this.thumbnail = thumbnail;
+        this.status = status;
     }
 
     //constructor with predefined picture
-    public MarketItem(String itemName, String itemPrice, String itemCategory, String itemDescription) {
+    public MarketItem(String itemName, String itemPrice, String itemCategory, String itemDescription, boolean status) {
+        this.itemID = itemID;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.itemCategory = itemCategory;
         this.itemDescription = itemDescription;
+        this.status = status;
     }
 
 
     //constructor with item picture and item owner and id
     public MarketItem(String itemName, String itemPrice, String itemCategory, String itemDescription, String itemPicture,
                       String itemOwner, String ownerID) {
+        this.itemID = itemID;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.itemCategory = itemCategory;
@@ -58,10 +67,28 @@ public class MarketItem implements Parcelable {
         this.itemPicture = itemPicture;
         this.itemOwner = itemOwner;
         this.ownerID = ownerID;
+        this.status = status;
+
+    }
+
+    //for the item id
+    public MarketItem(String itemID, String itemName, String itemPrice, String itemCategory, String itemDescription, String itemPicture,
+                      String itemOwner, String ownerID, boolean status) {
+
+        this.itemID = itemID;
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.itemCategory = itemCategory;
+        this.itemDescription = itemDescription;
+        this.itemPicture = itemPicture;
+        this.itemOwner = itemOwner;
+        this.ownerID = ownerID;
+        this.status = status;
 
     }
 
     protected MarketItem(Parcel in) {
+        itemID = in.readString();
         itemName = in.readString();
         itemPrice = in.readString();
         itemCategory = in.readString();
@@ -70,8 +97,13 @@ public class MarketItem implements Parcelable {
         thumbnail = in.readInt();
         itemOwner = in.readString();
         ownerID = in.readString();
+        status = in.readByte() != 0;
 
     }
+
+    public String getItemID() { return itemID; }
+
+    public void setItemID(String itemID) { this.itemID = itemID; }
 
     public String getItemName() {
         return itemName;
@@ -101,9 +133,7 @@ public class MarketItem implements Parcelable {
         return itemDescription;
     }
 
-    public void setItemDescription(String itemDescription) {
-        this.itemDescription = itemDescription;
-    }
+    public void setItemDescription(String itemDescription) { this.itemDescription = itemDescription; }
 
     public String getItemPicture() {
         return itemPicture;
@@ -137,6 +167,10 @@ public class MarketItem implements Parcelable {
         this.ownerID = ownerID;
     }
 
+    public boolean isStatus() { return status; }
+
+    public void setStatus(boolean status) { this.status = status; }
+
     @Override
     public int describeContents() {
         return 0;
@@ -144,6 +178,7 @@ public class MarketItem implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(itemID);
         dest.writeString(itemName);
         dest.writeString(itemPrice);
         dest.writeString(itemCategory);
@@ -152,5 +187,6 @@ public class MarketItem implements Parcelable {
         dest.writeInt(thumbnail);
         dest.writeString(itemOwner);
         dest.writeString(ownerID);
+        dest.writeByte((byte) (status ? 1 : 0));
     }
 }

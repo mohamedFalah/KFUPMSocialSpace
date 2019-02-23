@@ -15,7 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.android.kfupmsocialspace.firebaseServices.FirebaseService;
+import com.example.android.kfupmsocialspace.presenter.userPresenter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -88,6 +91,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        //for the token this has to be declared in the signup page but for now it is here
+        userPresenter userPresenter = new userPresenter();
+
+        //this is also here because no idea where it should be
+        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+
 
         //Firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
@@ -185,4 +196,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         for (int i = 0; i < navigationview.getMenu().size(); i++)
             navigationview.getMenu().getItem(i).setChecked(false);
     }
+
+
+
 }

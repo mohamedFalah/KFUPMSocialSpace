@@ -7,6 +7,7 @@ public class User implements UserContract.IModel {
     private String email;
     private String firstName;
     private String lastName;
+    private String token;
 
     //maybe converted to Number later
     private String phone;
@@ -31,6 +32,18 @@ public class User implements UserContract.IModel {
         this.email = email;
         this.firstName = FirstName;
         this.lastName = LastName;
+
+    }
+
+
+    //constructor with user token
+    public User(String email, String FirstName, String LastName, String phone, String token) {
+
+        this.email = email;
+        this.firstName = FirstName;
+        this.lastName = LastName;
+        this.phone = phone;
+        this.token = token;
 
     }
 
@@ -67,9 +80,14 @@ public class User implements UserContract.IModel {
         this.phone = phone;
     }
 
+    public String getToken() { return token; }
+
+    public void setToken(String token) { this.token = token; }
 
     @Override
     public String getUserFullName() {
         return getFirstName() + " " + getLastName();
     }
+
+
 }

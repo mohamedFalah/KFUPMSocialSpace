@@ -39,6 +39,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.5'
     implementation 'com.google.firebase:firebase-database:16.0.5'
     implementation 'com.google.firebase:firebase-storage:16.0.1'
+    implementation 'com.google.firebase:firebase-messaging:17.3.3'
+
 
     //https://github.com/ittianyu/BottomNavigationViewEx
     implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.2'
