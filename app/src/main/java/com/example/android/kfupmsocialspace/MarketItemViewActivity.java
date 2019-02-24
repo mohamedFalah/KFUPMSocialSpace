@@ -102,14 +102,17 @@ public class MarketItemViewActivity extends AppCompatActivity implements View.On
 
         marketItemPresenter.reserveItem(marketItem);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(reservationStatus = true)
-                    Toast.makeText(MarketItemViewActivity.this, "Item reserved", Toast.LENGTH_SHORT).show();
-            }
-        }, 800);
-
+        if(marketItemPresenter.cannotReserve){
+            Toast.makeText(this, "You cannot reserve your own item", Toast.LENGTH_SHORT).show();
+        }else {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (reservationStatus = true)
+                        Toast.makeText(MarketItemViewActivity.this, "Item reserved", Toast.LENGTH_SHORT).show();
+                }
+            }, 800);
+        }
     }
 
     @Override

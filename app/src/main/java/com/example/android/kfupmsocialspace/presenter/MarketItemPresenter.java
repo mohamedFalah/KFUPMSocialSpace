@@ -23,6 +23,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
@@ -42,6 +43,10 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
     private StorageReference stRef = FirebaseStorage.getInstance().getReference("MarketItemImages");
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private String userId;
+
+    //public
+     public boolean cannotReserve = false;
+     public boolean uploadInProgress = true;
 
     //this wrong but why not
     private userPresenter userPresenter;
@@ -118,6 +123,9 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
 
                     //upload the item to database
                     uploadMarketItem(marketItem);
+
+                    //the progress finished
+                    uploadInProgress = false;
                 } else {
                     // Handle failures
                     Log.d("uplaod log", "error while uploading");
@@ -146,11 +154,10 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
 
     @Override
     public void reserveItem(MarketItem marketItem) {
-
-        dbRef.child(marketItem.getItemID()).child("status").setValue(true);
-
         //get the user id. as reservation id.
         getUser();
+
+        String ownerID =  marketItem.getOwnerID();
 
         //get the current time
         Calendar calendar = Calendar.getInstance();
@@ -161,21 +168,27 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
         Reservation reservation = new Reservation(marketItem.getItemID(),time,marketItem.getOwnerID());
 
         if(userId != null) {
-            database.getReference().child("ReservedItems").child(userId).setValue(reservation)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            view.reservationStatus(true);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            view.reservationStatus(false);
-                        }
-                    });
-        }
+            if (!userId.equals(ownerID)) {
+                dbRef.child(marketItem.getItemID()).child("status").setValue(true);
 
+                database.getReference().child("ReservedItems").child(userId).setValue(reservation)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                view.reservationStatus(true);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                view.reservationStatus(false);
+                            }
+                        });
+            }
+            else{
+                cannotReserve = true;
+            }
+        }
 
     }
 
