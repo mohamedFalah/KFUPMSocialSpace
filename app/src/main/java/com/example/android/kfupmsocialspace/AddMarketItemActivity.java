@@ -1,5 +1,6 @@
 package com.example.android.kfupmsocialspace;
 
+import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -36,6 +37,11 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
     private Button addMarketItemButton;
     private Spinner spinner;
     private ProgressBar progressBar;
+
+
+
+    //uploading progress
+    private int progress = 0;
 
 
     //presenter
@@ -113,18 +119,11 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
 
                         uploadMarketItem();
 
-
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                finish();
-                            }
-                        }, 25000);
-
                     }
                 });
     }
 
+    
     /*
      * this a dialog to choose from gallery or take picure with camera
      */
@@ -228,10 +227,21 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
 
     @Override
     public void progressBarValue(int progress) {
+
         progressBar.setProgress(progress);
+
+        //end it if progress is finsihed
+        if(progress == 100){
+            Toast.makeText(this, "Item uploaded", Toast.LENGTH_LONG).show();
+            finish();
+        }
+
 
     }
 
+    /*
+            Not used but implemented by interface
+     */
     @Override
     public void reservationStatus(boolean status) {
 
