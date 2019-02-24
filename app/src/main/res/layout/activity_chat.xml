@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ChatActivity">
 
     <FrameLayout
@@ -14,43 +15,50 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/messages_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="8dp"/>
     </FrameLayout>
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:background="@android:color/white"
-        android:weightSum="1">
+        android:layout_margin="8dp"
+        app:cardCornerRadius="24dp">
 
-        <ImageButton
-            android:id="@+id/attach_file"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="4dp"
-            android:layout_weight="0.1"
-            android:background="?android:attr/selectableItemBackground"
-            android:src="@drawable/ic_attach_file" />
-
-        <EditText
-            android:id="@+id/message_string"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"
-            android:focusedByDefault="false"
-            android:hint="Type a message"
-            android:textSize="20sp" />
+            android:orientation="horizontal"
+            android:weightSum="1">
 
-        <ImageButton
-            android:id="@+id/send_message"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="4dp"
-            android:layout_weight="0.1"
-            android:background="?android:attr/selectableItemBackground"
-            android:src="@drawable/ic_send" />
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/attach_file"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="0.1"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_attach_file" />
+
+            <EditText
+                android:id="@+id/message_string"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:focusedByDefault="false"
+                android:hint="Type a message"
+                android:textSize="20sp" />
+
+            <ImageButton
+                android:id="@+id/send_message"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="0.1"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_send" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
 </RelativeLayout>
