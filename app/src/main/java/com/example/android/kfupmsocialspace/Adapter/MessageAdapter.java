@@ -23,31 +23,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         this.userMessageList = userMessageList;
     }
 
-    public class MessageViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView senderMessage, receiverName, receiverMessage;
-        public LinearLayout receiverMessageHolder;
-
-        public MessageViewHolder(@NonNull View itemView) {
-            super(itemView);
-            senderMessage = itemView.findViewById(R.id.sender_message);
-
-            receiverMessageHolder  = itemView.findViewById(R.id.receiver_message_holder);
-            receiverName = itemView.findViewById(R.id.receiver_name);
-            receiverMessage = itemView.findViewById(R.id.receiver_message);
-        }
-    }
-
-    @NonNull
-    @Override
-    public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.message_single_layout,viewGroup,false);
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        return new MessageViewHolder(view);
-    }
-
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int i) {
 
@@ -66,18 +41,43 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
 
         if(fromUserID != null && fromUserID.equals(messageSenderID)){
-            holder.senderMessage.setVisibility(View.VISIBLE);
+            holder.senderMessageHolder.setVisibility(View.VISIBLE);
             holder.senderMessage.setText(message.getMessage());
             holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
         }
         else {
-            holder.senderMessage.setVisibility(View.INVISIBLE);
+            holder.senderMessageHolder.setVisibility(View.INVISIBLE);
 
             holder.receiverMessageHolder.setVisibility(View.VISIBLE);
 //            holder.receiverName.setVisibility(View.VISIBLE);
 //            holder.receiverMessage.setVisibility(View.VISIBLE);
             holder.receiverName.setText(message.getSenderName());
             holder.receiverMessage.setText(message.getMessage());
+        }
+    }
+
+    @NonNull
+    @Override
+    public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.message_single_layout, viewGroup, false);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        return new MessageViewHolder(view);
+    }
+
+    public class MessageViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView senderMessage, receiverName, receiverMessage;
+        public LinearLayout senderMessageHolder, receiverMessageHolder;
+
+        public MessageViewHolder(@NonNull View itemView) {
+            super(itemView);
+            senderMessageHolder = itemView.findViewById(R.id.sender_message_holder);
+            senderMessage = itemView.findViewById(R.id.sender_message);
+            receiverMessageHolder = itemView.findViewById(R.id.receiver_message_holder);
+            receiverName = itemView.findViewById(R.id.receiver_name);
+            receiverMessage = itemView.findViewById(R.id.receiver_message);
         }
     }
 
