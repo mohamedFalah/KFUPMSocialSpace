@@ -33,23 +33,26 @@ public class userPresenter implements UserContract.IPresenter {
 
     //not used yet.
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private String UserID = mAuth.getCurrentUser().getUid();
 
 
     //to access it from a presenter
-    userPresenter(String UserID) {
-        getUserObject(UserID);
-    }
 
     //empty constructor
     public userPresenter(){
+
+        getUserObject(UserID);
+
         userToken();
     };
 
 
-    public userPresenter(UserContract.IView newView, String UserID) {
+    public userPresenter(UserContract.IView newView) {
 
         //create user object with exitsting data from database
         getUserObject(UserID);
+
+        Log.i("user", "jkljsljfsjfljlfjlksdjfjf   " +userModel.getUserFullName());
 
         //create new view no idea why
         view = newView;
@@ -57,6 +60,9 @@ public class userPresenter implements UserContract.IPresenter {
 
     }
 
+    /*
+            device token for sending notifications
+     */
     private void userToken(){
 
 
@@ -87,6 +93,10 @@ public class userPresenter implements UserContract.IPresenter {
     }
 
 
+    /*
+            get the current user object
+
+     */
     private void getUserObject(String UserID) {
         if (UserID != null) {
             dbRef.child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -106,6 +116,14 @@ public class userPresenter implements UserContract.IPresenter {
 
 
 
+    /*
+        get  the user full name
+     */
+
+    public String getTheUsername(){
+
+        return userModel.getUserFullName();
+    }
 
 
 
@@ -113,7 +131,7 @@ public class userPresenter implements UserContract.IPresenter {
     @Override
     public void onSendClick() {
 
-        String fullName = userModel.getUserFullName();
+        String fullName = getTheUsername();
 
         view.onDataRecived(fullName);
 

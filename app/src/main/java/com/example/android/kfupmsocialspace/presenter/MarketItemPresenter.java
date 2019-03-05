@@ -53,7 +53,7 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
 
     public MarketItemPresenter(MarketitemContract.IView newView) {
         getUser();
-        userPresenter = new userPresenter(userId);
+        userPresenter = new userPresenter();
         view = newView;
 
     }
