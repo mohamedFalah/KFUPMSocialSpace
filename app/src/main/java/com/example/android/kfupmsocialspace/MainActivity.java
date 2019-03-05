@@ -2,6 +2,7 @@ package com.example.android.kfupmsocialspace;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -11,8 +12,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.kfupmsocialspace.firebaseServices.FirebaseService;
@@ -58,6 +62,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth firebaseAuth;
     private DrawerLayout drawer;
 
+
+
+
+
+    //user
+    userPresenter userPresenter;
+    private String userName;
+
     //This part adds the three dots on the top right
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -94,7 +106,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         //for the token this has to be declared in the signup page but for now it is here
-        userPresenter userPresenter = new userPresenter();
+        userPresenter = new userPresenter();
+
+        //get the user name
+        //userName = userPresenter.getTheUsername();
 
         //this is also here because no idea where it should be
         FirebaseMessaging.getInstance().setAutoInitEnabled(true);
@@ -193,8 +208,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         NavigationView navigationview = findViewById(R.id.nav_view);
+
+
         for (int i = 0; i < navigationview.getMenu().size(); i++)
             navigationview.getMenu().getItem(i).setChecked(false);
+
+
+
+
+
     }
 
 

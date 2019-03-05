@@ -35,10 +35,10 @@ public class NewsFragment extends Fragment {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
 
-    static ArrayList<News> newsList = new ArrayList<>();;
-    static RecyclerView newsRecyclerView ;
-    static NewsAdapter newsAdapter;
-    static GridLayoutManager gridLayoutManager;
+     ArrayList<News> newsList = new ArrayList<>();;
+     RecyclerView newsRecyclerView ;
+     NewsAdapter newsAdapter;
+     GridLayoutManager gridLayoutManager;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference("News");
@@ -64,8 +64,15 @@ public class NewsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.news_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_news, container, false);
         gridLayoutManager = new GridLayoutManager(getContext(), calculateNoOfColumns(getContext()));
+
+        newsRecyclerView = view.findViewById(R.id.newsRecycleView);
+        newsAdapter = new NewsAdapter(newsList, getContext());
+        gridLayoutManager = new GridLayoutManager(getContext(),1);
+        newsRecyclerView.setLayoutManager(gridLayoutManager);
+        newsRecyclerView.setAdapter(newsAdapter);
+
         return view;
     }
 
@@ -74,14 +81,16 @@ public class NewsFragment extends Fragment {
 
         super.onStart();
 
+        newsList.clear();
+
+
         dbRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 News news = dataSnapshot.getValue(News.class);
-                newsList.clear();
                 newsList.add(news);
-                gridLayoutManager.scrollToPosition(newsList.size() - 1);
+                //gridLayoutManager.scrollToPosition(newsList.size() - 1);
                 newsAdapter.notifyDataSetChanged();
 
             }
@@ -155,11 +164,7 @@ public class NewsFragment extends Fragment {
 
             ///for the news adapter
 
-            newsRecyclerView = rootView.findViewById(R.id.recycler_market_items_list);
-            newsAdapter = new NewsAdapter(newsList, getContext());
-            gridLayoutManager = new GridLayoutManager(getContext(),1);
-            newsRecyclerView.setLayoutManager(gridLayoutManager);
-            newsRecyclerView.setAdapter(newsAdapter);
+
 
             return rootView;
         }

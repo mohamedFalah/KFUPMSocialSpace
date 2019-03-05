@@ -67,7 +67,7 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
         userMessagesList.setAdapter(messageAdapter);
 
         //initilaize user presenter
-        userpresenter = new userPresenter(this, currentUserId);
+        userpresenter = new userPresenter(this);
 
 
         chatAttachFileBtn = findViewById(R.id.attach_file);
