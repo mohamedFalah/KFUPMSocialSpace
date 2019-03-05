@@ -30,11 +30,6 @@
             android:text="Title"
             style="@style/TextAppearance.AppCompat.Large" />
 
-        <TextView
-            android:id="@+id/news_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            style="@style/TextAppearance.AppCompat.Medium" />
+        
     </LinearLayout>
 </android.support.v7.widget.CardView>
