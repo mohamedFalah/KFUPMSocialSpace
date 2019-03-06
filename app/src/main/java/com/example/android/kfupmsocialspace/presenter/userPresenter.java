@@ -52,7 +52,7 @@ public class userPresenter implements UserContract.IPresenter {
         //create user object with exitsting data from database
         getUserObject(UserID);
 
-        Log.i("user", "jkljsljfsjfljlfjlksdjfjf   " +userModel.getUserFullName());
+       // Log.i("user", "jkljsljfsjfljlfjlksdjfjf   " +userModel.getUserFullName());
 
         //create new view no idea why
         view = newView;
@@ -125,6 +125,10 @@ public class userPresenter implements UserContract.IPresenter {
         return userModel.getUserFullName();
     }
 
+    //get the user Id
+    public String getUserID(){
+        return UserID;
+    }
 
 
     //return full name of the user

@@ -19,8 +19,10 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.android.kfupmsocialspace.Adapter.MessageAdapter;
+import com.example.android.kfupmsocialspace.contract.ChatContract;
 import com.example.android.kfupmsocialspace.model.Message;
 import com.example.android.kfupmsocialspace.contract.UserContract;
+import com.example.android.kfupmsocialspace.presenter.ChatPresenter;
 import com.example.android.kfupmsocialspace.presenter.userPresenter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -34,15 +36,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ChatActivity extends AppCompatActivity implements UserContract.IView {
+public class ChatActivity extends AppCompatActivity implements ChatContract.IView {
 
     ImageButton chatAttachFileBtn;
     ImageButton chatSendBtn;
     EditText chatMsgField;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference("Message");
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private String currentUserId = mAuth.getCurrentUser().getUid();
+    //private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+   // private String currentUserId = mAuth.getCurrentUser().getUid();
     private LinearLayoutManager linearLayoutManager;
 
 
@@ -50,8 +52,8 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
     private MessageAdapter messageAdapter;
     private RecyclerView userMessagesList;
 
-    //user presenter
-    private userPresenter userpresenter;
+    //chat presenter
+    private ChatPresenter chatPresenter;
     private String SenderName = "";
 
     @Override
@@ -67,7 +69,7 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
         userMessagesList.setAdapter(messageAdapter);
 
         //initilaize user presenter
-        userpresenter = new userPresenter(this);
+        chatPresenter = new ChatPresenter(this);
 
 
         chatAttachFileBtn = findViewById(R.id.attach_file);
@@ -82,7 +84,11 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
 
         chatSendBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                sendMsg();
+
+                String messageText = chatMsgField.getText().toString().trim();
+                chatPresenter.sendMsg(messageText);
+
+                chatMsgField.setText("");
             }
         });
 
@@ -102,7 +108,7 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
                 messageAdapter.notifyItemChanged(itemPosition);
 
             }
-        });
+        }).attachToRecyclerView(userMessagesList);
 
     }
 
@@ -116,7 +122,6 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft,
                                        int oldTop, int oldRight, int oldBottom) {
-
                 if(bottom < oldBottom)
                     linearLayoutManager.smoothScrollToPosition(userMessagesList,null, messageAdapter.getItemCount());
 
@@ -148,42 +153,6 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
     }
 
 
-    // sending method
-    private void sendMsg() {
-
-        String msg = chatMsgField.getText().toString();
-
-        //to get the user name
-        userpresenter.onSendClick();
-
-        Toast.makeText(ChatActivity.this, SenderName, Toast.LENGTH_SHORT).show();
-
-        if (!TextUtils.isEmpty(msg)) {
-
-            DatabaseReference push = dbRef.push();
-            String push_Id = push.getKey();
-
-
-            //Arranging the structure of the data
-            Map msgMap = new HashMap();
-            msgMap.put("SenderID", currentUserId);
-            msgMap.put("SenderName", SenderName);
-            msgMap.put("Message", msg);
-
-            Map map2 = new HashMap();
-            map2.put("section2/" + push_Id, msgMap);
-
-            dbRef.updateChildren(map2, new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                    if (databaseError != null) {
-                        Log.d("CHAT_LOG", databaseError.getMessage());
-                    }
-                }
-            });
-            chatMsgField.setText("");
-        }
-    }
 
     //This part adds the three dots on the top right
     @Override
@@ -223,9 +192,4 @@ public class ChatActivity extends AppCompatActivity implements UserContract.IVie
     }
 
 
-    @Override
-    public void onDataRecived(String userFullName) {
-        SenderName = userFullName;
-
-    }
 }
