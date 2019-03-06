@@ -26,9 +26,9 @@
             android:id="@+id/news_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLength="17"
+            style="@style/TextAppearance.AppCompat.Medium"
             android:text="Title"
-            style="@style/TextAppearance.AppCompat.Large" />
+            android:maxLines="2" />
 
         
     </LinearLayout>
