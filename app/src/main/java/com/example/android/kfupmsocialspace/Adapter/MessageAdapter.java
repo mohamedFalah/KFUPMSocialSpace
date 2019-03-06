@@ -43,6 +43,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         if(fromUserID != null && fromUserID.equals(messageSenderID)){
             holder.senderMessageHolder.setVisibility(View.VISIBLE);
             holder.senderMessage.setText(message.getMessage());
+            holder.senderMessageTime.setText(message.getTimestamp());
             holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
         }
         else {
@@ -53,6 +54,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 //            holder.receiverMessage.setVisibility(View.VISIBLE);
             holder.receiverName.setText(message.getSenderName());
             holder.receiverMessage.setText(message.getMessage());
+            holder.receiverMessageTime.setText(message.getTimestamp());
         }
     }
 
@@ -68,16 +70,22 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     public class MessageViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView senderMessage, receiverName, receiverMessage;
+        public TextView senderMessage,senderMessageTime, receiverName, receiverMessage, receiverMessageTime;
         public LinearLayout senderMessageHolder, receiverMessageHolder;
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            //sender
             senderMessageHolder = itemView.findViewById(R.id.sender_message_holder);
             senderMessage = itemView.findViewById(R.id.sender_message);
+            senderMessageTime = itemView.findViewById(R.id.sender_message_time);
+
+            //reciever
             receiverMessageHolder = itemView.findViewById(R.id.receiver_message_holder);
             receiverName = itemView.findViewById(R.id.receiver_name);
             receiverMessage = itemView.findViewById(R.id.receiver_message);
+            receiverMessageTime = itemView.findViewById(R.id.receiver_message_time);
         }
     }
 
@@ -85,4 +93,5 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public int getItemCount() {
         return userMessageList.size();
     }
+
 }

@@ -45,8 +45,7 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
     private String userId;
 
     //public
-     public boolean cannotReserve = false;
-     public boolean uploadInProgress = true;
+    public boolean cannotReserve = false;
 
     //this wrong but why not
     private userPresenter userPresenter;
@@ -124,8 +123,6 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
                     //upload the item to database
                     uploadMarketItem(marketItem);
 
-                    //the progress finished
-                    uploadInProgress = false;
                 } else {
                     // Handle failures
                     Log.d("uplaod log", "error while uploading");
