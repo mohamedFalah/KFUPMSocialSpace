@@ -33,7 +33,7 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
     List<MarketItem> marketItemList = new ArrayList<>();
     RecyclerView market_recycler_view;
     MarketRecyclerViewAdapter marketItemAdapter;
-    ;
+
     GridLayoutManager gridLayoutManager;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference("Market Item");

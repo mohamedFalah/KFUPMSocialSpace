@@ -1,10 +1,15 @@
 package com.example.android.kfupmsocialspace;
 
+import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -41,6 +47,8 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
     ImageButton chatAttachFileBtn;
     ImageButton chatSendBtn;
     EditText chatMsgField;
+    static final int PICK_IMAGE_REQUEST = 1;
+
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference("Message");
     //private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -62,7 +70,7 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
         setContentView(R.layout.activity_chat);
 
 
-        messageAdapter = new MessageAdapter(messageList);
+        messageAdapter = new MessageAdapter(messageList,this);
         userMessagesList = findViewById(R.id.messages_list);
         linearLayoutManager = new LinearLayoutManager(this);
         userMessagesList.setLayoutManager(linearLayoutManager);
@@ -79,6 +87,7 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
         chatAttachFileBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(ChatActivity.this, "File btn clicked", Toast.LENGTH_SHORT).show();
+                chooseImage();
             }
         });
 
@@ -190,6 +199,90 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
         super.onBackPressed();
         NavUtils.navigateUpFromSameTask(this);
     }
+
+
+
+    /*
+     * this a dialog to choose from gallery or take picure with camera
+     */
+
+    private void chooseImage() {
+
+        final CharSequence[] items = {"CAMERA", "GALLERY", "CANCEL"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("SELECT FROM");
+
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (items[item].equals("CAMERA")) {
+                    FromCamera();
+                } else if (items[item].equals("GALLERY")) {
+                    FromGallery();
+                } else {
+
+                    dialog.dismiss();
+
+                }
+            }
+        });
+
+        builder.show();
+    }
+
+    /*
+     *
+     * run the gallery method
+     *
+     */
+
+    private void FromGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    /*
+     *
+     * run the camera method
+     *
+     */
+    private void FromCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    /*
+     *
+     * show the chooser image.
+     *
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null
+                && data.getData() != null) {
+
+            Uri ImageUri = data.getData();
+
+
+            chatPresenter.sendImageMessage(System.currentTimeMillis() + "." + getFileExtension(ImageUri), ImageUri);
+
+
+
+        }
+    }
+
+
+
+    private String getFileExtension(Uri uri) {
+
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton().getSingleton();
+        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
+
+    }
+
 
 
 }

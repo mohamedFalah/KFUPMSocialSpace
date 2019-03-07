@@ -54,11 +54,6 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <ImageView
-            android:id="@+id/sender_image"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-
         <TextView
             android:id="@+id/sender_message"
             android:layout_width="wrap_content"
@@ -73,6 +68,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:text="time" />
+
+        <ImageView
+            android:id="@+id/sender_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="TODO"
+            android:scaleType="centerCrop" />
     </LinearLayout>
 
 </RelativeLayout>
