@@ -23,13 +23,13 @@ import java.util.List;
 public class ChatRoomsAdapter extends RecyclerView.Adapter<ChatRoomsAdapter.ChatRoomsViewHolder>{
 
     private List<ChatRoom> chatRoomsList;
-    Message message;
-    private OnItemClickListener listener;
+    private Message message;
+    private OnItemClickListener  listener;
 
 
     //here for the now
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference dbRef = database.getReference("Message");
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference dbRef = database.getReference("Message");
 
     public ChatRoomsAdapter(List<ChatRoom> chatRoomsList) {
         this.chatRoomsList = chatRoomsList;
