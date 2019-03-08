@@ -18,15 +18,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class SignIn extends AppCompatActivity implements View.OnClickListener {
+public class InstructorSignIn extends AppCompatActivity implements View.OnClickListener {
 
 
     private EditText IDNumber;
     private EditText password;
     private Button SignIn;
     private TextView SignUp;
-    private TextView InstructorSignIn;
-
 
     private ProgressDialog progressDialog;
 
@@ -46,7 +44,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.activity_instructor_sign_in);
 
 
         progressDialog = new ProgressDialog(this);
@@ -55,12 +53,9 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         IDNumber = findViewById(R.id.IDNumberSignIn);
         password = findViewById(R.id.PasswordSignIn);
         SignUp = findViewById(R.id.SignUp);
-        InstructorSignIn = findViewById(R.id.InstructorSignIn);
-
 
         SignUp.setOnClickListener(this);
         SignIn.setOnClickListener(this);
-        InstructorSignIn.setOnClickListener(this);
 
     }
 
@@ -121,13 +116,5 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
-        if (view == InstructorSignIn) {
-            Intent intent = new Intent(getApplicationContext(), InstructorSignIn.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            this.finish();
-            startActivity(intent);
-
-        }
-
     }
 }
