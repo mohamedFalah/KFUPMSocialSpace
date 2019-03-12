@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view_chat"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true">
+
+    <RelativeLayout
+        android:id="@+id/enter_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:addStatesFromChildren="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:duplicateParentState="true"
+        android:focusable="true"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:id="@+id/parent_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:id="@+id/chat_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxWidth="?attr/actionBarSize"
+                android:maxLines="2"
+                android:text="Course-Name-101" />
+
+            <LinearLayout
+                android:id="@+id/child_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Small"
+                    android:id="@+id/last_sender_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Last Sender Name" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=": " />
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Small"
+                    android:id="@+id/message_string"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="?attr/actionBarSize"
+                    android:maxLines="1"
+                    android:text="Message-String" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/last_message_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/parent_linear_layout"
+            android:layout_centerVertical="true"
+            android:contentDescription="message time"
+            android:text="time" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

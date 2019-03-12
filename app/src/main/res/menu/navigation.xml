@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+
+    <!--https://www.youtube.com/watch?v=tPV8xA7m-iw-->
     <item
         android:id="@+id/navigation_chats"
         android:icon="@drawable/chats_icon"
@@ -14,6 +16,11 @@
         android:title="@string/title_blogs" />
 
     <item
+        android:id="@+id/navigation_news"
+        android:icon="@drawable/news_icon"
+        android:title="@string/title_news" />
+
+    <item
         android:id="@+id/navigation_roommate"
         android:icon="@drawable/roommate_icon"
         android:title="@string/title_roommate" />
@@ -22,5 +29,4 @@
         android:id="@+id/navigation_market"
         android:icon="@drawable/market_icon"
         android:title="@string/title_market" />
-
 </menu>

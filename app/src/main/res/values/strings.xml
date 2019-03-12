@@ -1,17 +1,8 @@
 <resources>
     <string name="app_name">KFUPM Social Space</string>
-    <string name="title_activity_main_screen">MainScreen</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="chats">Chats</string>
-    <string name="blogs">Blogs</string>
-    <string name="roommate">Roommate</string>
-    <string name="market">Market</string>
-    <string name="title_activity_main2">Main2Activity</string>
     <string name="title_chats">Chats</string>
     <string name="title_blogs">Blogs</string>
     <string name="title_roommate">Roommate</string>
@@ -21,4 +12,99 @@
     <string name="files">Files</string>
     <string name="log_out">Log out</string>
     <string name="student_name">Student Name</string>
+    <string name="news_and_events">News &amp; Events</string>
+    <string name="password">Password</string>
+    <string name="id_number">ID Number</string>
+    <string name="sign_in">Sign In</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="select_a_department">Select a department</string>
+    <string name="select_a_course">Select a course</string>
+    <string name="request">Request</string>
+    <string name="title_activity_utilities">UtilitiesActivity</string>
+    <string name="tab_text_kfupm_numbers">KFUPM NUMBERS</string>
+    <string name="tab_text_restaurants">Restaurants</string>
+    <string name="tab_text_links">Useful Links</string>
+    <!--Hello World from section: %1$d-->
+    <string name="section_format">Utility lists here</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="title_activity_news">NewsActivity</string>
+    <string name="tab_text_news">News</string>
+    <string name="tab_text_events">Events</string>
+    <string name="tab_text_club_events">Clubs Events</string>
+    <string name="title_activity_my_market_items">MyMarketItemsActivity</string>
+    <string name="placed_market_items">Placed Items</string>
+    <string name="reserved_market_items">Reserved Items</string>
+    <string name="title_news">News</string>
 </resources>
