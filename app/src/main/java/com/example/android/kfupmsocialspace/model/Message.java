@@ -8,6 +8,7 @@ public class Message {
     private String Message;
     private String Timestamp;
     private String Type;
+    private String media;
     private String Image;
     private String Document;
     private String voice;
@@ -17,16 +18,18 @@ public class Message {
 
     }
 
-    private Message(String senderID,String senderName,String message,String timestamp, String type,  String image, String document, String voice){
+    public Message(String senderID,String senderName,String message,String timestamp, String type,  String media){
 
         this.SenderID = senderID;
         this.SenderName = senderName;
         this.Message = message;
         this.Timestamp = timestamp;
         this.Type = type;
-        this.Image = image;
-        this.Document = document;
-        this.voice = voice;
+        this.media = media;
+
+//        this.Image = image;
+//        this.Document = document;
+//        this.voice = voice;
 
     }
 
@@ -43,26 +46,26 @@ public class Message {
 
 
   //custom constructors
-  public static Message textMessage(String senderID,String senderName,String message,String timestamp){
+ /* public static Message textMessage(String senderID,String senderName,String message,String timestamp){
       Message textMsg = new Message(senderID,senderName,message,timestamp,"text",null,null,null);
       return  textMsg;
 
   }
 
   public static Message imageMessage(String senderID,String senderName,String message,String timestamp, String image ){
-        Message imageMsg = new Message(senderID,senderName,null,timestamp,"image",image,null,null);
+        Message imageMsg = new Message(senderID,senderName,message,timestamp,"image",image,null,null);
         return  imageMsg;
   }
 
   public static Message documentMessage(String senderID,String senderName,String message,String timestamp, String document ){
-        Message documentMsg = new Message(senderID,senderName,null,timestamp,"document",null,document,null);
+        Message documentMsg = new Message(senderID,senderName,message,timestamp,"document",null,document,null);
         return  documentMsg;
   }
 
   public static Message voiceMessage(String senderID,String senderName,String message,String timestamp, String voice ){
-        Message voiceMsg = new Message(senderID,senderName,null,timestamp,"voice",null,null,voice);
+        Message voiceMsg = new Message(senderID,senderName,message,timestamp,"voice",null,null,voice);
         return  voiceMsg;
-  }
+  }*/
 
 
 
@@ -77,6 +80,8 @@ public class Message {
     public String getTimestamp() { return Timestamp; }
 
     public String getType() { return Type; }
+
+    public String getMedia() { return media; }
 
     public String getImage() { return Image; }
 
@@ -97,6 +102,8 @@ public class Message {
     public void setTimestamp(String timestamp) { Timestamp = timestamp; }
 
     public void setType(String type) { Type = type; }
+
+    public void setMedia(String media) { this.media = media; }
 
     public void setImage(String image) { Image = image; }
 

@@ -110,7 +110,10 @@ public class ChatRoomsAdapter extends RecyclerView.Adapter<ChatRoomsAdapter.Chat
                      }
 
                      senderName.setText(message.getSenderName());
-                     lastMessage.setText(message.getMessage());
+                     if(message.getType().equals("text"))
+                        lastMessage.setText(message.getMessage());
+                     else
+                         lastMessage.setText("Media");
                      lastMessageTime.setText(message.getTimestamp());
 
 

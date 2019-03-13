@@ -40,6 +40,7 @@ public class ChatPresenter implements ChatContract.IPresenter {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference("Message");
     private StorageReference stRef = FirebaseStorage.getInstance().getReference("ChatImages");
+    private StorageReference stRefDoc = FirebaseStorage.getInstance().getReference("ChatDocs");
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
@@ -77,7 +78,7 @@ public class ChatPresenter implements ChatContract.IPresenter {
 
 
             //create message instance
-            message.textMessage(userID,userName,messageText,getCurrentTime());
+            message =  new Message(userID,userName,messageText,getCurrentTime(),"text", "");
 
 
             //send the message
@@ -126,8 +127,8 @@ public class ChatPresenter implements ChatContract.IPresenter {
                 if (task.isSuccessful() && task.getResult() != null) {
                     Uri downloadUri = task.getResult();
                     String image = task.getResult().toString();
-                    message.imageMessage(userpresenter.getUserID(), userpresenter.userModel.getUserFullName(),
-                            "", getCurrentTime(),image);
+                    message = new Message(userpresenter.getUserID(), userpresenter.userModel.getUserFullName(),
+                            "", getCurrentTime(),"image", image);
 
 
                     //upload the item to database
@@ -151,7 +152,7 @@ public class ChatPresenter implements ChatContract.IPresenter {
            send document message
      */
     public void sendDocumentMessage(String documentName, Uri documentUri) {
-        final StorageReference documentRef = stRef.child(documentName);
+        final StorageReference documentRef = stRefDoc.child(documentName);
         documentRef.putFile(documentUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -185,8 +186,8 @@ public class ChatPresenter implements ChatContract.IPresenter {
                 if (task.isSuccessful() && task.getResult() != null) {
                     Uri downloadUri = task.getResult();
                     String document = task.getResult().toString();
-                    message.documentMessage(userpresenter.getUserID(), userpresenter.userModel.getUserFullName(),
-                            "", getCurrentTime(),document);
+                    message = new Message(userpresenter.getUserID(), userpresenter.userModel.getUserFullName(),
+                            "", getCurrentTime(),"document", document);
 
 
                     //upload the item to database
