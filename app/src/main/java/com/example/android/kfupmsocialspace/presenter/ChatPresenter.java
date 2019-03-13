@@ -33,7 +33,7 @@ import java.util.Map;
 public class ChatPresenter implements ChatContract.IPresenter {
 
 
-    private Message message;
+    private Message message = new Message();
     private ChatContract.IView View;
 
     //database
@@ -57,6 +57,9 @@ public class ChatPresenter implements ChatContract.IPresenter {
     }
 
 
+    /*
+            send text message
+     */
 
     public void sendMsg(String messageText) {
 
@@ -74,7 +77,7 @@ public class ChatPresenter implements ChatContract.IPresenter {
 
 
             //create message instance
-            message = new Message(userID,userName,messageText,getCurrentTime(),"text");
+            message.textMessage(userID,userName,messageText,getCurrentTime());
 
 
             //send the message
@@ -84,7 +87,9 @@ public class ChatPresenter implements ChatContract.IPresenter {
     }
 
 
-
+    /*
+           send picture message
+     */
     public void sendImageMessage(String pictureName, Uri uri){
 
         final StorageReference imageRef = stRef.child(pictureName);
@@ -121,12 +126,12 @@ public class ChatPresenter implements ChatContract.IPresenter {
                 if (task.isSuccessful() && task.getResult() != null) {
                     Uri downloadUri = task.getResult();
                     String image = task.getResult().toString();
-                    message = new Message(userpresenter.getUserID(), userpresenter.userModel.getUserFullName(),
-                            "", getCurrentTime(),"image", image);
+                    message.imageMessage(userpresenter.getUserID(), userpresenter.userModel.getUserFullName(),
+                            "", getCurrentTime(),image);
 
 
                     //upload the item to database
-                    SendImageMessage(message);
+                    SendMediaMessage(message);
 
                 } else {
                     // Handle failures
@@ -142,8 +147,72 @@ public class ChatPresenter implements ChatContract.IPresenter {
                 });
     }
 
+    /*
+           send document message
+     */
+    public void sendDocumentMessage(String documentName, Uri documentUri) {
+        final StorageReference documentRef = stRef.child(documentName);
+        documentRef.putFile(documentUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-    public void SendImageMessage(Message message) {
+                        //get the picture uplaod reference from firebase storage
+
+
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    }
+                })
+                .continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful() && task.getException() != null) {
+                            throw task.getException();
+                        }
+
+                        // Continue with the task to get the download URL
+                        return documentRef.getDownloadUrl();
+
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful() && task.getResult() != null) {
+                    Uri downloadUri = task.getResult();
+                    String document = task.getResult().toString();
+                    message.documentMessage(userpresenter.getUserID(), userpresenter.userModel.getUserFullName(),
+                            "", getCurrentTime(),document);
+
+
+                    //upload the item to database
+                    SendMediaMessage(message);
+
+                } else {
+                    // Handle failures
+                    Log.d("uplaod log", "error while uploading");
+                }
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //show the failure message.
+                    }
+                });
+
+    }
+
+
+    /*
+            upload reference for storage to database
+     */
+
+    public void SendMediaMessage(Message message) {
         DatabaseReference push = dbRef.push();
         String messageID = push.getKey();
         if (messageID != null) {
@@ -153,8 +222,9 @@ public class ChatPresenter implements ChatContract.IPresenter {
     }
 
 
-
-
+    /*
+            check the text message is not empty
+     */
     private boolean checkEmptyMessage(String message){
 
         if(!message.isEmpty() && message.trim().length() > 0)
@@ -163,9 +233,12 @@ public class ChatPresenter implements ChatContract.IPresenter {
     }
 
 
+    /*
+            method to get the current time
+     */
     private String getCurrentTime(){
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm a");
         String time = format.format(calendar.getTime());
 
         return time;
