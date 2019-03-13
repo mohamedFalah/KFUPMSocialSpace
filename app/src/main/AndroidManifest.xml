@@ -119,6 +119,9 @@
             android:name=".Placeholder"
             android:theme="@style/SplashTheme" />
 
+        <activity
+            android:name=".InstructorSignIn" />
+
         <service android:name=".firebaseServices.FirebaseService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

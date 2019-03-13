@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignIn">
+    tools:context=".InstructorSignIn">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="317dp"
@@ -21,7 +21,7 @@
             android:layout_marginTop="7dp"
             android:layout_marginEnd="75dp"
             android:layout_marginBottom="16dp"
-            android:text="Student Sign In"
+            android:text="Instructor Sign In"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -31,13 +31,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/InstructorSignIn"
+            android:id="@+id/signUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="68dp"
             android:layout_marginEnd="8dp"
-            android:text=" Instructor"
+            android:text=" Student"
             android:textColor="@android:color/holo_blue_dark"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +51,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="76dp"
             android:layout_marginEnd="8dp"
-            android:text="Are you instructor ?"
+            android:text="Are you Student ?"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
