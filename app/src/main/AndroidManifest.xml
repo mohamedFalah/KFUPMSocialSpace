@@ -17,9 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".NewsWebView"></activity>
         <activity
             android:name=".MyMarketItemEditActivity"
-            android:parentActivityName="MyMarketItemViewActivity"></activity>
+            android:parentActivityName=".MyMarketItemViewActivity" />
         <activity
             android:name=".MyMarketItemViewActivity"
             android:parentActivityName=".MyMarketItemsActivity" />
@@ -119,9 +120,7 @@
         <activity
             android:name=".Placeholder"
             android:theme="@style/SplashTheme" />
-
-        <activity
-            android:name=".InstructorSignIn" />
+        <activity android:name=".InstructorSignIn" />
 
         <service android:name=".firebaseServices.FirebaseService">
             <intent-filter>

@@ -10,7 +10,6 @@
         android:id="@+id/newsRecycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/market_search_bar"
 
         android:layout_margin="4dp"
         android:columnWidth="180dp"

@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import com.example.android.kfupmsocialspace.R;
 import com.example.android.kfupmsocialspace.model.MarketItem;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //this whole java file
@@ -24,16 +27,42 @@ import java.util.List;
 
 //for the dots on the carview of the market item
 //https://www.androidhive.info/2016/05/android-working-with-card-view-and-recycler-view/
-public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecyclerViewAdapter.marketItemViewHolder> {
+public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecyclerViewAdapter.marketItemViewHolder> implements Filterable {
 
     private List<MarketItem> marketItemList;
+    private List<MarketItem> marketItemListFull;
     private Context mContext;
     private OnItemClickListener listener;
+    private Filter marketFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<MarketItem> filteredList = new ArrayList<>();
 
-    public MarketRecyclerViewAdapter(List<MarketItem> marketItemList, Context mContext) {
-        this.marketItemList = marketItemList;
-        this.mContext = mContext;
-    }
+            if (charSequence == null || charSequence.length() == 0) {
+                filteredList.addAll(marketItemListFull);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+
+                for (MarketItem item : marketItemListFull) {
+                    if (item.getItemName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            marketItemList.clear();
+            marketItemList.addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
     @Override
     public void onBindViewHolder(final marketItemViewHolder holder, int i) {
@@ -153,4 +182,14 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
     }
 
 
+    public MarketRecyclerViewAdapter(List<MarketItem> marketItemList, Context mContext) {
+        this.marketItemList = marketItemList;
+        marketItemListFull = new ArrayList<>(marketItemList);
+        this.mContext = mContext;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return marketFilter;
+    }
 }

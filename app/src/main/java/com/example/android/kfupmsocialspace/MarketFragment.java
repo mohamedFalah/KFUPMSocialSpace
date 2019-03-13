@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 
 import com.example.android.kfupmsocialspace.Adapter.MarketRecyclerViewAdapter;
 import com.example.android.kfupmsocialspace.model.MarketItem;
-import com.example.android.kfupmsocialspace.presenter.userPresenter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -54,10 +53,11 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.market_fragment, container, false);
         FloatingActionButton fab = view.findViewById(R.id.floating_btn_add_market_item);
         fab.setOnClickListener(this);
-
+        setHasOptionsMenu(true);//Make sure you have this line of code.
 
         return view;
     }
@@ -142,5 +142,28 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
             }
         });
     }
+
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        super.onCreateOptionsMenu(menu, inflater);
+//        inflater.inflate(R.menu.main_menu, menu);
+//
+//        MenuItem searchItem = menu.findItem(R.id.search_top_bar_icon);
+//        SearchView searchView = (SearchView) searchItem.getActionView();
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String s) {
+//                marketItemAdapter.getFilter().filter(s);
+//                return false;
+//            }
+//        });
+//    }
 
 }
