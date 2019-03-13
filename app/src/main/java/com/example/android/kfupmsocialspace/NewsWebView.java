@@ -17,6 +17,9 @@ public class NewsWebView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_web_view);
 
+        Bundle data = getIntent().getExtras();
+        news = data.getParcelable("clickedNews");
+
         webView = (WebView) findViewById(R.id.news_webview);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(news.getPage());
