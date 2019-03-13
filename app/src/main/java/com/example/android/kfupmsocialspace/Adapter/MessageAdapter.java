@@ -61,7 +61,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 holder.senderMessageHolder.setVisibility(View.VISIBLE);
                 holder.senderMessage.setVisibility(View.INVISIBLE);
                 holder.senderMessageTime.setText(message.getTimestamp());
-                Picasso.with(context).load(Uri.parse(message.getImage())).fit().centerCrop().into(holder.senderImage);
+                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.senderImage);
                 holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
             } else if(message.getType().equals("document")){
                 holder.senderMessageHolder.setVisibility(View.VISIBLE);
@@ -88,7 +88,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 holder.receiverName.setText(message.getSenderName());
                 holder.receiverMessage.setVisibility(View.INVISIBLE);
                 holder.receiverMessageTime.setText(message.getTimestamp());
-                Picasso.with(context).load(Uri.parse(message.getImage())).fit().centerCrop().into(holder.receiverImage);
+                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.receiverImage);
             } else if(message.getType().equals("document")){
                 holder.receiverMessageHolder.setVisibility(View.VISIBLE);
 //            holder.receiverName.setVisibility(View.VISIBLE);
