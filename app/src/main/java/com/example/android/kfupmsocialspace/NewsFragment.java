@@ -1,6 +1,7 @@
 package com.example.android.kfupmsocialspace;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -72,6 +73,19 @@ public class NewsFragment extends Fragment {
         gridLayoutManager = new GridLayoutManager(getContext(),1);
         newsRecyclerView.setLayoutManager(gridLayoutManager);
         newsRecyclerView.setAdapter(newsAdapter);
+
+        newsAdapter.SetOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                News news = newsList.get(position);
+
+                Intent intent = new Intent(getActivity(), NewsWebView.class);
+
+                intent.putExtra("clickedNews", news);
+
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
