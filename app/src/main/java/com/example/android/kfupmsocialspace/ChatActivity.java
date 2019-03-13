@@ -1,14 +1,19 @@
 package com.example.android.kfupmsocialspace;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -48,6 +53,13 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
     ImageButton chatSendBtn;
     EditText chatMsgField;
     static final int PICK_IMAGE_REQUEST = 1;
+    static final int PICK_DOC_REQUEST = 2;
+
+
+    ///for recording
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private static String fileName = null;
+    ////////recording
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference("Message");
@@ -208,7 +220,7 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
 
     private void chooseImage() {
 
-        final CharSequence[] items = {"CAMERA", "GALLERY", "CANCEL"};
+        final CharSequence[] items = {"CAMERA", "GALLERY","DOCUMENT","CANCEL"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("SELECT FROM");
 
@@ -219,6 +231,8 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
                     FromCamera();
                 } else if (items[item].equals("GALLERY")) {
                     FromGallery();
+                } else if (items[item].equals("DOCUMENT")) {
+                    FromDevice();
                 } else {
 
                     dialog.dismiss();
@@ -253,7 +267,27 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
 
     /*
      *
-     * show the chooser image.
+     * select document method
+     *
+     */
+
+    private void FromDevice() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("*/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        String[] mimeTypes =
+                {"application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .doc & .docx
+                        "application/vnd.ms-powerpoint","application/vnd.openxmlformats-officedocument.presentationml.presentation", // .ppt & .pptx
+                        "application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xls & .xlsx
+                        "application/pdf"};
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+        startActivityForResult(intent, PICK_DOC_REQUEST);
+    }
+
+
+    /*
+     *
+     * show the chooser.
      *
      */
     @Override
@@ -264,12 +298,15 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
                 && data.getData() != null) {
 
             Uri ImageUri = data.getData();
-
-
             chatPresenter.sendImageMessage(System.currentTimeMillis() + "." + getFileExtension(ImageUri), ImageUri);
+        }
 
 
+        if (requestCode == PICK_DOC_REQUEST && resultCode == RESULT_OK && data != null
+                && data.getData() != null) {
 
+            Uri documentUri = data.getData();
+            chatPresenter.sendDocumentMessage(System.currentTimeMillis() + "." + getFileExtension(documentUri), documentUri);
         }
     }
 
@@ -282,7 +319,6 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
         return mime.getExtensionFromMimeType(contentResolver.getType(uri));
 
     }
-
 
 
 }

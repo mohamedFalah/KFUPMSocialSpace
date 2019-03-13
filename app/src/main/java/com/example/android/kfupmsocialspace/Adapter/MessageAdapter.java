@@ -23,7 +23,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     private List<Message> userMessageList;
     private FirebaseAuth firebaseAuth;
-    Context context;
+    private Context context;
 
     public MessageAdapter(List<Message> userMessageList, Context context) {
         this.userMessageList = userMessageList;
@@ -57,11 +57,17 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 holder.senderImage.setVisibility(View.INVISIBLE);
                 holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
 
-            } else {
+            } else if(message.getType().equals("image")){
                 holder.senderMessageHolder.setVisibility(View.VISIBLE);
                 holder.senderMessage.setVisibility(View.INVISIBLE);
                 holder.senderMessageTime.setText(message.getTimestamp());
                 Picasso.with(context).load(Uri.parse(message.getImage())).fit().centerCrop().into(holder.senderImage);
+                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+            } else if(message.getType().equals("document")){
+                holder.senderMessageHolder.setVisibility(View.VISIBLE);
+                holder.senderMessage.setVisibility(View.INVISIBLE);
+                holder.senderMessageTime.setText(message.getTimestamp());
+                holder.senderImage.setVisibility(View.INVISIBLE);
                 holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
             }
         } else {
@@ -75,7 +81,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 holder.receiverMessage.setText(message.getMessage());
                 holder.receiverMessageTime.setText(message.getTimestamp());
                 holder.receiverImage.setVisibility(View.INVISIBLE);
-            } else {
+            } else if(message.getType().equals("image")){
                 holder.receiverMessageHolder.setVisibility(View.VISIBLE);
 //            holder.receiverName.setVisibility(View.VISIBLE);
 //            holder.receiverMessage.setVisibility(View.VISIBLE);
@@ -83,6 +89,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 holder.receiverMessage.setVisibility(View.INVISIBLE);
                 holder.receiverMessageTime.setText(message.getTimestamp());
                 Picasso.with(context).load(Uri.parse(message.getImage())).fit().centerCrop().into(holder.receiverImage);
+            } else if(message.getType().equals("document")){
+                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
+//            holder.receiverName.setVisibility(View.VISIBLE);
+//            holder.receiverMessage.setVisibility(View.VISIBLE);
+                holder.receiverName.setText(message.getSenderName());
+                holder.receiverMessage.setVisibility(View.INVISIBLE);
+                holder.receiverMessageTime.setText(message.getTimestamp());
+                holder.receiverImage.setVisibility(View.INVISIBLE);
             }
         }
     }
