@@ -52,13 +52,13 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
 
         // link the the references to the view
-        IDNumber = findViewById(R.id.IDNumberSignIn);
-        password = findViewById(R.id.PasswordSignIn);
+        IDNumber = findViewById(R.id.id_number_sign_in);
+        password = findViewById(R.id.password_sign_in);
         FirstName = findViewById(R.id.FirstName);
         LastName = findViewById(R.id.LastName);
         phone = findViewById(R.id.phone);
-        SignUp = findViewById(R.id.SignUp);
-        SignIn = findViewById(R.id.SignIn);
+        SignUp = findViewById(R.id.sign_up);
+        SignIn = findViewById(R.id.sign_in);
 
 
         //handle the clicks on view

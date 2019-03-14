@@ -51,11 +51,11 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
         progressDialog = new ProgressDialog(this);
 
-        SignIn = findViewById(R.id.SignIn);
-        IDNumber = findViewById(R.id.IDNumberSignIn);
-        password = findViewById(R.id.PasswordSignIn);
-        SignUp = findViewById(R.id.SignUp);
-        InstructorSignIn = findViewById(R.id.InstructorSignIn);
+        SignIn = findViewById(R.id.sign_in);
+        IDNumber = findViewById(R.id.id_number_sign_in);
+        password = findViewById(R.id.password_sign_in);
+        SignUp = findViewById(R.id.sign_up);
+        InstructorSignIn = findViewById(R.id.instructor_sign_in);
 
 
         SignUp.setOnClickListener(this);

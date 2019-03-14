@@ -2,6 +2,7 @@ package com.example.android.kfupmsocialspace;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -23,5 +24,16 @@ public class NewsWebView extends AppCompatActivity {
         webView = (WebView) findViewById(R.id.news_webview);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(news.getPage());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onBackPressed();
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                break;
+        }
+        return true;
     }
 }
