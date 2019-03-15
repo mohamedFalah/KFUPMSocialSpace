@@ -36,4 +36,14 @@ public class NewsWebView extends AppCompatActivity {
         }
         return true;
     }
+
+
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
