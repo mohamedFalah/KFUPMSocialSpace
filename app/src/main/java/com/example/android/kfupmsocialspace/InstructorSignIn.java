@@ -25,6 +25,7 @@ public class InstructorSignIn extends AppCompatActivity implements View.OnClickL
     private EditText password;
     private Button SignIn;
     private TextView SignUp;
+    private TextView studentSignIn;
 
     private ProgressDialog progressDialog;
 
@@ -49,13 +50,15 @@ public class InstructorSignIn extends AppCompatActivity implements View.OnClickL
 
         progressDialog = new ProgressDialog(this);
 
-        SignIn = findViewById(R.id.SignIn);
-        IDNumber = findViewById(R.id.IDNumberSignIn);
-        password = findViewById(R.id.PasswordSignIn);
-        SignUp = findViewById(R.id.SignUp);
+        SignIn = findViewById(R.id.sign_in);
+        IDNumber = findViewById(R.id.id_number_sign_in);
+        password = findViewById(R.id.password_sign_in);
+        SignUp = findViewById(R.id.sign_up);
+        studentSignIn = findViewById(R.id.student_sign_in);
 
         SignUp.setOnClickListener(this);
         SignIn.setOnClickListener(this);
+        studentSignIn.setOnClickListener(this);
 
     }
 
@@ -114,6 +117,13 @@ public class InstructorSignIn extends AppCompatActivity implements View.OnClickL
         if (view == SignUp) {
             Intent intent = new Intent(getApplicationContext(), SignUp.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+
+        if (view == studentSignIn) {
+            Intent intent = new Intent(getApplicationContext(), SignIn.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            this.finish();
             startActivity(intent);
         }
     }
