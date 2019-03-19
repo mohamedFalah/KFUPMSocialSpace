@@ -5,14 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
-
 
 import com.example.android.kfupmsocialspace.Adapter.CategoryAdapter;
 
@@ -39,7 +39,19 @@ public class BlogsFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+        //https://stackoverflow.com/questions/34597334/android-change-menu-depending-on-selected-fragment/34597423#34597423
+        setHasOptionsMenu(true);//Make sure you have this line of code.
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        //https://stackoverflow.com/questions/34597334/android-change-menu-depending-on-selected-fragment/34597423#34597423
+        menu.findItem(R.id.my_roommate_request).setVisible(false);
+        menu.findItem(R.id.my_market_items).setVisible(false);
+        menu.findItem(R.id.my_blogs).setVisible(true);
+        menu.findItem(R.id.search_top_bar_icon).setVisible(true);
     }
 
     @Override
