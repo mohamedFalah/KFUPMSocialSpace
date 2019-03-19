@@ -11,6 +11,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -79,8 +81,6 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
         */
 
 
-
-
         market_recycler_view = view.findViewById(R.id.recycler_market_items_list);
         marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList, getContext());
         gridLayoutManager = new GridLayoutManager(getContext(), calculateNoOfColumns(getContext()));
@@ -141,6 +141,15 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.findItem(R.id.my_blogs).setVisible(false);
+        menu.findItem(R.id.my_roommate_request).setVisible(false);
+        menu.findItem(R.id.my_market_items).setVisible(true);
+        menu.findItem(R.id.search_top_bar_icon).setVisible(true);
     }
 
 //    @Override

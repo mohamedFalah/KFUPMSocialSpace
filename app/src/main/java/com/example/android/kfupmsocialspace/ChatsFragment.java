@@ -10,17 +10,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.kfupmsocialspace.Adapter.ChatRoomsAdapter;
-import com.example.android.kfupmsocialspace.Adapter.MessageAdapter;
 import com.example.android.kfupmsocialspace.model.ChatRoom;
-import com.example.android.kfupmsocialspace.model.Message;
-import com.example.android.kfupmsocialspace.presenter.RoomChatRequestPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +41,7 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
         FloatingActionButton fab = view.findViewById(R.id.floating_btn_add_course);
         fab.setOnClickListener(this);
 
+        setHasOptionsMenu(true);//Make sure you have this line of code.
 
         return view;
     }
@@ -91,5 +89,14 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.findItem(R.id.my_roommate_request).setVisible(false);
+        menu.findItem(R.id.my_market_items).setVisible(false);
+        menu.findItem(R.id.my_blogs).setVisible(false);
+        menu.findItem(R.id.search_top_bar_icon).setVisible(false);
     }
 }
