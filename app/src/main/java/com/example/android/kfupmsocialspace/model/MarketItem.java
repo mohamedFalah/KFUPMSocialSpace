@@ -31,6 +31,9 @@ public class MarketItem implements Parcelable {
     //Reservation status
     private boolean status;
 
+    //time information
+    private String itemTime;
+
     public MarketItem() {
     }
 
@@ -58,7 +61,7 @@ public class MarketItem implements Parcelable {
 
     //constructor with item picture and item owner and id
     public MarketItem(String itemName, String itemPrice, String itemCategory, String itemDescription, String itemPicture,
-                      String itemOwner, String ownerID) {
+                      String itemOwner, String ownerID, String itemTime) {
         this.itemID = itemID;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
@@ -68,12 +71,13 @@ public class MarketItem implements Parcelable {
         this.itemOwner = itemOwner;
         this.ownerID = ownerID;
         this.status = status;
+        this.itemTime = itemTime;
 
     }
 
     //for the item id
     public MarketItem(String itemID, String itemName, String itemPrice, String itemCategory, String itemDescription, String itemPicture,
-                      String itemOwner, String ownerID, boolean status) {
+                      String itemOwner, String ownerID, boolean status, String itemTime) {
 
         this.itemID = itemID;
         this.itemName = itemName;
@@ -84,6 +88,7 @@ public class MarketItem implements Parcelable {
         this.itemOwner = itemOwner;
         this.ownerID = ownerID;
         this.status = status;
+        this.itemTime = itemTime;
 
     }
 
@@ -98,6 +103,7 @@ public class MarketItem implements Parcelable {
         itemOwner = in.readString();
         ownerID = in.readString();
         status = in.readByte() != 0;
+        itemTime =  in.readString();
 
     }
 
@@ -171,6 +177,12 @@ public class MarketItem implements Parcelable {
 
     public void setStatus(boolean status) { this.status = status; }
 
+    public String getItemTime() { return itemTime; }
+
+    public void setItemTime(String itemTime) { this.itemTime = itemTime; }
+
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -188,5 +200,6 @@ public class MarketItem implements Parcelable {
         dest.writeString(itemOwner);
         dest.writeString(ownerID);
         dest.writeByte((byte) (status ? 1 : 0));
+        dest.writeString(itemTime);
     }
 }

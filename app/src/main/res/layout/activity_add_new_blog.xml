@@ -26,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/blogTitle"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,8 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Blog Category"
-            app:layout_constraintStart_toStartOf="@+id/editText"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
+            app:layout_constraintStart_toStartOf="@+id/blogTitle"
+            app:layout_constraintTop_toBottomOf="@+id/blogTitle" />
 
         <Spinner
             android:id="@+id/blog_category_spinner"
@@ -68,6 +68,7 @@
             tools:layout_editor_absoluteY="197dp" />
 
         <EditText
+            android:id="@+id/blogContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
