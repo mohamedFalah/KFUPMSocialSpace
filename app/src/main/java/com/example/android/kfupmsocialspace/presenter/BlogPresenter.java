@@ -1,15 +1,21 @@
 package com.example.android.kfupmsocialspace.presenter;
 
+import android.support.annotation.NonNull;
 import android.text.format.DateFormat;
 
 import com.example.android.kfupmsocialspace.contract.blogContract;
 import com.example.android.kfupmsocialspace.model.Blog;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class BlogPresenter implements blogContract.IPresenter{
 
@@ -45,7 +51,7 @@ public class BlogPresenter implements blogContract.IPresenter{
         String blogID = push.getKey();
 
         //add the blog
-        dbRef.child(category).child(blogID).setValue(blog);
+        dbRef.child(blogID).setValue(blog);
 
 
 
@@ -77,6 +83,39 @@ public class BlogPresenter implements blogContract.IPresenter{
         String currentDate = time + " "+ dayOfTheWeek + " " + day + " " + month + " " + year;
 
         return currentDate;
+    }
+
+
+
+    ///get user blogs
+
+    public void getUserBlogs(){
+
+
+            final List<Blog> myBlogsList = new ArrayList<>();
+
+
+            dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                        blog = snapshot.getValue(Blog.class);
+                        if(blog.getWriterID().equals(userpresenter.getUserID())){
+                           myBlogsList.add(blog);
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            View.myblogs(myBlogsList);
+
     }
 
 
