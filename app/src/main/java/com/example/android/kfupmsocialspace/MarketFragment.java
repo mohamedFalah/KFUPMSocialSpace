@@ -130,6 +130,7 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+
     }
 
     @Override

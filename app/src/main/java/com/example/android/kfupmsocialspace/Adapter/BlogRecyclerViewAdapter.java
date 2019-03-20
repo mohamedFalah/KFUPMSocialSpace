@@ -39,9 +39,9 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
 
-        myViewHolder.blog_title.setText(mData.get(i).getBlog_title());
-        myViewHolder.blog_writer.setText(mData.get(i).getBlog_writer());
-        myViewHolder.blog_category.setText(mData.get(i).getBlog_category());
+        myViewHolder.blog_title.setText(mData.get(i).getTitle());
+        myViewHolder.blog_writer.setText(mData.get(i).getWriter());
+        myViewHolder.blog_category.setText(mData.get(i).getCategory());
 
         myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,9 +50,9 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
                 Intent intent = new Intent(mContext, BlogViewActivity.class);
 
                 // passing data to the BlogViewActivity
-                intent.putExtra("Title", mData.get(i).getBlog_title());
-                intent.putExtra("Writer", mData.get(i).getBlog_writer());
-                intent.putExtra("Category", mData.get(i).getBlog_category());
+                intent.putExtra("Title", mData.get(i).getTitle());
+                intent.putExtra("Writer", mData.get(i).getWriter());
+                intent.putExtra("Category", mData.get(i).getCategory());
                 // start the activity
                 mContext.startActivity(intent);
             }

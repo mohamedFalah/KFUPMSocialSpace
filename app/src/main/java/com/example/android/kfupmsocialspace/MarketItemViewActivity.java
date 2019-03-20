@@ -25,7 +25,7 @@ import com.squareup.picasso.Picasso;
 //https://www.youtube.com/watch?v=SD2t75T5RdY
 public class MarketItemViewActivity extends AppCompatActivity implements View.OnClickListener, MarketitemContract.IView {
 
-    private TextView itemName, itemPrice, itemCategory, itemDescription, itemOwner;
+    private TextView itemName, itemPrice, itemCategory, itemDescription, itemOwner, itemDate;
     private ImageView itemImg;
     private Button reserveItem;
 
@@ -58,6 +58,7 @@ public class MarketItemViewActivity extends AppCompatActivity implements View.On
         itemCategory = findViewById(R.id.txtCat);
         itemOwner = findViewById(R.id.owner);
         reserveItem = findViewById(R.id.reserveItem);
+        itemDate = findViewById(R.id.date);
 
         itemName.setText(marketItem.getItemName());
         itemDescription.setText(marketItem.getItemDescription());
@@ -65,6 +66,12 @@ public class MarketItemViewActivity extends AppCompatActivity implements View.On
         itemOwner.setText(marketItem.getItemOwner());
         itemCategory.setText(marketItem.getItemCategory());
         itemPrice.setText(marketItem.getItemPrice());
+
+        if(marketItem.getItemTime() != null){
+            itemDate.setText(marketItem.getItemTime());
+        }
+        else
+            itemDate.setText("No date");
 
 
 

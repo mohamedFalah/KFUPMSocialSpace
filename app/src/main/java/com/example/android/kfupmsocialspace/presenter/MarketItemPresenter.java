@@ -3,6 +3,7 @@ package com.example.android.kfupmsocialspace.presenter;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -27,7 +28,9 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.util.Calendar;
+import java.util.Date;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -117,7 +120,7 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
                     Uri downloadUri = task.getResult();
                     String itemPicture = task.getResult().toString();
                     marketItem = new MarketItem(itemN, itemP, itemC, itemDes,
-                            itemPicture, Owner, userId);
+                            itemPicture, Owner, userId, getCurrentDate());
 
 
                     //upload the item to database
@@ -156,13 +159,8 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
 
         String ownerID =  marketItem.getOwnerID();
 
-        //get the current time
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-        String time = format.format(calendar.getTime());
-
         //create reservation instance
-        Reservation reservation = new Reservation(marketItem.getItemID(),time,marketItem.getOwnerID());
+        Reservation reservation = new Reservation(marketItem.getItemID(),getCurrenTime(),marketItem.getOwnerID());
 
         if(userId != null) {
             if (!userId.equals(ownerID)) {
@@ -187,6 +185,30 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
             }
         }
 
+    }
+
+
+    ///get time in milliseconds!
+    private String getCurrenTime(){
+        Calendar calendar = Calendar.getInstance();
+        long timeMilliseconds = calendar.getTimeInMillis();
+        String time = String.valueOf(timeMilliseconds);
+
+        return time;
+    }
+
+    //get the date of the today;
+    private String getCurrentDate(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        String dayOfTheWeek = (String) DateFormat.format("EEEE", date); // Thursday
+        String day          = (String) DateFormat.format("dd",   date); // 20
+        String month  = (String) DateFormat.format("MMM",  date); // Jun
+        String year         = (String) DateFormat.format("yyyy", date); //2013
+
+        String currentDate = dayOfTheWeek + " " + day + " " + month + " " + year;
+
+        return currentDate;
     }
 
     //get the user id
