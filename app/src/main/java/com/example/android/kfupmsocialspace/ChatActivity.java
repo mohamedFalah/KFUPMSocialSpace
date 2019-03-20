@@ -1,41 +1,30 @@
 package com.example.android.kfupmsocialspace;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.android.kfupmsocialspace.Adapter.MessageAdapter;
 import com.example.android.kfupmsocialspace.contract.ChatContract;
 import com.example.android.kfupmsocialspace.model.Message;
-import com.example.android.kfupmsocialspace.contract.UserContract;
 import com.example.android.kfupmsocialspace.presenter.ChatPresenter;
-import com.example.android.kfupmsocialspace.presenter.userPresenter;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,9 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity implements ChatContract.IView {
 
@@ -98,8 +85,7 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
 
         chatAttachFileBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(ChatActivity.this, "File btn clicked", Toast.LENGTH_SHORT).show();
-                chooseImage();
+                chooseOption();
             }
         });
 
@@ -218,7 +204,7 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
      * this a dialog to choose from gallery or take picure with camera
      */
 
-    private void chooseImage() {
+    private void chooseOption() {
 
         final CharSequence[] items = {"CAMERA", "GALLERY","DOCUMENT","CANCEL"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
