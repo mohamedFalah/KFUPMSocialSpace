@@ -1,6 +1,7 @@
 package com.example.android.kfupmsocialspace;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,12 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.example.android.kfupmsocialspace.Adapter.MessageAdapter;
 import com.example.android.kfupmsocialspace.contract.ChatContract;
@@ -257,7 +260,22 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
      *
      */
 
+    //https://stackoverflow.com/questions/29579811/changing-number-of-columns-with-gridlayoutmanager-and-recyclerview
+    //A modified version of the function in the link above by ridha.
+    //it gets the width of the message based on the device and it is called if there is an image in the message.
+    public static int calculateMessageWidth(Context context) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        int scalingFactor = 20; // You can vary the value held by the scalingFactor
+        // variable. The smaller it is the more no. of columns you can display, and the
+        // larger the value the less no. of columns will be calculated. It is the scaling
+        // factor to tweak to your needs.
+        int messageWidth = (int) (dpWidth / scalingFactor);
+        return messageWidth;
+    }
+
     private void FromDevice() {
+
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.setType("*/*");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -268,8 +286,17 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
                         "application/pdf"};
         intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
         startActivityForResult(intent, PICK_DOC_REQUEST);
+
+
     }
 
+    private String getFileExtension(Uri uri) {
+
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton().getSingleton();
+        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
+
+    }
 
     /*
      *
@@ -280,10 +307,29 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+//        LinearLayout myLinearLayout = findViewById(R.id.sender_message_holder);
+        ImageView myImageView = findViewById(R.id.sender_image);
+//        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) myImageView.getLayoutParams();
+//        params.width = 120;
+//        params.height = 120;
+//        // existing height is ok as is, no need to edit it
+//        myImageView.setLayoutParams(params);
+
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null
                 && data.getData() != null) {
 
             Uri ImageUri = data.getData();
+            //myLinearLayout.setLayoutParams(new RelativeLayout.LayoutParams(300, 300));
+//            myImageView.setAdjustViewBounds(true);
+//            myImageView.setMaxWidth(100);
+//            myImageView.setMaxHeight(100);
+//            myImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
+//            params.width = 120;
+//            params.height = 120;
+            // existing height is ok as is, no need to edit it
+//            myImageView.setLayoutParams(params);
+//            myImageView.getLayoutParams().width = 220;
+//            myImageView.getLayoutParams().height = 220;
             chatPresenter.sendImageMessage(System.currentTimeMillis() + "." + getFileExtension(ImageUri), ImageUri);
         }
 
@@ -293,18 +339,8 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
 
             Uri documentUri = data.getData();
             chatPresenter.sendDocumentMessage(System.currentTimeMillis() + "." + getFileExtension(documentUri), documentUri);
+//            myLinearLayout.setLayoutParams(new LinearLayout.LayoutParams(150, 150));
+//            myImageView.setImageResource(R.drawable.ic_file);
         }
     }
-
-
-
-    private String getFileExtension(Uri uri) {
-
-        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton().getSingleton();
-        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
-
-    }
-
-
 }

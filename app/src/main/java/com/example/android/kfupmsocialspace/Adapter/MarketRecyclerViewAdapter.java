@@ -5,15 +5,12 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.kfupmsocialspace.R;
 import com.example.android.kfupmsocialspace.model.MarketItem;
@@ -85,12 +82,12 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
             holder.itemThumbnail.setImageResource(R.drawable.ps4);
         }
 
-        holder.overflow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // showPopupMenu(holder.overflow);
-            }
-        });
+//        holder.overflow.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // showPopupMenu(holder.overflow);
+//            }
+//        });
     }
 
     @NonNull
@@ -142,7 +139,8 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
 
     public static class marketItemViewHolder extends RecyclerView.ViewHolder {
         public TextView itemName, itemPrice;
-        public ImageView itemThumbnail, overflow;
+        public ImageView itemThumbnail;
+//        public ImageView overflow;
 
         public marketItemViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -150,7 +148,7 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
             itemName = itemView.findViewById(R.id.item_name_id);
             itemPrice = itemView.findViewById(R.id.item_price_id);
             itemThumbnail = itemView.findViewById(R.id.item_image_id);
-            overflow = (ImageView) itemView.findViewById(R.id.overflow);
+//            overflow = (ImageView) itemView.findViewById(R.id.overflow);
 
             //on the click event
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -175,20 +173,20 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
     /**
      * Click listener for popup menu items
      */
-    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
-
-        public MyMenuItemClickListener() {
-        }
-
-        @Override
-        public boolean onMenuItemClick(MenuItem menuItem) {
-            switch (menuItem.getItemId()) {
-                case R.id.action_add_favourite:
-                    Toast.makeText(mContext, "Add to favourite", Toast.LENGTH_SHORT).show();
-                    return true;
-                default:
-            }
-            return false;
-        }
-    }
+//    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+//
+//        public MyMenuItemClickListener() {
+//        }
+//
+//        @Override
+//        public boolean onMenuItemClick(MenuItem menuItem) {
+//            switch (menuItem.getItemId()) {
+//                case R.id.action_add_favourite:
+//                    Toast.makeText(mContext, "Add to favourite", Toast.LENGTH_SHORT).show();
+//                    return true;
+//                default:
+//            }
+//            return false;
+//        }
+//    }
 }
