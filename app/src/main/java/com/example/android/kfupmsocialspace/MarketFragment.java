@@ -30,7 +30,6 @@ import java.util.List;
 //https://www.youtube.com/watch?v=SD2t75T5RdY
 public class MarketFragment extends Fragment implements View.OnClickListener {
 
-
     List<MarketItem> marketItemList = new ArrayList<>();
     RecyclerView market_recycler_view;
     MarketRecyclerViewAdapter marketItemAdapter;
@@ -94,35 +93,25 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
             public void onItemClick(int position) {
 
                 MarketItem marketItem = marketItemList.get(position);
-
                 Intent intent = new Intent(getActivity(), MarketItemViewActivity.class);
-
                 intent.putExtra("clickedItem", marketItem);
-
                 startActivity(intent);
 
             }
         });
-
-
     }
 
     public void onStart() {
-
         super.onStart();
-
         marketItemList.clear();
-
         dbRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
                 MarketItem marketItem = dataSnapshot.getValue(MarketItem.class);
                 marketItemList.add(marketItem);
                 //no need to scroll here, this isn't the chat.
                 //gridLayoutManager.scrollToPosition(marketItemList.size() - 1);
                 marketItemAdapter.notifyDataSetChanged();
-
             }
 
             @Override

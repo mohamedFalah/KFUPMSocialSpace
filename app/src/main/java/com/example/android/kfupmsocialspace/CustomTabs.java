@@ -13,6 +13,8 @@ import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
+//https://developer.chrome.com/multidevice/android/customtabs
+//https://stackoverflow.com/questions/44228971/opening-custom-webview-with-powered-by-chrome-with-action-menus
 public class CustomTabs {
 
     private static final int TOOLBAR_SHARE_ITEM_ID = 1;
