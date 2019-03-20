@@ -11,7 +11,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.android.kfupmsocialspace.contract.blogContract;
+import com.example.android.kfupmsocialspace.model.Blog;
 import com.example.android.kfupmsocialspace.presenter.BlogPresenter;
+
+import java.util.List;
 
 public class AddNewBlogActivity extends AppCompatActivity implements View.OnClickListener, blogContract.IView{
 
@@ -89,6 +92,15 @@ public class AddNewBlogActivity extends AppCompatActivity implements View.OnClic
 
 
 
+
+    }
+
+
+    /*
+            method not used here
+     */
+    @Override
+    public void myblogs(List<Blog> myBlogsList) {
 
     }
 }
