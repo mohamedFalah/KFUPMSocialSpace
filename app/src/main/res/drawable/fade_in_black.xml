@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Colored rectangle-->
+    <!--https://stackoverflow.com/questions/26311785/android-drawing-custom-shapes-->
+    <!--https://stackoverflow.com/questions/5646944/how-to-set-shapes-opacity-->
+    <item>
+        <shape android:shape="rectangle">
+            <size
+                android:width="100dp"
+                android:height="40dp" />
+            <solid android:color="#BB000000" />
+        </shape>
+    </item>
+
+</layer-list>

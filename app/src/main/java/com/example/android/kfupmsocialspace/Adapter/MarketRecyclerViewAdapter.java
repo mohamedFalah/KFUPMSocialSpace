@@ -5,18 +5,18 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.kfupmsocialspace.R;
 import com.example.android.kfupmsocialspace.model.MarketItem;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //this whole java file
@@ -24,14 +24,46 @@ import java.util.List;
 
 //for the dots on the carview of the market item
 //https://www.androidhive.info/2016/05/android-working-with-card-view-and-recycler-view/
-public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecyclerViewAdapter.marketItemViewHolder> {
+public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecyclerViewAdapter.marketItemViewHolder> implements Filterable {
 
     private List<MarketItem> marketItemList;
+    private List<MarketItem> marketItemListFull;
     private Context mContext;
     private OnItemClickListener listener;
+    private Filter marketFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<MarketItem> filteredList = new ArrayList<>();
+
+            if (charSequence == null || charSequence.length() == 0) {
+                filteredList.addAll(marketItemListFull);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+
+                for (MarketItem item : marketItemListFull) {
+                    if (item.getItemName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            marketItemList.clear();
+            marketItemList.addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public MarketRecyclerViewAdapter(List<MarketItem> marketItemList, Context mContext) {
         this.marketItemList = marketItemList;
+        marketItemListFull = new ArrayList<>(marketItemList);
         this.mContext = mContext;
     }
 
@@ -43,19 +75,19 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
         holder.itemName.setText(marketItem.getItemName());
         holder.itemPrice.setText(String.valueOf(marketItem.getItemPrice()));
 
-        if(marketItem.getItemPicture() != null){
+        if (marketItem.getItemPicture() != null) {
             Uri imageUri = Uri.parse(marketItem.getItemPicture());
             Picasso.with(mContext).load(imageUri).fit().centerCrop().into(holder.itemThumbnail);
-        }else{
+        } else {
             holder.itemThumbnail.setImageResource(R.drawable.ps4);
         }
 
-        holder.overflow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // showPopupMenu(holder.overflow);
-            }
-        });
+//        holder.overflow.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // showPopupMenu(holder.overflow);
+//            }
+//        });
     }
 
     @NonNull
@@ -63,27 +95,52 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
     public marketItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.cardview_market_item,viewGroup,false);
+                .inflate(R.layout.cardview_market_item, viewGroup, false);
 
         return new marketItemViewHolder(view, listener);
     }
 
+    @Override
+    public int getItemCount() {
+        return marketItemList.size();
+    }
+
+    // a method will be explained later
+    public void SetOnItemClickListener(OnItemClickListener listener) {
+
+        this.listener = listener;
+
+    }
+
+    @Override
+    public Filter getFilter() {
+        return marketFilter;
+    }
+
+    /// interface for handling the click event on recycle view
+    public interface OnItemClickListener {
+
+        void onItemClick(int position);
+
+    }
+
     /**
      * Showing popup menu when tapping on 3 dots
-
-     private void showPopupMenu(View view) {
-     // inflate menu
-     PopupMenu popup = new PopupMenu(mContext, view);
-     MenuInflater inflater = popup.getMenuInflater();
-     inflater.inflate(R.menu.menu_market_cardview, popup.getMenu());
-     popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
-     popup.show();
-     }
+     * <p>
+     * private void showPopupMenu(View view) {
+     * // inflate menu
+     * PopupMenu popup = new PopupMenu(mContext, view);
+     * MenuInflater inflater = popup.getMenuInflater();
+     * inflater.inflate(R.menu.menu_market_cardview, popup.getMenu());
+     * popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
+     * popup.show();
+     * }
      */
 
     public static class marketItemViewHolder extends RecyclerView.ViewHolder {
         public TextView itemName, itemPrice;
-        public ImageView itemThumbnail, overflow;
+        public ImageView itemThumbnail;
+//        public ImageView overflow;
 
         public marketItemViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -91,7 +148,7 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
             itemName = itemView.findViewById(R.id.item_name_id);
             itemPrice = itemView.findViewById(R.id.item_price_id);
             itemThumbnail = itemView.findViewById(R.id.item_image_id);
-            overflow = (ImageView) itemView.findViewById(R.id.overflow);
+//            overflow = (ImageView) itemView.findViewById(R.id.overflow);
 
             //on the click event
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -113,44 +170,23 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
         }
     }
 
-    @Override
-    public int getItemCount() {
-        return marketItemList.size();
-    }
-
     /**
      * Click listener for popup menu items
      */
-    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
-
-        public MyMenuItemClickListener() {
-        }
-
-        @Override
-        public boolean onMenuItemClick(MenuItem menuItem) {
-            switch (menuItem.getItemId()) {
-                case R.id.action_add_favourite:
-                    Toast.makeText(mContext, "Add to favourite", Toast.LENGTH_SHORT).show();
-                    return true;
-                default:
-            }
-            return false;
-        }
-    }
-
-    /// interface for handling the click event on recycle view
-    public interface OnItemClickListener{
-
-        void onItemClick(int position);
-
-    }
-
-    // a method will be explained later
-    public void SetOnItemClickListener(OnItemClickListener listener){
-
-        this.listener = listener;
-
-    }
-
-
+//    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+//
+//        public MyMenuItemClickListener() {
+//        }
+//
+//        @Override
+//        public boolean onMenuItemClick(MenuItem menuItem) {
+//            switch (menuItem.getItemId()) {
+//                case R.id.action_add_favourite:
+//                    Toast.makeText(mContext, "Add to favourite", Toast.LENGTH_SHORT).show();
+//                    return true;
+//                default:
+//            }
+//            return false;
+//        }
+//    }
 }

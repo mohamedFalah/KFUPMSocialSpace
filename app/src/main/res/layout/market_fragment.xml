@@ -4,20 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <SearchView
-        android:id="@+id/market_search_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@android:color/white" />
-
     <!--        android:layout_above="@id/floating_btn_add_market_item"-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_market_items_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/market_search_bar"
 
         android:layout_margin="4dp"
         android:columnWidth="180dp"

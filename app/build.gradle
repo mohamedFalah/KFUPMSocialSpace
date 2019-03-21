@@ -41,7 +41,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:16.0.1'
     implementation 'com.google.firebase:firebase-messaging:17.3.3'
 
-
     //https://github.com/ittianyu/BottomNavigationViewEx
     implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.2'
     implementation "com.android.support:design:28.0.0"
@@ -57,6 +56,29 @@ dependencies {
 
     //load image from url
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    //https://github.com/ParkSangGwon/TedBottomPicker
+    //for the image like fragment in AddImageWithCaptionFragment
+    //i did not use 2.0.0 because it lead to an issue in the AddImageWithCaptionFragment class
+    //implementation 'gun0912.ted:tedbottompicker:2.0.0'
+
+    //https://github.com/MEiDIK/TedBottomPicker
+    implementation 'gun0912.ted:tedbottompicker:1.1.0'
+    //implementation 'gun0912.ted:tedpermission:x.y.z'
+
+
+    //https://github.com/bumptech/glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
+    //for chrome tabs
+    implementation 'com.android.support:customtabs:28.0.0'
+
+
+
+    //read xlsx files
+    //implementation "org.apache.poi:poi:3.17"
+    //implementation "org.apache.poi:poi-ooxml:3.17"
 
 }
 

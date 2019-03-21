@@ -27,7 +27,7 @@ public class RoomChatRequestPresenter implements RoomChatRequestContarct.IPresen
     //firebase connection
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference("Courses");
-    private DatabaseReference RoomChat = database.getReference("Chat");
+    private DatabaseReference RoomChat = database.getReference("ChatRooms");
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
@@ -135,7 +135,7 @@ public class RoomChatRequestPresenter implements RoomChatRequestContarct.IPresen
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChild(course)) {
 
-                    RoomChat.child(course).child("Requests").child(UserID);
+                    RoomChat.child("Requests").child(course).child(UserID);
 
 
                 }
@@ -149,9 +149,9 @@ public class RoomChatRequestPresenter implements RoomChatRequestContarct.IPresen
                     Request.put("StudentID", UserID);
 
                     Map map2 = new HashMap();
-                    map2.put("Requests/" + push_Id, Request);
+                    map2.put( course +"/"+ push_Id, Request);
 
-                    RoomChat.child(course).updateChildren(map2, new DatabaseReference.CompletionListener() {
+                    RoomChat.child("Request").updateChildren(map2, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                             if (databaseError != null) {

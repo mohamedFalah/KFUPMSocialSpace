@@ -1,26 +1,34 @@
 package com.example.android.kfupmsocialspace.Adapter;
 
+import android.content.Context;
+import android.media.Image;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.android.kfupmsocialspace.R;
 import com.example.android.kfupmsocialspace.model.Message;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder>{
+public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
 
     private List<Message> userMessageList;
     private FirebaseAuth firebaseAuth;
+    private Context context;
 
-    public MessageAdapter(List<Message> userMessageList) {
+    public MessageAdapter(List<Message> userMessageList, Context context) {
         this.userMessageList = userMessageList;
+        this.context = context;
+
     }
 
     @Override
@@ -28,8 +36,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         String messageSenderID = " ";
 
-        if(firebaseAuth.getCurrentUser() != null)
-            messageSenderID= firebaseAuth.getCurrentUser().getUid();
+        if (firebaseAuth.getCurrentUser() != null)
+            messageSenderID = firebaseAuth.getCurrentUser().getUid();
 
         Message message = userMessageList.get(i);
 
@@ -40,21 +48,59 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 //        holder.receiverMessage.setVisibility(View.INVISIBLE);
         holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
 
-        if(fromUserID != null && fromUserID.equals(messageSenderID)){
-            holder.senderMessageHolder.setVisibility(View.VISIBLE);
-            holder.senderMessage.setText(message.getMessage());
-            holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
-        }
-        else {
+        if (fromUserID != null && fromUserID.equals(messageSenderID)) {
+
+            if (message.getType().equals("text")) {
+                holder.senderMessageHolder.setVisibility(View.VISIBLE);
+                holder.senderMessage.setText(message.getMessage());
+                holder.senderMessageTime.setText(message.getTimestamp());
+                holder.senderImage.setVisibility(View.INVISIBLE);
+                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+
+            } else if(message.getType().equals("image")){
+                holder.senderMessageHolder.setVisibility(View.VISIBLE);
+                holder.senderMessage.setVisibility(View.INVISIBLE);
+                holder.senderMessageTime.setText(message.getTimestamp());
+                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.senderImage);
+                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+            } else if(message.getType().equals("document")){
+                holder.senderMessageHolder.setVisibility(View.VISIBLE);
+                holder.senderMessage.setVisibility(View.INVISIBLE);
+                holder.senderMessageTime.setText(message.getTimestamp());
+                holder.senderImage.setVisibility(View.INVISIBLE);
+                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+            }
+        } else {
             holder.senderMessageHolder.setVisibility(View.INVISIBLE);
 
-            holder.receiverMessageHolder.setVisibility(View.VISIBLE);
+            if (message.getType().equals("text")) {
+                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
 //            holder.receiverName.setVisibility(View.VISIBLE);
 //            holder.receiverMessage.setVisibility(View.VISIBLE);
-            holder.receiverName.setText(message.getSenderName());
-            holder.receiverMessage.setText(message.getMessage());
+                holder.receiverName.setText(message.getSenderName());
+                holder.receiverMessage.setText(message.getMessage());
+                holder.receiverMessageTime.setText(message.getTimestamp());
+                holder.receiverImage.setVisibility(View.INVISIBLE);
+            } else if(message.getType().equals("image")){
+                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
+//            holder.receiverName.setVisibility(View.VISIBLE);
+//            holder.receiverMessage.setVisibility(View.VISIBLE);
+                holder.receiverName.setText(message.getSenderName());
+                holder.receiverMessage.setVisibility(View.INVISIBLE);
+                holder.receiverMessageTime.setText(message.getTimestamp());
+                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.receiverImage);
+            } else if(message.getType().equals("document")){
+                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
+//            holder.receiverName.setVisibility(View.VISIBLE);
+//            holder.receiverMessage.setVisibility(View.VISIBLE);
+                holder.receiverName.setText(message.getSenderName());
+                holder.receiverMessage.setVisibility(View.INVISIBLE);
+                holder.receiverMessageTime.setText(message.getTimestamp());
+                holder.receiverImage.setVisibility(View.INVISIBLE);
+            }
         }
     }
+
 
     @NonNull
     @Override
@@ -68,16 +114,25 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     public class MessageViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView senderMessage, receiverName, receiverMessage;
+        public TextView senderMessage,senderMessageTime, receiverName, receiverMessage, receiverMessageTime;
         public LinearLayout senderMessageHolder, receiverMessageHolder;
+        public ImageView senderImage, receiverImage;
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            //sender
             senderMessageHolder = itemView.findViewById(R.id.sender_message_holder);
             senderMessage = itemView.findViewById(R.id.sender_message);
+            senderMessageTime = itemView.findViewById(R.id.sender_message_time);
+            senderImage = itemView.findViewById(R.id.sender_image);
+
+            //reciever
             receiverMessageHolder = itemView.findViewById(R.id.receiver_message_holder);
             receiverName = itemView.findViewById(R.id.receiver_name);
             receiverMessage = itemView.findViewById(R.id.receiver_message);
+            receiverMessageTime = itemView.findViewById(R.id.receiver_message_time);
+            receiverImage =itemView.findViewById(R.id.receiver_image);
         }
     }
 
@@ -85,4 +140,5 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public int getItemCount() {
         return userMessageList.size();
     }
+
 }

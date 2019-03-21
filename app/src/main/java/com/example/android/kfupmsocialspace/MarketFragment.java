@@ -11,12 +11,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android.kfupmsocialspace.Adapter.MarketRecyclerViewAdapter;
 import com.example.android.kfupmsocialspace.model.MarketItem;
-import com.example.android.kfupmsocialspace.presenter.userPresenter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,11 +30,10 @@ import java.util.List;
 //https://www.youtube.com/watch?v=SD2t75T5RdY
 public class MarketFragment extends Fragment implements View.OnClickListener {
 
-
     List<MarketItem> marketItemList = new ArrayList<>();
     RecyclerView market_recycler_view;
     MarketRecyclerViewAdapter marketItemAdapter;
-    ;
+
     GridLayoutManager gridLayoutManager;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference("Market Item");
@@ -54,10 +54,11 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.market_fragment, container, false);
         FloatingActionButton fab = view.findViewById(R.id.floating_btn_add_market_item);
         fab.setOnClickListener(this);
-
+        setHasOptionsMenu(true);//Make sure you have this line of code.
 
         return view;
     }
@@ -79,8 +80,6 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
         */
 
 
-
-
         market_recycler_view = view.findViewById(R.id.recycler_market_items_list);
         marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList, getContext());
         gridLayoutManager = new GridLayoutManager(getContext(), calculateNoOfColumns(getContext()));
@@ -94,35 +93,25 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
             public void onItemClick(int position) {
 
                 MarketItem marketItem = marketItemList.get(position);
-
                 Intent intent = new Intent(getActivity(), MarketItemViewActivity.class);
-
                 intent.putExtra("clickedItem", marketItem);
-
                 startActivity(intent);
 
             }
         });
-
-
     }
 
     public void onStart() {
-
         super.onStart();
-
         marketItemList.clear();
-
         dbRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
                 MarketItem marketItem = dataSnapshot.getValue(MarketItem.class);
                 marketItemList.add(marketItem);
                 //no need to scroll here, this isn't the chat.
                 //gridLayoutManager.scrollToPosition(marketItemList.size() - 1);
                 marketItemAdapter.notifyDataSetChanged();
-
             }
 
             @Override
@@ -141,6 +130,39 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.findItem(R.id.my_blogs).setVisible(false);
+        menu.findItem(R.id.my_roommate_request).setVisible(false);
+        menu.findItem(R.id.my_market_items).setVisible(true);
+        menu.findItem(R.id.search_top_bar_icon).setVisible(true);
+    }
+
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        super.onCreateOptionsMenu(menu, inflater);
+//        inflater.inflate(R.menu.main_menu, menu);
+//
+//        MenuItem searchItem = menu.findItem(R.id.search_top_bar_icon);
+//        SearchView searchView = (SearchView) searchItem.getActionView();
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String s) {
+//                marketItemAdapter.getFilter().filter(s);
+//                return false;
+//            }
+//        });
+//    }
 
 }

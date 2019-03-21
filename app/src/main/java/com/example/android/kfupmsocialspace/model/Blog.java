@@ -1,22 +1,35 @@
 package com.example.android.kfupmsocialspace.model;
 
-public class Blog {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-//    private int blog_id;
-    private String blog_title;
-    private String blog_category;
-    private String blog_subject;
-    private String blog_writer;
+public class Blog implements Parcelable {
+
+    private int blog_id;
+    private String title;
+    private String category;
+    private String subject;
+    private String writer;
+    private String writerID;
+    private String time;
 
     public Blog() {
     }
 
-    public Blog(String blog_title, String blog_category, String blog_subject, String blog_writer) {
-//        this.blog_id = blog_id;
-        this.blog_title = blog_title;
-        this.blog_category = blog_category;
-        this.blog_subject = blog_subject;
-        this.blog_writer = blog_writer;
+    public Blog(String title, String category, String subject, String writer) {
+        this.title = title;
+        this.category = category;
+        this.subject = subject;
+        this.writer = writer;
+    }
+
+    public Blog(String title, String category, String subject, String writer, String writerID, String time) {
+        this.title = title;
+        this.category = category;
+        this.subject = subject;
+        this.writer = writer;
+        this.writerID = writerID;
+        this.time = time;
     }
 
 //    public int getBlog_id() {
@@ -27,35 +40,82 @@ public class Blog {
 //        this.blog_id = blog_id;
 //    }
 
-    public String getBlog_title() {
-        return blog_title;
+    protected Blog(Parcel in) {
+        blog_id = in.readInt();
+        title = in.readString();
+        category = in.readString();
+        subject = in.readString();
+        writer = in.readString();
+        writerID = in.readString();
+        time = in.readString();
     }
 
-    public void setBlog_title(String blog_title) {
-        this.blog_title = blog_title;
+    public static final Creator<Blog> CREATOR = new Creator<Blog>() {
+        @Override
+        public Blog createFromParcel(Parcel in) {
+            return new Blog(in);
+        }
+
+        @Override
+        public Blog[] newArray(int size) {
+            return new Blog[size];
+        }
+    };
+
+    public String getTitle() {
+        return title;
     }
 
-    public String getBlog_category() {
-        return blog_category;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setBlog_category(String blog_category) {
-        this.blog_category = blog_category;
+    public String getCategory() {
+        return category;
     }
 
-    public String getBlog_subject() {
-        return blog_subject;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public void setBlog_subject(String blog_subject) {
-        this.blog_subject = blog_subject;
+    public String getSubject() {
+        return subject;
     }
 
-    public String getBlog_writer() {
-        return blog_writer;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
-    public void setBlog_writer(String blog_writer) {
-        this.blog_writer = blog_writer;
+    public String getWriter() {
+        return writer;
+    }
+
+    public void setWriter(String writer) {
+        this.writer = writer;
+    }
+
+    public String getTime() { return time; }
+
+    public void setTime(String time) { this.time = time; }
+
+    public String getWriterID() { return writerID; }
+
+    public void setWriterID(String writerID) { this.writerID = writerID; }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(blog_id);
+        dest.writeString(title);
+        dest.writeString(category);
+        dest.writeString(subject);
+        dest.writeString(writer);
+        dest.writeString(writerID);
+        dest.writeString(time);
+
     }
 }

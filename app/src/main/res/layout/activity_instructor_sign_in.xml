@@ -25,13 +25,13 @@
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/IDNumberSignIn"
+            app:layout_constraintBottom_toTopOf="@+id/id_number_sign_in"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/signUp"
+            android:id="@+id/student_sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -42,10 +42,10 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/HaveAccount" />
+            app:layout_constraintTop_toBottomOf="@+id/no_account" />
 
         <TextView
-            android:id="@+id/haveAccount"
+            android:id="@+id/are_you_instructor_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -55,10 +55,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SignIn" />
+            app:layout_constraintTop_toBottomOf="@+id/sign_in" />
 
         <EditText
-            android:id="@+id/IDNumberSignIn"
+            android:id="@+id/id_number_sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -72,7 +72,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/PasswordSignIn"
+            android:id="@+id/password_sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -83,11 +83,11 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/IDNumberSignIn" />
+            app:layout_constraintTop_toBottomOf="@+id/id_number_sign_in" />
 
 
         <Button
-            android:id="@+id/SignIn"
+            android:id="@+id/sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -96,10 +96,10 @@
             android:text="@string/sign_in"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/PasswordSignIn" />
+            app:layout_constraintTop_toBottomOf="@+id/password_sign_in" />
 
         <TextView
-            android:id="@+id/HaveAccount"
+            android:id="@+id/no_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -108,10 +108,10 @@
             android:text="@string/don_t_have_an_account"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SignIn" />
+            app:layout_constraintTop_toBottomOf="@+id/sign_in" />
 
         <TextView
-            android:id="@+id/SignUp"
+            android:id="@+id/sign_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -122,6 +122,6 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/HaveAccount" />
+            app:layout_constraintTop_toBottomOf="@+id/no_account" />
     </android.support.constraint.ConstraintLayout>
 </RelativeLayout>
