@@ -31,8 +31,9 @@
 
             <ImageView
                 android:id="@+id/receiver_image"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/receiver_message"
@@ -41,6 +42,13 @@
                 android:text="dummy text"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/receiver_Doc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Doc"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/receiver_message_time"
@@ -71,11 +79,18 @@
 
             <ImageView
                 android:id="@+id/sender_image"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:visibility="gone"
                 android:contentDescription="TODO"
                 android:scaleType="centerCrop" />
+
+            <Button
+                android:id="@+id/sender_Doc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Doc"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/sender_message"
