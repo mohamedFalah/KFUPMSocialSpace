@@ -22,9 +22,10 @@
             android:scaleType="centerCrop" />
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/item_image_id"
+            android:layout_centerInParent="true"
             android:layout_margin="5dp">
 
             <TextView
@@ -58,14 +59,14 @@
                     android:textSize="12dp" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/overflow"
-                android:layout_width="20dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="10dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_dots" />
+            <!--<ImageView-->
+            <!--android:id="@+id/overflow"-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--android:src="@drawable/ic_dots" />-->
         </RelativeLayout>
 
     </RelativeLayout>
