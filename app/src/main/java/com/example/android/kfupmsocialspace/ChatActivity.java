@@ -127,7 +127,8 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
 
         super.onStart();
 
-
+        messageList.clear();
+        messageAdapter.notifyDataSetChanged();
         userMessagesList.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft,
@@ -152,6 +153,7 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
+                messageAdapter.notifyDataSetChanged();
             }
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) { }
