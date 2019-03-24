@@ -2,6 +2,7 @@ package com.example.android.kfupmsocialspace;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -13,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.kfupmsocialspace.presenter.userPresenter;
@@ -209,6 +212,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         NavigationView navigationview = findViewById(R.id.nav_view);
+        View headerView = navigationview.getHeaderView(0);
+        final TextView userName = headerView.findViewById(R.id.student_name);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                 userName.setText(userPresenter.getTheUsername());
+            }
+        }, 4000);
+
 
 
         for (int i = 0; i < navigationview.getMenu().size(); i++)
