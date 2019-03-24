@@ -45,86 +45,35 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         String fromUserID = message.getSenderID();
 
-        //This should hide the name of the user and the message
-//        holder.receiverName.setVisibility(View.INVISIBLE);
-//        holder.receiverMessage.setVisibility(View.INVISIBLE);
+
         holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
 
         if (fromUserID != null && fromUserID.equals(messageSenderID)) {
-
+            holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
             if (message.getType().equals("text")) {
-                holder.senderMessageHolder.setVisibility(View.VISIBLE);
-                holder.senderMessage.setText(message.getMessage());
-                holder.senderMessageTime.setText(message.getTimestamp());
-                holder.senderImage.setVisibility(View.GONE);
-                holder.senderDoc.setVisibility(View.GONE);
-                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+
+                textMessage( holder,  message,  "sender");
 
             } else if(message.getType().equals("image")){
-                holder.senderMessageHolder.setVisibility(View.VISIBLE);
-                holder.senderMessage.setVisibility(View.INVISIBLE);
-                holder.senderMessageTime.setText(message.getTimestamp());
-                holder.senderDoc.setVisibility(View.GONE);
-                holder.senderImage.setVisibility(View.VISIBLE);
-                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.senderImage);
-                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+
+                ImageMessage(holder, message, "sender");
+
             } else if(message.getType().equals("document")){
-                holder.senderMessageHolder.setVisibility(View.VISIBLE);
-                holder.senderMessage.setVisibility(View.INVISIBLE);
-                holder.senderMessageTime.setText(message.getTimestamp());
-                holder.senderImage.setVisibility(View.GONE);
-                holder.senderDoc.setVisibility(View.VISIBLE);
-                final String docUrl = message.getMedia();
-                holder.senderDoc.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                        CustomTabsIntent customTabsIntent = builder.build();
-                        customTabsIntent.launchUrl(context, Uri.parse(docUrl));
-                    }
-                });
-                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+                DocumentMessage(holder, message, "sender");
             }
         } else {
             holder.senderMessageHolder.setVisibility(View.INVISIBLE);
 
             if (message.getType().equals("text")) {
-                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
-//            holder.receiverName.setVisibility(View.VISIBLE);
-//            holder.receiverMessage.setVisibility(View.VISIBLE);
-                holder.receiverName.setText(message.getSenderName());
-                holder.receiverImage.setVisibility(View.GONE);
-                holder.receiverDoc.setVisibility(View.GONE);
-                holder.receiverMessage.setText(message.getMessage());
-                holder.receiverMessageTime.setText(message.getTimestamp());
+
+                textMessage( holder,  message,  "receiver");
+
             } else if(message.getType().equals("image")){
-                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
-//            holder.receiverName.setVisibility(View.VISIBLE);
-//            holder.receiverMessage.setVisibility(View.VISIBLE);
-                holder.receiverName.setText(message.getSenderName());
-                holder.receiverMessage.setVisibility(View.INVISIBLE);
-                holder.receiverDoc.setVisibility(View.GONE);
-                holder.receiverMessageTime.setText(message.getTimestamp());
-                holder.receiverImage.setVisibility(View.VISIBLE);
-                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.receiverImage);
+
+                ImageMessage(holder, message, "receiver");
+
             } else if(message.getType().equals("document")){
-                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
-//            holder.receiverName.setVisibility(View.VISIBLE);
-//            holder.receiverMessage.setVisibility(View.VISIBLE);
-                holder.receiverName.setText(message.getSenderName());
-                holder.receiverImage.setVisibility(View.GONE);
-                holder.receiverMessage.setVisibility(View.INVISIBLE);
-                holder.receiverDoc.setVisibility(View.VISIBLE);
-                final String docUrl = message.getMedia();
-                holder.receiverDoc.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                        CustomTabsIntent customTabsIntent = builder.build();
-                        customTabsIntent.launchUrl(context, Uri.parse(docUrl));
-                    }
-                });
-                holder.receiverMessageTime.setText(message.getTimestamp());
+                DocumentMessage(holder, message, "receiver");
             }
         }
     }
@@ -172,5 +121,120 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public int getItemCount() {
         return userMessageList.size();
     }
+
+
+
+
+    public void textMessage(MessageViewHolder holder, Message message, String who){
+
+        switch(who){
+
+            case "sender":
+
+                holder.senderMessageHolder.setVisibility(View.VISIBLE);
+                holder.senderMessage.setText(message.getMessage());
+                holder.senderMessageTime.setText(message.getTimestamp());
+                holder.senderImage.setVisibility(View.GONE);
+                holder.senderDoc.setVisibility(View.GONE);
+                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+                break;
+
+            case "receiver":
+
+                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
+                holder.receiverName.setText(message.getSenderName());
+                holder.receiverImage.setVisibility(View.GONE);
+                holder.receiverDoc.setVisibility(View.GONE);
+                holder.receiverMessage.setText(message.getMessage());
+                holder.receiverMessageTime.setText(message.getTimestamp());
+
+                break;
+
+        }
+
+
+
+    };
+    public void ImageMessage(MessageViewHolder holder, Message message, String who){
+        switch(who){
+
+            case "sender":
+
+                holder.senderMessageHolder.setVisibility(View.VISIBLE);
+                holder.senderMessage.setVisibility(View.INVISIBLE);
+                holder.senderMessageTime.setText(message.getTimestamp());
+                holder.senderDoc.setVisibility(View.GONE);
+                holder.senderImage.setVisibility(View.VISIBLE);
+                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.senderImage);
+                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+
+                break;
+
+            case "receiver":
+
+                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
+                holder.receiverName.setText(message.getSenderName());
+                holder.receiverMessage.setVisibility(View.INVISIBLE);
+                holder.receiverDoc.setVisibility(View.GONE);
+                holder.receiverMessageTime.setText(message.getTimestamp());
+                holder.receiverImage.setVisibility(View.VISIBLE);
+                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.receiverImage);
+
+                break;
+
+        }
+
+
+    };
+    public void DocumentMessage(MessageViewHolder holder, Message message, String who){
+
+        final String docUrl = message.getMedia();
+
+        switch(who){
+
+            case "sender":
+
+                holder.senderMessageHolder.setVisibility(View.VISIBLE);
+                holder.senderMessage.setVisibility(View.INVISIBLE);
+                holder.senderMessageTime.setText(message.getTimestamp());
+                holder.senderImage.setVisibility(View.GONE);
+                holder.senderDoc.setVisibility(View.VISIBLE);
+                holder.senderDoc.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                        CustomTabsIntent customTabsIntent = builder.build();
+                        customTabsIntent.launchUrl(context, Uri.parse(docUrl));
+                    }
+                });
+                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+                break;
+
+            case "receiver":
+
+                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
+                holder.receiverName.setText(message.getSenderName());
+                holder.receiverImage.setVisibility(View.GONE);
+                holder.receiverMessage.setVisibility(View.INVISIBLE);
+                holder.receiverDoc.setVisibility(View.VISIBLE);
+                holder.receiverDoc.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                        CustomTabsIntent customTabsIntent = builder.build();
+                        customTabsIntent.launchUrl(context, Uri.parse(docUrl));
+                    }
+                });
+                holder.receiverMessageTime.setText(message.getTimestamp());
+
+                break;
+
+        }
+
+
+
+
+    };
+
 
 }
