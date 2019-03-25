@@ -17,21 +17,14 @@
             android:id="@+id/item_image_id"
             android:layout_width="match_parent"
             android:layout_height="190dp"
-            android:background="#FFF"
+            android:background="@drawable/loading"
             android:scaleType="centerCrop" />
 
-        <RelativeLayout
-            android:id="@+id/loadingPanel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@android:color/white">
-
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
+        <!--<ProgressBar-->
+        <!--android:id="@+id/loadingPanel"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true" />-->
 
         <RelativeLayout
             android:id="@+id/item_name_and_price"

@@ -85,6 +85,11 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
         gridLayoutManager = new GridLayoutManager(getContext(), calculateNoOfColumns(getContext()));
         market_recycler_view.setLayoutManager(gridLayoutManager);
         market_recycler_view.setAdapter(marketItemAdapter);
+
+//        market_recycler_view.setItemViewCacheSize(2000);
+//        market_recycler_view.setDrawingCacheEnabled(true);
+//        market_recycler_view.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
+
         marketItemAdapter.notifyDataSetChanged();
 
         //click event and pass data.
