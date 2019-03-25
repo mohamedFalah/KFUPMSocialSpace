@@ -4,10 +4,12 @@ import android.content.Context;
 import android.media.Image;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,7 +34,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MessageViewHolder holder, int i) {
+    public void onBindViewHolder(@NonNull  MessageViewHolder holder, int i) {
 
         String messageSenderID = " ";
 
@@ -43,60 +45,35 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         String fromUserID = message.getSenderID();
 
-        //This should hide the name of the user and the message
-//        holder.receiverName.setVisibility(View.INVISIBLE);
-//        holder.receiverMessage.setVisibility(View.INVISIBLE);
+
         holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
 
         if (fromUserID != null && fromUserID.equals(messageSenderID)) {
-
+            holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
             if (message.getType().equals("text")) {
-                holder.senderMessageHolder.setVisibility(View.VISIBLE);
-                holder.senderMessage.setText(message.getMessage());
-                holder.senderMessageTime.setText(message.getTimestamp());
-                holder.senderImage.setVisibility(View.INVISIBLE);
-                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+
+                textMessage( holder,  message,  "sender");
 
             } else if(message.getType().equals("image")){
-                holder.senderMessageHolder.setVisibility(View.VISIBLE);
-                holder.senderMessage.setVisibility(View.INVISIBLE);
-                holder.senderMessageTime.setText(message.getTimestamp());
-                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.senderImage);
-                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+
+                ImageMessage(holder, message, "sender");
+
             } else if(message.getType().equals("document")){
-                holder.senderMessageHolder.setVisibility(View.VISIBLE);
-                holder.senderMessage.setVisibility(View.INVISIBLE);
-                holder.senderMessageTime.setText(message.getTimestamp());
-                holder.senderImage.setVisibility(View.INVISIBLE);
-                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+                DocumentMessage(holder, message, "sender");
             }
         } else {
             holder.senderMessageHolder.setVisibility(View.INVISIBLE);
 
             if (message.getType().equals("text")) {
-                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
-//            holder.receiverName.setVisibility(View.VISIBLE);
-//            holder.receiverMessage.setVisibility(View.VISIBLE);
-                holder.receiverName.setText(message.getSenderName());
-                holder.receiverMessage.setText(message.getMessage());
-                holder.receiverMessageTime.setText(message.getTimestamp());
-                holder.receiverImage.setVisibility(View.INVISIBLE);
+
+                textMessage( holder,  message,  "receiver");
+
             } else if(message.getType().equals("image")){
-                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
-//            holder.receiverName.setVisibility(View.VISIBLE);
-//            holder.receiverMessage.setVisibility(View.VISIBLE);
-                holder.receiverName.setText(message.getSenderName());
-                holder.receiverMessage.setVisibility(View.INVISIBLE);
-                holder.receiverMessageTime.setText(message.getTimestamp());
-                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.receiverImage);
+
+                ImageMessage(holder, message, "receiver");
+
             } else if(message.getType().equals("document")){
-                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
-//            holder.receiverName.setVisibility(View.VISIBLE);
-//            holder.receiverMessage.setVisibility(View.VISIBLE);
-                holder.receiverName.setText(message.getSenderName());
-                holder.receiverMessage.setVisibility(View.INVISIBLE);
-                holder.receiverMessageTime.setText(message.getTimestamp());
-                holder.receiverImage.setVisibility(View.INVISIBLE);
+                DocumentMessage(holder, message, "receiver");
             }
         }
     }
@@ -117,6 +94,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         public TextView senderMessage,senderMessageTime, receiverName, receiverMessage, receiverMessageTime;
         public LinearLayout senderMessageHolder, receiverMessageHolder;
         public ImageView senderImage, receiverImage;
+        public Button senderDoc, receiverDoc;
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -126,6 +104,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             senderMessage = itemView.findViewById(R.id.sender_message);
             senderMessageTime = itemView.findViewById(R.id.sender_message_time);
             senderImage = itemView.findViewById(R.id.sender_image);
+            senderDoc = itemView.findViewById(R.id.sender_Doc);
 
             //reciever
             receiverMessageHolder = itemView.findViewById(R.id.receiver_message_holder);
@@ -133,6 +112,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             receiverMessage = itemView.findViewById(R.id.receiver_message);
             receiverMessageTime = itemView.findViewById(R.id.receiver_message_time);
             receiverImage =itemView.findViewById(R.id.receiver_image);
+            receiverDoc = itemView.findViewById(R.id.receiver_Doc);
+
         }
     }
 
@@ -140,5 +121,120 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public int getItemCount() {
         return userMessageList.size();
     }
+
+
+
+
+    public void textMessage(MessageViewHolder holder, Message message, String who){
+
+        switch(who){
+
+            case "sender":
+
+                holder.senderMessageHolder.setVisibility(View.VISIBLE);
+                holder.senderMessage.setText(message.getMessage());
+                holder.senderMessageTime.setText(message.getTimestamp());
+                holder.senderImage.setVisibility(View.GONE);
+                holder.senderDoc.setVisibility(View.GONE);
+                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+                break;
+
+            case "receiver":
+
+                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
+                holder.receiverName.setText(message.getSenderName());
+                holder.receiverImage.setVisibility(View.GONE);
+                holder.receiverDoc.setVisibility(View.GONE);
+                holder.receiverMessage.setText(message.getMessage());
+                holder.receiverMessageTime.setText(message.getTimestamp());
+
+                break;
+
+        }
+
+
+
+    };
+    public void ImageMessage(MessageViewHolder holder, Message message, String who){
+        switch(who){
+
+            case "sender":
+
+                holder.senderMessageHolder.setVisibility(View.VISIBLE);
+                holder.senderMessage.setVisibility(View.INVISIBLE);
+                holder.senderMessageTime.setText(message.getTimestamp());
+                holder.senderDoc.setVisibility(View.GONE);
+                holder.senderImage.setVisibility(View.VISIBLE);
+                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.senderImage);
+                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+
+                break;
+
+            case "receiver":
+
+                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
+                holder.receiverName.setText(message.getSenderName());
+                holder.receiverMessage.setVisibility(View.INVISIBLE);
+                holder.receiverDoc.setVisibility(View.GONE);
+                holder.receiverMessageTime.setText(message.getTimestamp());
+                holder.receiverImage.setVisibility(View.VISIBLE);
+                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.receiverImage);
+
+                break;
+
+        }
+
+
+    };
+    public void DocumentMessage(MessageViewHolder holder, Message message, String who){
+
+        final String docUrl = message.getMedia();
+
+        switch(who){
+
+            case "sender":
+
+                holder.senderMessageHolder.setVisibility(View.VISIBLE);
+                holder.senderMessage.setVisibility(View.INVISIBLE);
+                holder.senderMessageTime.setText(message.getTimestamp());
+                holder.senderImage.setVisibility(View.GONE);
+                holder.senderDoc.setVisibility(View.VISIBLE);
+                holder.senderDoc.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                        CustomTabsIntent customTabsIntent = builder.build();
+                        customTabsIntent.launchUrl(context, Uri.parse(docUrl));
+                    }
+                });
+                holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
+                break;
+
+            case "receiver":
+
+                holder.receiverMessageHolder.setVisibility(View.VISIBLE);
+                holder.receiverName.setText(message.getSenderName());
+                holder.receiverImage.setVisibility(View.GONE);
+                holder.receiverMessage.setVisibility(View.INVISIBLE);
+                holder.receiverDoc.setVisibility(View.VISIBLE);
+                holder.receiverDoc.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                        CustomTabsIntent customTabsIntent = builder.build();
+                        customTabsIntent.launchUrl(context, Uri.parse(docUrl));
+                    }
+                });
+                holder.receiverMessageTime.setText(message.getTimestamp());
+
+                break;
+
+        }
+
+
+
+
+    };
+
 
 }
