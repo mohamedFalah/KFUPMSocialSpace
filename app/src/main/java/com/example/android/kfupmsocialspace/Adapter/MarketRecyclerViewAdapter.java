@@ -76,33 +76,28 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
         holder.itemName.setText(marketItem.getItemName());
         holder.itemPrice.setText(String.valueOf(marketItem.getItemPrice()));
 
-
         if (marketItem.getItemPicture() != null) {
-
-            holder.myloadingPanel.setVisibility(View.VISIBLE);
-            holder.myItemNameAndPriceHolder.setVisibility(View.INVISIBLE);
             Uri imageUri = Uri.parse(marketItem.getItemPicture());
-
-//            Picasso.with(mContext).load(imageUri).fit().centerCrop().into(holder.itemThumbnail);
+            Picasso.with(mContext).load(imageUri).fit().centerCrop().into(holder.itemThumbnail);
 //            Picasso.with(mContext).load(imageUri).error(R.drawable.no_image).placeholder(R.drawable.loading_image).into(holder.itemThumbnail);
 
             //https://stackoverflow.com/questions/26548660/how-to-listen-for-picasso-android-load-complete-events
-            Picasso.with(mContext)
-                    .load(imageUri)
-                    .into(holder.itemThumbnail, new com.squareup.picasso.Callback() {
-                        @Override
-                        public void onSuccess() {
-                            holder.myItemNameAndPriceHolder.setVisibility(View.VISIBLE);
-                            holder.myloadingPanel.setVisibility(View.GONE);
-                        }
-
-                        @Override
-                        public void onError() {
-                            //Fill this one day.
-                        }
-                    });
+//            Picasso.with(mContext)
+//                    .load(imageUri)
+//                    .into(holder.itemThumbnail, new com.squareup.picasso.Callback() {
+//                        @Override
+//                        public void onSuccess() {
+//                            holder.myItemNameAndPriceHolder.setVisibility(View.VISIBLE);
+////                            holder.myLoadingPanel.setVisibility(View.GONE);
+//                        }
+//
+//                        @Override
+//                        public void onError() {
+//                            //Fill this one day.
+//                        }
+//                    });
         } else {
-            holder.myloadingPanel.setVisibility(View.GONE);
+//            holder.myLoadingPanel.setVisibility(View.GONE);
             holder.itemThumbnail.setImageResource(R.drawable.no_image);
         }
     }
@@ -145,12 +140,13 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
         private TextView itemName, itemPrice;
         private ImageView itemThumbnail;
 
-        private RelativeLayout myloadingPanel, myItemNameAndPriceHolder;
+        //        private ProgressBar myLoadingPanel;
+        private RelativeLayout myItemNameAndPriceHolder;
 
         private marketItemViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
 
-            myloadingPanel = itemView.findViewById(R.id.loadingPanel);
+//            myLoadingPanel = itemView.findViewById(R.id.loadingPanel);
             myItemNameAndPriceHolder = itemView.findViewById(R.id.item_name_and_price);
 
             itemName = itemView.findViewById(R.id.item_name_id);

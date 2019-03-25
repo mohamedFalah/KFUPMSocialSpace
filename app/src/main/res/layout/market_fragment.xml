@@ -8,7 +8,7 @@
         android:id="@+id/recycler_market_items_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        android:layout_centerHorizontal="true" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floating_btn_add_market_item"
