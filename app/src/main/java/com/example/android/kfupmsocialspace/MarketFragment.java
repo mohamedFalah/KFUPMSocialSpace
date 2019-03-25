@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,6 +149,43 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
         menu.findItem(R.id.blogs_search_top_bar_icon).setVisible(false);
         menu.findItem(R.id.roommate_search_top_bar_icon).setVisible(false);
         menu.findItem(R.id.market_search_top_bar_icon).setVisible(true);
+
+        SearchView searchView = (SearchView) menu.findItem(R.id.market_search_top_bar_icon).getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                dbRef.orderByChild("itemName").startAt(s).endAt(s+"\uf8ff")
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                marketItemList.clear();
+                                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                                    MarketItem marketItem = snapshot.getValue(MarketItem.class);
+                                    marketItemList.add(marketItem);
+                                    marketItemAdapter.notifyDataSetChanged();
+                                }
+
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                return true;
+            }
+        });
+
+
+
+
     }
 
 //    @Override
