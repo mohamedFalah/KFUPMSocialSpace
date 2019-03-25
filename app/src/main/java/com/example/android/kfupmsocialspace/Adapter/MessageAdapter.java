@@ -30,7 +30,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public MessageAdapter(List<Message> userMessageList, Context context) {
         this.userMessageList = userMessageList;
         this.context = context;
-
     }
 
     @Override
@@ -59,6 +58,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 ImageMessage(holder, message, "sender");
 
             } else if(message.getType().equals("document")){
+
                 DocumentMessage(holder, message, "sender");
             }
         } else {
@@ -73,11 +73,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 ImageMessage(holder, message, "receiver");
 
             } else if(message.getType().equals("document")){
+
                 DocumentMessage(holder, message, "receiver");
             }
         }
     }
-
 
     @NonNull
     @Override
@@ -121,8 +121,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public int getItemCount() {
         return userMessageList.size();
     }
-
-
 
 
     public void textMessage(MessageViewHolder holder, Message message, String who){
