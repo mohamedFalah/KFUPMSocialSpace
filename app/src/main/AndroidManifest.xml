@@ -18,9 +18,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <!--for the chrome tabs-->
+        <activity
+            android:name=".ReservedItemsActivity"
+            android:parentActivityName=".MyMarketItemsActivity"></activity>
+        <activity
+            android:name=".MyPlacedItemsActivity"
+            android:parentActivityName=".MyMarketItemsActivity" /> <!-- for the chrome tabs -->
         <receiver android:name=".CustomTabs$CopyBroadcastReceiver" />
+
         <activity
             android:name=".MyMarketItemEditActivity"
             android:parentActivityName=".MyMarketItemViewActivity" />
@@ -34,8 +39,7 @@
         <activity
             android:name=".MyMarketItemsActivity"
             android:label="@string/title_activity_my_market_items"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.kfupmsocialspace.MainActivity" />
