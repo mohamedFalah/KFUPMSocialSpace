@@ -160,13 +160,13 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
         String ownerID =  marketItem.getOwnerID();
 
         //create reservation instance
-        Reservation reservation = new Reservation(marketItem.getItemID(),getCurrenTime(),marketItem.getOwnerID());
+        Reservation reservation = new Reservation(marketItem.getItemID(),getCurrenTime(),marketItem.getOwnerID(), userId);
 
         if(userId != null) {
             if (!userId.equals(ownerID)) {
                 dbRef.child(marketItem.getItemID()).child("status").setValue(true);
-
-                database.getReference().child("ReservedItems").child(userId).setValue(reservation)
+                String reservationID = dbRef.push().getKey();
+                database.getReference().child("ReservedItems").child(reservationID).setValue(reservation)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
