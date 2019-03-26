@@ -1,14 +1,18 @@
 package com.example.android.kfupmsocialspace;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.example.android.kfupmsocialspace.Adapter.MarketRecyclerViewAdapter;
+import com.example.android.kfupmsocialspace.contract.MarketitemContract;
 import com.example.android.kfupmsocialspace.model.MarketItem;
 import com.example.android.kfupmsocialspace.model.Reservation;
+import com.example.android.kfupmsocialspace.presenter.MarketItemPresenter;
 import com.example.android.kfupmsocialspace.presenter.userPresenter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyPlacedItemsActivity extends AppCompatActivity {
+public class MyPlacedItemsActivity extends AppCompatActivity implements MarketitemContract.IView {
 
 
     List<MarketItem> MyItemsList = new ArrayList<>();
@@ -27,6 +31,7 @@ public class MyPlacedItemsActivity extends AppCompatActivity {
     MarketRecyclerViewAdapter myItemsAdapter;
     GridLayoutManager gridLayoutManager;
 
+    MarketItemPresenter marketItemPresenter;
     userPresenter userPresenter;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -39,6 +44,7 @@ public class MyPlacedItemsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_placed_items);
 
 
+        marketItemPresenter = new MarketItemPresenter(this);
         userPresenter = new userPresenter();
 
         MyItems = findViewById(R.id.my_placed_items_recyclerview);
@@ -55,28 +61,28 @@ public class MyPlacedItemsActivity extends AppCompatActivity {
     public void onStart(){
         super.onStart();
 
-       // MyItemsList.clear();
-        marketItemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                    MarketItem marketItem = snapshot.getValue(MarketItem.class);
+        marketItemPresenter.MyItems();
+         new Handler().postDelayed(new Runnable() {
+             @Override
+             public void run() {
+                 MyItemsList.addAll(marketItemPresenter.MyItemsList);
+                 Log.i("items","kllkjlkjlkjljlkjlkjlkj myitems acti" +MyItemsList.size());
+                 myItemsAdapter.notifyDataSetChanged();
+             }
+         },200);
 
-                    if(marketItem.getOwnerID().equals(userPresenter.getUserID())){
 
-                     MyItemsList.add(marketItem);
-                     myItemsAdapter.notifyDataSetChanged();
-
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        if(MyItemsList.size() == 0){
+            //No items
+        }
 
     }
+
+
+    //not used funtions
+    @Override
+    public void progressBarValue(int progress) { }
+    @Override
+    public void reservationStatus(boolean status) { }
 }
