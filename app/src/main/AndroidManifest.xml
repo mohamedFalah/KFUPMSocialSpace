@@ -23,7 +23,13 @@
             android:parentActivityName=".ChatActivity"></activity>
         <activity
             android:name=".ReservedItemsActivity"
-            android:parentActivityName=".MyMarketItemsActivity" />
+            android:parentActivityName=".MyMarketItemsActivity" >
+            <intent-filter>
+                <action android:name="ReservedItemsActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MyPlacedItemsActivity"
             android:parentActivityName=".MyMarketItemsActivity" /> <!-- for the chrome tabs -->
@@ -72,7 +78,18 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <intent-filter>
+                <action android:name="MainActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+
+        </activity>
+
+
         <activity
             android:name=".CategoryBlogsViewActivity"
             android:parentActivityName=".MainActivity" />
