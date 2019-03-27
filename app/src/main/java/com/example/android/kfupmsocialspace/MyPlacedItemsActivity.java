@@ -2,23 +2,20 @@ package com.example.android.kfupmsocialspace;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.android.kfupmsocialspace.Adapter.MarketRecyclerViewAdapter;
 import com.example.android.kfupmsocialspace.contract.MarketitemContract;
 import com.example.android.kfupmsocialspace.model.MarketItem;
-import com.example.android.kfupmsocialspace.model.Reservation;
 import com.example.android.kfupmsocialspace.presenter.MarketItemPresenter;
 import com.example.android.kfupmsocialspace.presenter.userPresenter;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +72,10 @@ public class MyPlacedItemsActivity extends AppCompatActivity implements Marketit
 
         if(MyItemsList.size() == 0){
             //No items
+            TextView myView = findViewById(R.id.no_placed_items_textview);
+            double size = MyItemsList.size();
+            myView.setText(size + "");
+            myView.setVisibility(View.VISIBLE);
         }
 
     }

@@ -19,8 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ImageZoomActivity"
+            android:parentActivityName=".ChatActivity"></activity>
+        <activity
             android:name=".ReservedItemsActivity"
-            android:parentActivityName=".MyMarketItemsActivity"></activity>
+            android:parentActivityName=".MyMarketItemsActivity" />
         <activity
             android:name=".MyPlacedItemsActivity"
             android:parentActivityName=".MyMarketItemsActivity" /> <!-- for the chrome tabs -->
