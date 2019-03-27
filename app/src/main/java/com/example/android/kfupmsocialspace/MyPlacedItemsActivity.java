@@ -16,7 +16,6 @@ import com.example.android.kfupmsocialspace.model.MarketItem;
 import com.example.android.kfupmsocialspace.presenter.MarketItemPresenter;
 import com.example.android.kfupmsocialspace.presenter.userPresenter;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,8 +81,6 @@ public class MyPlacedItemsActivity extends AppCompatActivity implements Marketit
         if(MyItemsList.size() == 0){
             //No items
             TextView myView = findViewById(R.id.no_placed_items_textview);
-            double size = MyItemsList.size();
-            myView.setText(size + "");
             myView.setVisibility(View.VISIBLE);
         }
 
