@@ -85,7 +85,7 @@ public class MyPlacedItemsActivity extends AppCompatActivity implements Marketit
              }
          },200);
 
-         
+
 
     }
 

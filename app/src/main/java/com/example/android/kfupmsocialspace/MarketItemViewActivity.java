@@ -74,6 +74,11 @@ public class MarketItemViewActivity extends AppCompatActivity implements View.On
             itemDate.setText("No date");
 
 
+        //for the reserved item
+        if(marketItem.isStatus() == true)
+            reserveItem.setEnabled(false);
+
+
 
 
         reserveItem.setOnClickListener(this);
@@ -117,6 +122,7 @@ public class MarketItemViewActivity extends AppCompatActivity implements View.On
                 public void run() {
                     if (reservationStatus = true)
                         Toast.makeText(MarketItemViewActivity.this, "Item reserved", Toast.LENGTH_SHORT).show();
+                        reserveItem.setEnabled(false);
                 }
             }, 800);
         }
