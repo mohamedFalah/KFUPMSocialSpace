@@ -58,20 +58,24 @@ public class ReservedItemsActivity extends AppCompatActivity implements Marketit
         super.onStart();
 
         marketItemPresenter.myReservedItems();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 myReservedItemsList.addAll(marketItemPresenter.myReservedItemsList);
                 Log.i("items","kllkjlkjlkjljlkjlkjlkj myitems acti" +myReservedItemsList.size());
                 myReservedItemsAdapter.notifyDataSetChanged();
-            }
-        },200);
 
-        if(myReservedItemsList.size() == 0){
-            //No items
-            TextView myView = findViewById(R.id.no_reserved_items_textview);
-            myView.setVisibility(View.VISIBLE);
-        }
+                if(myReservedItemsList.size() == 0){
+                    //No items
+                    TextView myView = findViewById(R.id.no_reserved_items_textview);
+                    myView.setVisibility(View.VISIBLE);
+                }
+
+            }
+        },900);
+
+
 
     }
 

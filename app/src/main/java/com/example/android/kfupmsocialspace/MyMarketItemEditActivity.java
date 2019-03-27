@@ -1,8 +1,10 @@
 package com.example.android.kfupmsocialspace;
 
+import android.animation.ValueAnimator;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.ImageFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,11 +14,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -36,10 +41,12 @@ public class MyMarketItemEditActivity extends AppCompatActivity implements Marke
     private Spinner itemCategory;
     private ImageView itemImg;
     private Button confirm, cancel;
+    private ProgressBar progressBar;
+
 
     private boolean textChangeHappened = false;
-    private boolean NoImageAdded = false;
     private boolean ImageChangedHappened = false;
+    private boolean SpinnerChanged = false;
 
 
     ArrayAdapter<String> adapter;
@@ -56,7 +63,8 @@ public class MyMarketItemEditActivity extends AppCompatActivity implements Marke
 
 
         Bundle data = getIntent().getExtras();
-        marketItem =  (MarketItem) data.getParcelable("clickedItem");
+        marketItem =  data.getParcelable("clickedItem");
+
 
         marketItemPresenter = new MarketItemPresenter(this);
 
@@ -65,6 +73,7 @@ public class MyMarketItemEditActivity extends AppCompatActivity implements Marke
         itemDescription = findViewById(R.id.itemDescription);
         itemImg = findViewById(R.id.item_picture);
         itemCategory = findViewById(R.id.itemCategory);
+        progressBar = findViewById(R.id.progress_bar);
         confirm = findViewById(R.id.confirm_item_edit);
         cancel = findViewById(R.id.cancel_item_edit);
 
@@ -88,8 +97,18 @@ public class MyMarketItemEditActivity extends AppCompatActivity implements Marke
         itemDescription.setText(marketItem.getItemDescription());
         Picasso.with(this).load(Uri.parse(marketItem.getItemPicture())).fit().centerCrop().into(itemImg);
         //for spinner value
-        int spinnerValue = adapter.getPosition(marketItem.getItemCategory());
+        final int spinnerValue = adapter.getPosition(marketItem.getItemCategory());
         itemCategory.setSelection(spinnerValue);
+
+
+
+
+
+
+        //listener to spinner
+        if(spinnerValue != itemCategory.getSelectedItemPosition())
+            SpinnerChanged = true;
+
 
 
         //listener to detect change
@@ -131,36 +150,46 @@ public class MyMarketItemEditActivity extends AppCompatActivity implements Marke
                 String itemCat = itemCategory.getSelectedItem().toString();
                 String itemDes = itemDescription.getText().toString().trim();
 
-                if (textChangeHappened) {
 
-                    if (ImageChangedHappened) {
 
-                        marketItemPresenter.uploadItemImage(System.currentTimeMillis() + "." + getFileExtension(ImageUri),
-                                ImageUri, itemN, itemP, itemCat, itemDes);
+                if(ImageChangedHappened){
 
-                        Toast.makeText(MyMarketItemEditActivity.this, "your ItemUpdated", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    marketItemPresenter.uploadItemImage(System.currentTimeMillis() + "." + getFileExtension(ImageUri),
+                            ImageUri, itemN, itemP, itemCat, itemDes, marketItem.getItemID());
 
-                        marketItem.setItemName(itemN);
-                        marketItem.setItemPrice(itemP);
-                        marketItem.setItemDescription(itemDes);
 
-                        marketItemPresenter.uploadMarketItem(marketItem);
 
-                        Toast.makeText(MyMarketItemEditActivity.this, "your ItemUpdated", Toast.LENGTH_SHORT).show();
+                    textChangeHappened = false;
+                    ImageChangedHappened =false;
 
-                    }
+                } else if (textChangeHappened ) {
+
+                    marketItem.setItemName(itemN);
+                    marketItem.setItemPrice(itemP);
+                    marketItem.setItemDescription(itemDes);
+                    marketItem.setItemCategory(itemCat);
+
+                    marketItemPresenter.uploadMarketItem(marketItem);
+
+                    Toast.makeText(MyMarketItemEditActivity.this, "your Item Updated", Toast.LENGTH_SHORT).show();
+                    textChangeHappened =false;
+
+
+                }else if(SpinnerChanged){
+
+                    marketItem.setItemCategory(itemCat);
+                    marketItemPresenter.uploadMarketItem(marketItem);
+
+                    Toast.makeText(MyMarketItemEditActivity.this, "your Item Updated", Toast.LENGTH_SHORT).show();
+                    SpinnerChanged = false;
+
+                }else {
+
+                    Toast.makeText(MyMarketItemEditActivity.this, "No thing modified", Toast.LENGTH_SHORT).show();
+
                 }
-                else{
-
-                        Intent intent = new Intent(getApplicationContext(), MyMarketItemViewActivity.class);
-                        intent.putExtra("clickedItem", marketItem);
-                        startActivity(intent);
-                        finish();
-                }
-
             }
+
         });
 
 
@@ -168,7 +197,6 @@ public class MyMarketItemEditActivity extends AppCompatActivity implements Marke
 
 
     }
-
 
 
     /*
@@ -259,15 +287,39 @@ public class MyMarketItemEditActivity extends AppCompatActivity implements Marke
 
     @Override
     public void afterTextChanged(Editable s) {
+
         textChangeHappened = true;
     }
 
 
 
 
-    //not used functions
     @Override
-    public void progressBarValue(int progress) { }
+    public void progressBarValue(int progress) {
+
+
+        ValueAnimator animator = ValueAnimator.ofInt(progressBar.getProgress(), progress);
+        animator.setInterpolator(new AccelerateInterpolator());
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                int value = (int) valueAnimator.getAnimatedValue();
+                progressBar.setProgress(value);
+            }
+        });
+
+        animator.start();
+
+        //end it if progress is finsihed
+        if(progressBar.getProgress() == 100){
+            Toast.makeText(this, "Item uploaded", Toast.LENGTH_LONG).show();
+            ImageChangedHappened = false;
+
+        }
+
+    }
+
+    //not used functions
     @Override
     public void reservationStatus(boolean status) { }
 }

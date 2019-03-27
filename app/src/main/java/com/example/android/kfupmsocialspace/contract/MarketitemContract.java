@@ -12,7 +12,7 @@ public class MarketitemContract {
     }
 
     public interface IPresenter {
-        void uploadItemImage(String name, Uri uri, String itemName, String price, String category, String itemDescription);
+        void uploadItemImage(String name, Uri uri, String itemName, String price, String category, String itemDescription, String itemID);
         void uploadMarketItem(MarketItem marketItem);
         void reserveItem(MarketItem marketItem);
     }

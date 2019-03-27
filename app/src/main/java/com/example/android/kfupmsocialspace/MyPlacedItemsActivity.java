@@ -74,15 +74,18 @@ public class MyPlacedItemsActivity extends AppCompatActivity implements Marketit
                  MyItemsList.addAll(marketItemPresenter.MyItemsList);
                  Log.i("items","kllkjlkjlkjljlkjlkjlkj myitems acti" +MyItemsList.size());
                  myItemsAdapter.notifyDataSetChanged();
+
+                 if(MyItemsList.size() == 0){
+                     //No items
+                     TextView myView = findViewById(R.id.no_placed_items_textview);
+                     double size = MyItemsList.size();
+                     myView.setText(size + "");
+                     myView.setVisibility(View.VISIBLE);
+                 }
              }
          },200);
 
-
-        if(MyItemsList.size() == 0){
-            //No items
-            TextView myView = findViewById(R.id.no_placed_items_textview);
-            myView.setVisibility(View.VISIBLE);
-        }
+         
 
     }
 
