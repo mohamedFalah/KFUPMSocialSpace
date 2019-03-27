@@ -1,5 +1,6 @@
 package com.example.android.kfupmsocialspace;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +15,7 @@ import com.example.android.kfupmsocialspace.contract.MarketitemContract;
 import com.example.android.kfupmsocialspace.model.MarketItem;
 import com.example.android.kfupmsocialspace.presenter.MarketItemPresenter;
 import com.example.android.kfupmsocialspace.presenter.userPresenter;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +30,6 @@ public class MyPlacedItemsActivity extends AppCompatActivity implements Marketit
 
     MarketItemPresenter marketItemPresenter;
     userPresenter userPresenter;
-
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference marketItemsRef = database.getReference("Market Item");
 
 
     @Override
@@ -50,6 +47,18 @@ public class MyPlacedItemsActivity extends AppCompatActivity implements Marketit
         MyItems.setLayoutManager(gridLayoutManager);
         MyItems.setAdapter(myItemsAdapter);
         myItemsAdapter.notifyDataSetChanged();
+
+        myItemsAdapter.SetOnItemClickListener(new MarketRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+                MarketItem marketItem = MyItemsList.get(position);
+                Intent intent = new Intent(getApplicationContext(), MyMarketItemViewActivity.class);
+                intent.putExtra("clickedItem", marketItem);
+                startActivity(intent);
+
+            }
+        });
 
     }
 

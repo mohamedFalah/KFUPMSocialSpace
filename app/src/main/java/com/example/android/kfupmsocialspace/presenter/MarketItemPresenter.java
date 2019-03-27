@@ -71,6 +71,8 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
 
     }
 
+
+    //uplaod the image item
     @Override
     public void uploadItemImage(String pictureName, Uri uri, String itemName, String price, String category,
 
@@ -152,16 +154,26 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
 
     }
 
+
+    //store the item in the datebase
     @Override
     public void uploadMarketItem(MarketItem marketItem) {
-        String itemID = marketItemsRef.push().getKey();
-        if (itemID != null) {
-            marketItem.setItemID(itemID);
-            marketItem.setStatus(false);
-            marketItemsRef.child(itemID).setValue(marketItem);
-        }
 
+        if (marketItem.getItemID() != null) {
+            marketItemsRef.child(marketItem.getItemID()).setValue(marketItem);
+
+        } else {
+            String itemID = marketItemsRef.push().getKey();
+            marketItem.setStatus(false);
+            if (itemID != null) {
+                marketItem.setItemID(itemID);
+                marketItem.setStatus(false);
+                marketItemsRef.child(itemID).setValue(marketItem);
+            }
+        }
     }
+
+
 
     @Override
     public void reserveItem(MarketItem marketItem) {
@@ -195,6 +207,17 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
                 cannotReserve = true;
             }
         }
+
+    }
+
+
+    //delete item
+    public void deleteItem(String itemID) {
+
+
+            marketItemsRef.child(itemID).removeValue();
+
+
 
     }
 
@@ -307,4 +330,6 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
             userId = user.getUid();
 
     }
+
+
 }
