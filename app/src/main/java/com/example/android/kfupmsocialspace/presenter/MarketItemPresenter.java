@@ -76,7 +76,7 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
     @Override
     public void uploadItemImage(String pictureName, Uri uri, String itemName, String price, String category,
 
-                                String itemDescription) {
+                                String itemDescription, final String itemID) {
 
         //item owner info
         final String Owner = userPresenter.userModel.getUserFullName();
@@ -132,8 +132,13 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
                 if (task.isSuccessful() && task.getResult() != null) {
                     Uri downloadUri = task.getResult();
                     String itemPicture = task.getResult().toString();
+
                     marketItem = new MarketItem(itemN, itemP, itemC, itemDes,
                             itemPicture, Owner, userId, getCurrentDate());
+
+                    //for existing item to modify image
+                    if(itemID != null)
+                        marketItem.setItemID(itemID);
 
 
                     //upload the item to database
@@ -212,10 +217,23 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
 
 
     //delete item
-    public void deleteItem(String itemID) {
+    public void deleteItem(MarketItem marketItem) {
 
+        StorageReference photoReferance = FirebaseStorage.getInstance().getReferenceFromUrl(marketItem.getItemPicture());
 
-            marketItemsRef.child(itemID).removeValue();
+        photoReferance.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.i("delete", "photo Deleted");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("delete", "photo not Deleted");
+            }
+        });
+
+        marketItemsRef.child(marketItem.getItemID()).removeValue();
 
 
 
@@ -223,7 +241,7 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
 
 
 
-    //return list of myitems that are reserved
+    //return list of items that I reserved
     public void myReservedItems(){
 
 
@@ -234,7 +252,7 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
 
                     final Reservation reservation = snapshot.getValue(Reservation.class);
 
-                    if(reservation.getOwnerID().equals(userPresenter.getUserID())){
+                    if(reservation.getReserverID().equals(userPresenter.getUserID())){
                         //get the items
                         marketItemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override

@@ -69,7 +69,7 @@ public class MyMarketItemViewActivity extends AppCompatActivity implements Marke
             @Override
             public void onClick(View v) {
 
-                marketItemPresenter.deleteItem(marketItem.getItemID());
+                marketItemPresenter.deleteItem(marketItem);
 
             }
         });
