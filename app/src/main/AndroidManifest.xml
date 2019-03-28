@@ -18,9 +18,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".ImageZoomActivity"
+            android:parentActivityName=".ChatActivity"></activity>
+        <activity
+            android:name=".ReservedItemsActivity"
+            android:parentActivityName=".MyMarketItemsActivity" >
+            <intent-filter>
+                <action android:name="ReservedItemsActivity" />
 
-        <!--for the chrome tabs-->
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MyPlacedItemsActivity"
+            android:parentActivityName=".MyMarketItemsActivity" /> <!-- for the chrome tabs -->
         <receiver android:name=".CustomTabs$CopyBroadcastReceiver" />
+
         <activity
             android:name=".MyMarketItemEditActivity"
             android:parentActivityName=".MyMarketItemViewActivity" />
@@ -34,8 +48,7 @@
         <activity
             android:name=".MyMarketItemsActivity"
             android:label="@string/title_activity_my_market_items"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.kfupmsocialspace.MainActivity" />
@@ -65,7 +78,18 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <intent-filter>
+                <action android:name="MainActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+
+        </activity>
+
+
         <activity
             android:name=".CategoryBlogsViewActivity"
             android:parentActivityName=".MainActivity" />

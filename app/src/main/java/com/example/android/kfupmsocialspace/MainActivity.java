@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                  userName.setText(userPresenter.getTheUsername());
             }
-        }, 4000);
+        }, 900);
 
 
 

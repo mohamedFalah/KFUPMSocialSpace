@@ -122,7 +122,10 @@ public class userPresenter implements UserContract.IPresenter {
 
     public String getTheUsername(){
 
-        return userModel.getUserFullName();
+        if(userModel != null)
+            return userModel.getUserFullName();
+
+        return "no user";
     }
 
     //get the user Id

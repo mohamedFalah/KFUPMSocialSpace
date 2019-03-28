@@ -215,7 +215,7 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
 
 
             marketItemPresenter.uploadItemImage(System.currentTimeMillis() + "." + getFileExtension(ImageUri),
-                    ImageUri, itemName, itemPrice, itemCategory, itemDescription);
+                    ImageUri, itemName, itemPrice, itemCategory, itemDescription,null);
 
         } else {
 

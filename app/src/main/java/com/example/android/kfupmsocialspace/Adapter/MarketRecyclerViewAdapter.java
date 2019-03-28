@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.android.kfupmsocialspace.R;
@@ -78,16 +79,27 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
         if (marketItem.getItemPicture() != null) {
             Uri imageUri = Uri.parse(marketItem.getItemPicture());
             Picasso.with(mContext).load(imageUri).fit().centerCrop().into(holder.itemThumbnail);
-        } else {
-            holder.itemThumbnail.setImageResource(R.drawable.ps4);
-        }
+//            Picasso.with(mContext).load(imageUri).error(R.drawable.no_image).placeholder(R.drawable.loading_image).into(holder.itemThumbnail);
 
-//        holder.overflow.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // showPopupMenu(holder.overflow);
-//            }
-//        });
+            //https://stackoverflow.com/questions/26548660/how-to-listen-for-picasso-android-load-complete-events
+//            Picasso.with(mContext)
+//                    .load(imageUri)
+//                    .into(holder.itemThumbnail, new com.squareup.picasso.Callback() {
+//                        @Override
+//                        public void onSuccess() {
+//                            holder.myItemNameAndPriceHolder.setVisibility(View.VISIBLE);
+////                            holder.myLoadingPanel.setVisibility(View.GONE);
+//                        }
+//
+//                        @Override
+//                        public void onError() {
+//                            //Fill this one day.
+//                        }
+//                    });
+        } else {
+//            holder.myLoadingPanel.setVisibility(View.GONE);
+            holder.itemThumbnail.setImageResource(R.drawable.no_image);
+        }
     }
 
     @NonNull
@@ -124,31 +136,22 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
 
     }
 
-    /**
-     * Showing popup menu when tapping on 3 dots
-     * <p>
-     * private void showPopupMenu(View view) {
-     * // inflate menu
-     * PopupMenu popup = new PopupMenu(mContext, view);
-     * MenuInflater inflater = popup.getMenuInflater();
-     * inflater.inflate(R.menu.menu_market_cardview, popup.getMenu());
-     * popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
-     * popup.show();
-     * }
-     */
-
     public static class marketItemViewHolder extends RecyclerView.ViewHolder {
-        public TextView itemName, itemPrice;
-        public ImageView itemThumbnail;
-//        public ImageView overflow;
+        private TextView itemName, itemPrice;
+        private ImageView itemThumbnail;
 
-        public marketItemViewHolder(View itemView, final OnItemClickListener listener) {
+        //        private ProgressBar myLoadingPanel;
+        private RelativeLayout myItemNameAndPriceHolder;
+
+        private marketItemViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
+
+//            myLoadingPanel = itemView.findViewById(R.id.loadingPanel);
+            myItemNameAndPriceHolder = itemView.findViewById(R.id.item_name_and_price);
 
             itemName = itemView.findViewById(R.id.item_name_id);
             itemPrice = itemView.findViewById(R.id.item_price_id);
             itemThumbnail = itemView.findViewById(R.id.item_image_id);
-//            overflow = (ImageView) itemView.findViewById(R.id.overflow);
 
             //on the click event
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -169,24 +172,4 @@ public class MarketRecyclerViewAdapter extends RecyclerView.Adapter<MarketRecycl
             });
         }
     }
-
-    /**
-     * Click listener for popup menu items
-     */
-//    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
-//
-//        public MyMenuItemClickListener() {
-//        }
-//
-//        @Override
-//        public boolean onMenuItemClick(MenuItem menuItem) {
-//            switch (menuItem.getItemId()) {
-//                case R.id.action_add_favourite:
-//                    Toast.makeText(mContext, "Add to favourite", Toast.LENGTH_SHORT).show();
-//                    return true;
-//                default:
-//            }
-//            return false;
-//        }
-//    }
 }

@@ -116,6 +116,8 @@ public class NewsFragment extends Fragment {
         menu.findItem(R.id.my_roommate_request).setVisible(false);
         menu.findItem(R.id.my_market_items).setVisible(false);
         menu.findItem(R.id.my_blogs).setVisible(false);
-        menu.findItem(R.id.search_top_bar_icon).setVisible(false);
+        menu.findItem(R.id.blogs_search_top_bar_icon).setVisible(false);
+        menu.findItem(R.id.roommate_search_top_bar_icon).setVisible(false);
+        menu.findItem(R.id.market_search_top_bar_icon).setVisible(false);
     }
 }
