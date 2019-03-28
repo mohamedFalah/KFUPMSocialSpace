@@ -65,7 +65,7 @@ public class InstructorSignIn extends AppCompatActivity implements View.OnClickL
 
     private void loginUser() {
 
-        String email = "s" + IDNumber.getText().toString().trim() + "@kfupm.edu.sa";
+        String email =  IDNumber.getText().toString().trim() + "@kfupm.edu.sa";
         String password_text = password.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
@@ -94,7 +94,7 @@ public class InstructorSignIn extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
 
 
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), InstructorMain.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
 
@@ -115,7 +115,7 @@ public class InstructorSignIn extends AppCompatActivity implements View.OnClickL
         }
 
         if (view == SignUp) {
-            Intent intent = new Intent(getApplicationContext(), SignUp.class);
+            Intent intent = new Intent(getApplicationContext(), InstructorSignUp.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
