@@ -1,4 +1,4 @@
-package com.example.android.kfupmsocialspace;
+package com.example.android.kfupmsocialspace.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

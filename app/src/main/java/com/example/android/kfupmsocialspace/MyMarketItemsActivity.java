@@ -14,13 +14,22 @@ public class MyMarketItemsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_market_items);
 
-        Button myPlacedItemsButton = findViewById(R.id.my_placed_items_button);
+        Button myUnreservedItemsButton = findViewById(R.id.my_placed_items_button);
+        Button myReservedItems = findViewById(R.id.my_reserved_items_button);
         Button reservedItems = findViewById(R.id.reserved_item_button);
 
-        myPlacedItemsButton.setOnClickListener(new View.OnClickListener() {
+        myUnreservedItemsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), MyPlacedItemsActivity.class);
+                Intent intent = new Intent(getBaseContext(), MyUnreservedItemsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        myReservedItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), MyReservedItemsActivity.class);
                 startActivity(intent);
             }
         });

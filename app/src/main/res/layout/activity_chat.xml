@@ -6,6 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ChatActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="matrix"
+        android:src="@drawable/bg" />
+
     <FrameLayout
         android:id="@+id/chat_messages_frame"
         android:layout_width="match_parent"

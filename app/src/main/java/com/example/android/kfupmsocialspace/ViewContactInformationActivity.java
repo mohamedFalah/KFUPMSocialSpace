@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-public class ReservedItemsActivity extends AppCompatActivity {
+public class ViewContactInformationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reserved_items);
+        setContentView(R.layout.activity_view_contact_information);
     }
 
     @Override
