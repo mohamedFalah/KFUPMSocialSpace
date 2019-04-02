@@ -7,7 +7,6 @@
     tools:context=".MyBlogsActivity">
 
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/myBlogs"
         android:layout_width="match_parent"
@@ -21,7 +20,21 @@
         android:stretchMode="columnWidth"
         android:verticalSpacing="1dp" />
 
-
+    <TextView
+        android:id="@+id/no_blogs_written_textview"
+        style="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="You did not write any blogs yet."
+        android:textAlignment="center"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
