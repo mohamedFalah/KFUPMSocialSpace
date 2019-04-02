@@ -18,20 +18,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ViewContactInformationActivity"></activity>
+        <activity android:name=".ReservedItemViewActivity" />
         <activity
-            android:name=".ImageZoomActivity"
-            android:parentActivityName=".ChatActivity"></activity>
+            android:name=".MyReservedItemViewActivity"
+            android:parentActivityName=".MyReservedItemsActivity" />
         <activity
             android:name=".ReservedItemsActivity"
-            android:parentActivityName=".MyMarketItemsActivity" >
-            <intent-filter>
-                <action android:name="ReservedItemsActivity" />
+            android:parentActivityName=".MyMarketItemsActivity" />
+        <activity
+            android:name=".ImageZoomActivity"
+            android:parentActivityName=".ChatActivity" />
+        <activity
+            android:name=".MyReservedItemsActivity"
+            android:parentActivityName=".MyMarketItemsActivity">
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="ReservedItemsActivity" /> -->
+
+
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".MyPlacedItemsActivity"
+            android:name=".MyUnreservedItemsActivity"
             android:parentActivityName=".MyMarketItemsActivity" /> <!-- for the chrome tabs -->
         <receiver android:name=".CustomTabs$CopyBroadcastReceiver" />
 
@@ -79,17 +89,12 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="MainActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
-
         </activity>
-
-
         <activity
             android:name=".CategoryBlogsViewActivity"
             android:parentActivityName=".MainActivity" />

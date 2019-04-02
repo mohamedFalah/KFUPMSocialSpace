@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android.kfupmsocialspace.Adapter.RoommateRecyclerViewAdapter;
+import com.example.android.kfupmsocialspace.model.RoommateRequest;
 
 import java.util.ArrayList;
 import java.util.List;
