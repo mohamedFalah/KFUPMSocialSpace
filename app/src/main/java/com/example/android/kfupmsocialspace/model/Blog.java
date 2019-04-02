@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 public class Blog implements Parcelable {
 
-    private int blog_id;
+    private String blog_id;
     private String title;
     private String category;
     private String subject;
@@ -17,6 +17,7 @@ public class Blog implements Parcelable {
     }
 
     public Blog(String title, String category, String subject, String writer) {
+        this.blog_id = blog_id;
         this.title = title;
         this.category = category;
         this.subject = subject;
@@ -24,6 +25,17 @@ public class Blog implements Parcelable {
     }
 
     public Blog(String title, String category, String subject, String writer, String writerID, String time) {
+        this.blog_id = blog_id;
+        this.title = title;
+        this.category = category;
+        this.subject = subject;
+        this.writer = writer;
+        this.writerID = writerID;
+        this.time = time;
+    }
+
+    public Blog(String blog_id, String title, String category, String subject, String writer, String writerID, String time) {
+        this.blog_id = blog_id;
         this.title = title;
         this.category = category;
         this.subject = subject;
@@ -41,7 +53,7 @@ public class Blog implements Parcelable {
 //    }
 
     protected Blog(Parcel in) {
-        blog_id = in.readInt();
+        blog_id = in.readString();
         title = in.readString();
         category = in.readString();
         subject = in.readString();
@@ -61,6 +73,10 @@ public class Blog implements Parcelable {
             return new Blog[size];
         }
     };
+
+    public String getBlog_id() { return blog_id; }
+
+    public void setBlog_id(String blog_id) { this.blog_id = blog_id; }
 
     public String getTitle() {
         return title;
@@ -109,7 +125,7 @@ public class Blog implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(blog_id);
+        dest.writeString(blog_id);
         dest.writeString(title);
         dest.writeString(category);
         dest.writeString(subject);

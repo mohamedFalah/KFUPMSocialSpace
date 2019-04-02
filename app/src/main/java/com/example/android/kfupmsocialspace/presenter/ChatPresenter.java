@@ -80,7 +80,7 @@ public class ChatPresenter implements ChatContract.IPresenter {
             //create message instance
             message =  new Message(userID,userName,messageText,getCurrentTime(),"text", "");
 
-
+            message.setMessageID(messageID);
             //send the message
             dbRef.child("section2").child(messageID).setValue(message);
 

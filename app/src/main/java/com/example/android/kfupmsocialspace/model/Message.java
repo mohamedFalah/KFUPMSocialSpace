@@ -3,6 +3,7 @@ package com.example.android.kfupmsocialspace.model;
 public class Message {
 
 
+    private String MessageID;
     private String SenderID;
     private String SenderName;
     private String Message;
@@ -19,7 +20,7 @@ public class Message {
     }
 
     public Message(String senderID,String senderName,String message,String timestamp, String type,  String media){
-
+        this.MessageID = MessageID;
         this.SenderID = senderID;
         this.SenderName = senderName;
         this.Message = message;
@@ -68,6 +69,7 @@ public class Message {
   }*/
 
 
+    public String getMessageID() { return MessageID; }
 
     public String getSenderID() {
         return SenderID;
@@ -88,6 +90,8 @@ public class Message {
     public String getDocument() { return Document; }
 
     public String getVoice() { return voice; }
+
+    public void setMessageID(String messageID) { MessageID = messageID; }
 
     public void setSenderID(String senderID) {
         SenderID = senderID;
