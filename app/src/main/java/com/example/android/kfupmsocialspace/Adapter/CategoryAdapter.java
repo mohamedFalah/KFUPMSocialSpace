@@ -1,49 +1,103 @@
 package com.example.android.kfupmsocialspace.Adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CategoryAdapter extends BaseAdapter {
+import com.example.android.kfupmsocialspace.R;
 
-    private int screen_width, screen_height;
+import java.util.List;
+
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.categoryViewHolder> {
+
+    private List<String> categoryList;
     private Context mContext;
-    // references to our categories
-    private String[] mThumbIds = {
-            "Game", "Education", "Entertainment", "Fun"
-    };
+    private OnItemClickListener listener;
 
-    public CategoryAdapter(Context c) {
+
+
+    public CategoryAdapter(List<String> categoryList, Context c) {
+        this.categoryList = categoryList;
         mContext = c;
     }
 
-    public int getCount() {
-        return mThumbIds.length;
+
+    @NonNull
+    @Override
+    public categoryViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.card_view_category, viewGroup, false);
+
+
+        return new categoryViewHolder(view, listener);
     }
 
-    public Object getItem(int position) {
-        return null;
+    @Override
+    public void onBindViewHolder(@NonNull CategoryAdapter.categoryViewHolder holder, int i) {
+
+//        holder.categoryNameHolder.setVisibility(View.VISIBLE);
+        holder.categoryName.setText(categoryList.get(i));
+
+
     }
 
-    public long getItemId(int position) {
-        return 0;
+   public class categoryViewHolder extends RecyclerView.ViewHolder{
+
+        private TextView categoryName;
+        private LinearLayout categoryNameHolder;
+
+
+       public categoryViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+           super(itemView);
+
+
+            categoryName = itemView.findViewById(R.id.categoryName);
+//            categoryNameHolder = itemView.findViewById(R.id.categoryNameHolder);
+
+
+           //on the click event
+           itemView.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+
+                   if (listener != null) {
+
+                       int position = getAdapterPosition();
+
+                       if (position != RecyclerView.NO_POSITION) {
+
+                           listener.onItemClick(position);
+
+                       }
+                   }
+               }
+           });
+
+
+       }
+   }
+
+    @Override
+    public int getItemCount() {
+        return categoryList.size();
     }
 
-    // create a new (TextView) for each item referenced by the Adapter
-    public View getView(int position, View convertView, ViewGroup parent) {
-        TextView textView;
-        if (convertView == null) {
-            // if it's not recycled, initialize some attributes
-            textView = new TextView(mContext);
-            textView.setLayoutParams(new ViewGroup.LayoutParams(185, 185));
-//            textView.setPadding(8, 8, 8, 8);
-        } else {
-            textView = (TextView) convertView;
-        }
 
-        textView.setText(mThumbIds[position]);
-        return textView;
+    public interface OnItemClickListener {
+
+        void onItemClick(int position);
+
+    }
+
+
+    public void SetOnItemClickListener(OnItemClickListener listener) {
+
+        this.listener = listener;
+
     }
 }
