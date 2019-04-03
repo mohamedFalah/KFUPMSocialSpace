@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,8 +54,11 @@ public class MyMarketItemEditActivity extends AppCompatActivity implements Marke
 
     private MarketItem marketItem;
 
-
     MarketItemPresenter marketItemPresenter;
+
+
+    //needed for nothing
+    int spinnerValueChange = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,7 @@ public class MyMarketItemEditActivity extends AppCompatActivity implements Marke
 
         Bundle data = getIntent().getExtras();
         marketItem =  data.getParcelable("clickedItem");
+
 
 
         marketItemPresenter = new MarketItemPresenter(this);
@@ -91,6 +96,9 @@ public class MyMarketItemEditActivity extends AppCompatActivity implements Marke
         itemCategory.setAdapter(adapter);
 
 
+
+
+
         //set the values
         itemName.setText(marketItem.getItemName());
         itemPrice.setText(marketItem.getItemPrice());
@@ -102,12 +110,25 @@ public class MyMarketItemEditActivity extends AppCompatActivity implements Marke
 
 
 
-
-
-
         //listener to spinner
-        if(spinnerValue != itemCategory.getSelectedItemPosition())
-            SpinnerChanged = true;
+        itemCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinnerValueChange != 1)
+                    SpinnerChanged = true;
+
+                spinnerValueChange++;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
 
 
 

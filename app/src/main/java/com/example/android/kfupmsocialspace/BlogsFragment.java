@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,8 +18,28 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.example.android.kfupmsocialspace.Adapter.CategoryAdapter;
+import com.example.android.kfupmsocialspace.Adapter.MarketRecyclerViewAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlogsFragment extends Fragment implements View.OnClickListener {
+
+
+    List<String> categoryList = new ArrayList<>();
+    RecyclerView categories;
+    CategoryAdapter categoryAdapter;
+    GridLayoutManager gridLayoutManager;
+
+
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference dbRef = database.getReference("Blog");
+
 
     @Nullable
     @Override
@@ -27,21 +50,61 @@ public class BlogsFragment extends Fragment implements View.OnClickListener {
         fab.setOnClickListener(this);
 
 
-        GridView gridview = view.findViewById(R.id.grid_view_blog_categories);
-        gridview.setAdapter(new CategoryAdapter(getContext()));
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                Toast.makeText(getContext(), "" + position,
-                        Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), CategoryBlogsViewActivity.class);
+        categories = view.findViewById(R.id.categories);
+        categoryAdapter = new CategoryAdapter(categoryList, getContext());
+        gridLayoutManager = new GridLayoutManager(getContext(), 1);
+        categories.setLayoutManager(gridLayoutManager);
+        categories.setAdapter(categoryAdapter);
+        categoryAdapter.notifyDataSetChanged();
+
+
+        categoryAdapter.SetOnItemClickListener(new CategoryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                String categoryClicked = categoryList.get(position);
+                Intent intent = new Intent(getActivity(), CategoryBlogsViewActivity.class);
+                intent.putExtra("clickedCategory",categoryClicked );
+
                 startActivity(intent);
             }
         });
 
+
         //https://stackoverflow.com/questions/34597334/android-change-menu-depending-on-selected-fragment/34597423#34597423
         setHasOptionsMenu(true);//Make sure you have this line of code.
         return view;
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        categoryList.clear();
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String category = ds.getKey();
+                    categoryList.add(category);
+                    Log.i("happened", "this is done added " +category);
+                    Log.i("happened", "this is done added");
+                }
+
+                categoryAdapter.notifyDataSetChanged();
+                Log.i("happened", "this is done added"+ categoryList.size());
+                Log.i("happened", "this is done added "+ dataSnapshot.getChildrenCount());
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                //handle the error
+            }
+        });
+
+
     }
 
     @Override

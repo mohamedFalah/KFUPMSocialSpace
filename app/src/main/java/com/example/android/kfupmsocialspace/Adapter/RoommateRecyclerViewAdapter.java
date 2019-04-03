@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.android.kfupmsocialspace.R;
-import com.example.android.kfupmsocialspace.RoommateRequest;
+import com.example.android.kfupmsocialspace.model.RoommateRequest;
 
 import java.util.List;
 

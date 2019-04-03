@@ -20,11 +20,11 @@ import java.util.List;
 public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerViewAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<Blog> mData;
+    private List<Blog> blogList;
 
     public BlogRecyclerViewAdapter(Context mContext, List<Blog> mData) {
         this.mContext = mContext;
-        this.mData = mData;
+        this.blogList = mData;
     }
 
     @NonNull
@@ -39,20 +39,18 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
 
-        myViewHolder.blog_title.setText(mData.get(i).getTitle());
-        myViewHolder.blog_writer.setText(mData.get(i).getWriter());
-        myViewHolder.blog_category.setText(mData.get(i).getCategory());
+        myViewHolder.blog_title.setText(blogList.get(i).getTitle());
+        myViewHolder.blog_writer.setText(blogList.get(i).getWriter());
+        myViewHolder.blog_category.setText(blogList.get(i).getCategory());
 
         myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(mContext, BlogViewActivity.class);
-
+                Blog blog = blogList.get(i);
                 // passing data to the BlogViewActivity
-                intent.putExtra("Title", mData.get(i).getTitle());
-                intent.putExtra("Writer", mData.get(i).getWriter());
-                intent.putExtra("Category", mData.get(i).getCategory());
+                intent.putExtra("clickedBlog", blog);
                 // start the activity
                 mContext.startActivity(intent);
             }
@@ -61,7 +59,7 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return blogList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
