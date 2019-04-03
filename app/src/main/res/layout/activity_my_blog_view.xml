@@ -8,8 +8,7 @@
     android:background="@drawable/bg"
     android:fillViewport="true"
     android:scrollbarStyle="outsideInset"
-    android:visibility="visible"
-    tools:context=".BlogViewActivity">
+    tools:context=".MyBlogViewActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,8 +26,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -68,40 +66,17 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
                     app:layout_constraintTop_toBottomOf="@+id/blog_category_id" />
 
-                <LinearLayout
-                    android:id="@+id/info_linear_layout"
+                <TextView
+                    android:id="@+id/blog_date_id"
+                    style="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Date"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/blog_subject_id">
-
-                    <TextView
-                        android:id="@+id/blog_date_id"
-                        style="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="Date" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="By" />
-
-                    <TextView
-                        android:id="@+id/blog_writer_name_id"
-                        style="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="Writer Name" />
-                </LinearLayout>
+                    app:layout_constraintTop_toBottomOf="@+id/blog_subject_id" />
 
                 <android.support.constraint.Guideline
                     android:id="@+id/guideline5"
@@ -114,65 +89,34 @@
         </android.support.v7.widget.CardView>
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/comments"
+        <Button
+            android:id="@+id/edit_blog"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/cardView1"
+            android:layout_margin="8dp"
+            android:text="Edit Blog"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@+id/remove_blog"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView2"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintVertical_bias="1.0" />
 
-        </android.support.v7.widget.RecyclerView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardView1"
+        <Button
+            android:id="@+id/remove_blog"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_margin="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp"
+            android:text="Remove Blog"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum=".5">
-
-                <EditText
-                    android:id="@+id/blog_message_string"
-                    style="@style/TextAppearance.AppCompat.Medium"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="0.4"
-                    android:focusedByDefault="false"
-                    android:hint="Type a message" />
-
-                <TextView
-                    android:id="@+id/blog_send_message"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
-                    android:layout_weight="0.1"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:src="@drawable/ic_send"
-                    android:text="Send"
-                    android:textAllCaps="false" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
 
     </android.support.constraint.ConstraintLayout>
+
 </ScrollView>

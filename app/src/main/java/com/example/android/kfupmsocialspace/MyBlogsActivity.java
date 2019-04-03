@@ -1,11 +1,13 @@
 package com.example.android.kfupmsocialspace;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.android.kfupmsocialspace.Adapter.BlogRecyclerViewAdapter;
 import com.example.android.kfupmsocialspace.contract.blogContract;
@@ -63,9 +65,14 @@ public class MyBlogsActivity extends AppCompatActivity implements blogContract.I
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
                     Blog blog = snapshot.getValue(Blog.class);
-                    if(blog.getWriterID().equals(userPresenter.getUserID())){
-                        myBlogsList.add(blog);
-                        myBlogAdapter.notifyDataSetChanged();
+                    if (blog.getWriterID() != null) {
+                        if (blog.getWriterID().equals(userPresenter.getUserID())) {
+                            myBlogsList.add(blog);
+                            myBlogAdapter.notifyDataSetChanged();
+                        }
+                    } else {
+                        TextView myView = findViewById(R.id.no_blogs_written_textview);
+                        myView.setVisibility(View.VISIBLE);
                     }
 
                 }
