@@ -18,7 +18,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewContactInformationActivity"></activity>
+        <activity
+            android:name=".MyBlogEditActivity"
+            android:parentActivityName=".MyBlogViewActivity"></activity>
+        <activity
+            android:name=".MyBlogViewActivity"
+            android:parentActivityName=".MyBlogsActivity" />
+        <activity android:name=".ViewContactInformationActivity" />
         <activity android:name=".ReservedItemViewActivity" />
         <activity
             android:name=".MyReservedItemViewActivity"
