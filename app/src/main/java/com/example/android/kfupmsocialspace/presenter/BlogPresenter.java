@@ -103,6 +103,15 @@ public class BlogPresenter implements blogContract.IPresenter {
     }
 
 
+    //delete blog
+    public void deleteBlog(Blog blog){
+
+        dbRef.child(blog.getCategory()).child(blog.getBlog_id()).removeValue();
+        dbRef2.child(blog.getBlog_id()).removeValue();
+
+    }
+
+
     ///get user blogs
 
     public void getUserBlogs() {
@@ -115,10 +124,13 @@ public class BlogPresenter implements blogContract.IPresenter {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    for(DataSnapshot snapshot1 : snapshot.getChildren()){
 
-                    blog = snapshot.getValue(Blog.class);
-                    if (blog.getWriterID().equals(userpresenter.getUserID())) {
-                        myBlogsList.add(blog);
+                        blog = snapshot1.getValue(Blog.class);
+                        if (blog.getWriterID().equals(userpresenter.getUserID())) {
+                            myBlogsList.add(blog);
+                        }
+
                     }
 
                 }

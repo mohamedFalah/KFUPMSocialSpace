@@ -208,7 +208,7 @@ public class AddMarketItemActivity extends AppCompatActivity implements Marketit
 
             //addMarketItemButton.setClickable(false);
 
-            String itemName = imageName.getText().toString().trim();
+            String itemName = imageName.getText().toString().trim().toLowerCase();
             String itemPrice = imagePrice.getText().toString().trim();
             String itemCategory = spinner.getSelectedItem().toString();
             String itemDescription = this.itemDescription.getText().toString().trim();

@@ -4,6 +4,7 @@ import java.sql.Time;
 
 public class Reservation {
 
+    private String ReservationID;
     private String productID;
     private String time;
     private String ownerID;
@@ -15,11 +16,17 @@ public class Reservation {
     }
 
     public Reservation(String productID, String time, String ownerID, String reserverID){
+        this.ReservationID = ReservationID;
         this.productID = productID;
         this.time = time;
         this.ownerID = ownerID;
         this.reserverID = reserverID;
     }
+
+
+    public String getReservationID() { return ReservationID; }
+
+    public void setReservationID(String reservationID) { ReservationID = reservationID; }
 
 
     public String getProductID() { return productID; }

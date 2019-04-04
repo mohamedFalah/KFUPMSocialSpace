@@ -1,10 +1,13 @@
 package com.example.android.kfupmsocialspace;
 
+<<<<<<< Updated upstream
 import android.os.Bundle;
+=======
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Handler;
+>>>>>>> Stashed changes
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,9 +15,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MenuItem;
+<<<<<<< Updated upstream
 import android.view.View;
 import android.widget.TextView;
+=======
 import android.widget.Toast;
+>>>>>>> Stashed changes
 
 import com.example.android.kfupmsocialspace.Adapter.BlogRecyclerViewAdapter;
 import com.example.android.kfupmsocialspace.contract.blogContract;
@@ -92,21 +98,32 @@ public class MyBlogsActivity extends AppCompatActivity implements blogContract.I
         super.onStart();
 
         myBlogsList.clear();
-
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    for(DataSnapshot snapshot1 : snapshot.getChildren()){
+                    for (DataSnapshot snapshotChilds : snapshot.getChildren()) {
 
-                        blog = snapshot1.getValue(Blog.class);
+                        blog = snapshotChilds.getValue(Blog.class);
+                        if(blog.getWriterID().equals(userPresenter.getUserID())){
+                            myBlogsList.add(blog);
+                            myBlogAdapter.notifyDataSetChanged();
+                        }
+
+<<<<<<< Updated upstream
+                    Blog blog = snapshot.getValue(Blog.class);
+                    if (blog.getWriterID() != null) {
                         if (blog.getWriterID().equals(userPresenter.getUserID())) {
                             myBlogsList.add(blog);
                             myBlogAdapter.notifyDataSetChanged();
-
                         }
-
+                    } else {
+                        TextView myView = findViewById(R.id.no_blogs_written_textview);
+                        myView.setVisibility(View.VISIBLE);
+=======
+>>>>>>> Stashed changes
                     }
+
 
                 }
             }
@@ -117,18 +134,10 @@ public class MyBlogsActivity extends AppCompatActivity implements blogContract.I
             }
         });
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(myBlogsList.size() == 0){
-                    TextView myView = findViewById(R.id.no_blogs_written_textview);
-                    myView.setVisibility(View.VISIBLE);
-                }
-            }
-        }, 300);
-
+       // blogPresenter.getUserBlogs();
 
     }
+
 
 
     @Override

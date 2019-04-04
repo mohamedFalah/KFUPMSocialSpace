@@ -48,7 +48,7 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
     private double progress;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference marketItemsRef = database.getReference("Market Item");
-    DatabaseReference reservationRef = database.getReference("ReservedItems");
+    private DatabaseReference reservationRef = database.getReference("ReservedItems");
     private StorageReference stRef = FirebaseStorage.getInstance().getReference("MarketItemImages");
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private String userId;
@@ -63,6 +63,10 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
 
     //this wrong but why not
     private userPresenter userPresenter;
+
+    public MarketItemPresenter(){
+
+    }
 
     public MarketItemPresenter(MarketitemContract.IView newView) {
         getUser();
@@ -194,6 +198,8 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
             if (!userId.equals(ownerID)) {
                 marketItemsRef.child(marketItem.getItemID()).child("status").setValue(true);
                 String reservationID = reservationRef.push().getKey();
+                reservation.setReservationID(reservationID);
+
                 reservationRef.child(reservationID).setValue(reservation)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -242,7 +248,7 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
 
 
     //return list of items that I reserved
-    public void myReservedItems(){
+    public void ReservedItems(){
 
 
         reservationRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -314,6 +320,122 @@ public class MarketItemPresenter implements MarketitemContract.IPresenter {
         });
 
     }
+
+    //return list of my items that is reserved by other
+    public void MyItemsReserved(){
+
+        MyItemsList.clear();
+        marketItemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                    MarketItem marketItem = snapshot.getValue(MarketItem.class);
+
+                    if(marketItem.getOwnerID().equals(userPresenter.getUserID()) && marketItem.isStatus() == true){
+
+                        MyItemsList.add(marketItem);
+                        Log.i("items","kllkjlkjlkjljlkjlkjlkj myitems" +MyItemsList.size());
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //handle the error
+            }
+        });
+
+
+    }
+
+
+    //get the reserver ID
+    public void getReserverID(final MarketItem marketItem){
+
+        reservationRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    Reservation reservation = snapshot.getValue(Reservation.class);
+
+                    if(reservation.getProductID().equals(marketItem.getItemID()) && reservation.getOwnerID().equals(marketItem.getOwnerID())){
+
+                        userPresenter.getUserObject(reservation.getOwnerID());
+
+
+                    }
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
+    //cancel reservation
+    public void CancelReservation(final String ItemID){
+
+
+        reservationRef.orderByChild("productID").startAt(ItemID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+
+                    Reservation reservation = snapshot.getValue(Reservation.class);
+
+                    if(reservation.getProductID().equals(ItemID))
+                        reservationRef.child(reservation.getReservationID()).removeValue();
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        marketItemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+
+                    marketItem = snapshot.getValue(MarketItem.class);
+                    if(marketItem.getItemID().equals(ItemID))
+                        marketItem.setStatus(false);
+
+                    uploadMarketItem(marketItem);
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
 
 
     ///get time in milliseconds!

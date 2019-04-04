@@ -51,7 +51,7 @@ public class MyUnreservedItemsActivity extends AppCompatActivity implements Mark
             public void onItemClick(int position) {
 
                 MarketItem marketItem = MyItemsList.get(position);
-                Intent intent = new Intent(getApplicationContext(), MyMarketItemViewActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MyMarketItemEditActivity.class);
                 intent.putExtra("clickedItem", marketItem);
                 startActivity(intent);
 
@@ -65,7 +65,7 @@ public class MyUnreservedItemsActivity extends AppCompatActivity implements Mark
     public void onStart() {
         super.onStart();
 
-
+        MyItemsList.clear();
         marketItemPresenter.MyItems();
         new Handler().postDelayed(new Runnable() {
             @Override
