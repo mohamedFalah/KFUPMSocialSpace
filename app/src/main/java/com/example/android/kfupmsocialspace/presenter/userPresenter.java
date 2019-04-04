@@ -97,7 +97,7 @@ public class userPresenter implements UserContract.IPresenter {
             get the current user object
 
      */
-    private void getUserObject(String UserID) {
+    public void getUserObject(String UserID) {
         if (UserID != null) {
             dbRef.child(UserID).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -114,6 +114,13 @@ public class userPresenter implements UserContract.IPresenter {
         }
     }
 
+
+
+
+    //get the user instance
+    public User getUserModel() {
+        return userModel;
+    }
 
 
     /*

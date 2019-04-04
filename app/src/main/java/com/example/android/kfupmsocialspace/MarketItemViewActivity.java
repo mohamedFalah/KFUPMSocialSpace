@@ -123,8 +123,13 @@ public class MarketItemViewActivity extends AppCompatActivity implements View.On
                     if (reservationStatus = true)
                         Toast.makeText(MarketItemViewActivity.this, "Item reserved", Toast.LENGTH_SHORT).show();
                         reserveItem.setEnabled(false);
+
+                         Intent intent = new Intent(getApplicationContext(), ReservedItemViewActivity.class);
+                         intent.putExtra("clickedItem", marketItem);
+                         startActivity(intent);
                 }
-            }, 800);
+            }, 400);
+
         }
     }
 
