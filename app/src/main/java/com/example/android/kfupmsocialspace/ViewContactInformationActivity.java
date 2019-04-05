@@ -48,44 +48,31 @@ public class ViewContactInformationActivity extends AppCompatActivity {
         //to check from where the item recieved
         boolean resever = data.getBoolean("showReseverinfo");
 
-        if(!resever) {
+        if (resever) {
             userPresenter.getUserObject(marketItem.getOwnerID());
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    user = userPresenter.getUserModel();
 
-                    name.setText(user.getUserFullName());
-                    email.setText(user.getEmail());
-
-                    if (user.getPhone() != null)
-                        Phone.setText(user.getPhone());
-                    else
-                        Phone.setText("user has no phone number");
-
-                }
-            }, 400);
 
         } else {
             marketItemPresenter.getReserverID(marketItem);
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    user = userPresenter.getUserModel();
-
-                    name.setText(user.getUserFullName());
-                    email.setText(user.getEmail());
-
-                    if (user.getPhone() != null)
-                        Phone.setText(user.getPhone());
-                    else
-                        Phone.setText("user has no phone number");
-
-                }
-            }, 600);
-
+            user = userPresenter.getUserModel();
         }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                user = userPresenter.getUserModel();
+
+                name.setText(user.getUserFullName());
+                email.setText(user.getEmail());
+
+                if (user.getPhone() != null)
+                    Phone.setText(user.getPhone());
+                else
+                    Phone.setText("user has no phone number");
+
+            }
+        }, 400);
     }
 
 
