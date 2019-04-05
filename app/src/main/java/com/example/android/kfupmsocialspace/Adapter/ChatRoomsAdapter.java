@@ -2,11 +2,9 @@ package com.example.android.kfupmsocialspace.Adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.android.kfupmsocialspace.R;
@@ -20,11 +18,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class ChatRoomsAdapter extends RecyclerView.Adapter<ChatRoomsAdapter.ChatRoomsViewHolder>{
+public class ChatRoomsAdapter extends RecyclerView.Adapter<ChatRoomsAdapter.ChatRoomsViewHolder> {
 
     private List<ChatRoom> chatRoomsList;
     private Message message;
-    private OnItemClickListener  listener;
+    private OnItemClickListener listener;
 
 
     //here for the now
@@ -57,12 +55,31 @@ public class ChatRoomsAdapter extends RecyclerView.Adapter<ChatRoomsAdapter.Chat
 
     }
 
+    @Override
+    public int getItemCount() {
+        return chatRoomsList.size();
+    }
 
-     class ChatRoomsViewHolder extends RecyclerView.ViewHolder {
+    // a method will be explained later
+    public void SetOnItemClickListener(OnItemClickListener listener) {
 
-         TextView roomName, senderName, lastMessage, lastMessageTime;
+        this.listener = listener;
 
-         ChatRoomsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+    }
+
+
+    /// interface for handling the click event on recycle view
+    public interface OnItemClickListener {
+
+        void onItemClick(int position);
+
+    }
+
+    class ChatRoomsViewHolder extends RecyclerView.ViewHolder {
+
+        TextView roomName, senderName, lastMessage, lastMessageTime;
+
+        ChatRoomsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
 
             roomName = itemView.findViewById(R.id.chat_name);
@@ -73,84 +90,60 @@ public class ChatRoomsAdapter extends RecyclerView.Adapter<ChatRoomsAdapter.Chat
             lastMessageTime = itemView.findViewById(R.id.last_message_time);
 
 
-             //on the click event
-             itemView.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
+            //on the click event
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                     if (listener != null) {
+                    if (listener != null) {
 
-                         int position = getAdapterPosition();
+                        int position = getAdapterPosition();
 
-                         if (position != RecyclerView.NO_POSITION) {
+                        if (position != RecyclerView.NO_POSITION) {
 
-                             listener.onItemClick(position);
+                            listener.onItemClick(position);
 
-                         }
-                     }
-                 }
-             });
+                        }
+                    }
+                }
+            });
 
         }
 
 
+        //get the last message  this could somewhere else (chat presenter)
+        void lastMessage(String chatRoomName) {
 
+            dbRef.child(chatRoomName).orderByKey().limitToLast(1).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-         //get the last message  this could somewhere else (chat presenter)
-         void lastMessage(String chatRoomName){
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
 
-             dbRef.child(chatRoomName).orderByKey().limitToLast(1).addValueEventListener(new ValueEventListener() {
-                 @Override
-                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        message = data.getValue(Message.class);
 
-                     for(DataSnapshot data : dataSnapshot.getChildren()){
+                    }
 
-                         message = data.getValue(Message.class);
-
-                     }
-
-                     senderName.setText(message.getSenderName());
-                     if(message.getType().equals("text"))
+                    senderName.setText(message.getSenderName());
+                    if (message.getType().equals("text"))
                         lastMessage.setText(message.getMessage());
-                     else
-                         lastMessage.setText("Media");
-                     lastMessageTime.setText(message.getTimestamp());
+                    else
+                        lastMessage.setText("Media");
+                    lastMessageTime.setText(message.getTimestamp());
 
 
-                 }
+                }
 
-                 @Override
-                 public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                 }
-             });
+                }
+            });
 
-         }
+        }
 
-
-
-     }
-
-    @Override
-    public int getItemCount() {
-        return chatRoomsList.size();
-    }
-
-
-    /// interface for handling the click event on recycle view
-    public interface OnItemClickListener{
-
-        void onItemClick(int position);
 
     }
-
-    // a method will be explained later
-    public void SetOnItemClickListener(OnItemClickListener listener){
-
-        this.listener = listener;
-
-    }
-
 
 
 }

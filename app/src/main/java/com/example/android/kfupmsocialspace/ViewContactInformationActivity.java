@@ -14,13 +14,10 @@ import com.example.android.kfupmsocialspace.presenter.userPresenter;
 public class ViewContactInformationActivity extends AppCompatActivity {
 
 
-
+    boolean resever = false;
     private TextView name, email, Phone;
     private MarketItem marketItem;
     private User user;
-
-    boolean resever = false;
-
     private userPresenter userPresenter;
     private MarketItemPresenter marketItemPresenter;
 
@@ -34,12 +31,11 @@ public class ViewContactInformationActivity extends AppCompatActivity {
         marketItemPresenter = new MarketItemPresenter();
 
 
-
         //intilization
 
         name = findViewById(R.id.contact_information_student_name);
-        email =findViewById(R.id.contact_information_student_email);
-        Phone =findViewById(R.id.contact_information_student_phone);
+        email = findViewById(R.id.contact_information_student_email);
+        Phone = findViewById(R.id.contact_information_student_phone);
 
         //recive data
         Bundle data = getIntent().getExtras();
@@ -79,8 +75,6 @@ public class ViewContactInformationActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-
 
 
     }

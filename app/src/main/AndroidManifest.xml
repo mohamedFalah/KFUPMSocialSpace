@@ -115,7 +115,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".chat_label_info_fragment" /> <!-- https://stackoverflow.com/questions/28100472/how-can-i-create-an-android-activity-with-back-arrow-as-shown-in-the-picture -->
+        <!-- https://stackoverflow.com/questions/28100472/how-can-i-create-an-android-activity-with-back-arrow-as-shown-in-the-picture -->
         <activity
             android:name=".AddCourseActivity"
             android:parentActivityName=".MainActivity" />
