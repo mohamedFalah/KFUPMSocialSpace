@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".CategoryBlogsViewActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="matrix"
+        android:src="@drawable/bg" />
+
     <!--        android:layout_above="@id/floating_btn_add_market_item"-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_blogs_list"

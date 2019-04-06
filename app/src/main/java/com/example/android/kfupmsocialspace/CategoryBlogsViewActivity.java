@@ -2,19 +2,15 @@ package com.example.android.kfupmsocialspace;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.MenuItem;
+import android.view.Menu;
 import android.view.View;
 
 import com.example.android.kfupmsocialspace.Adapter.BlogRecyclerViewAdapter;
 import com.example.android.kfupmsocialspace.model.Blog;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,8 +43,7 @@ public class CategoryBlogsViewActivity extends AppCompatActivity implements View
         Intent intent = getIntent();
         Category = intent.getStringExtra("clickedCategory");
 
-        Log.i("category", "the firebase category is "+ Category);
-
+//        Log.i("category", "the firebase category is "+ Category);
 
         categoryBlogs = findViewById(R.id.recycler_blogs_list);
         blogsAdapter = new BlogRecyclerViewAdapter(this, listOfBlogs);
@@ -67,11 +62,10 @@ public class CategoryBlogsViewActivity extends AppCompatActivity implements View
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Blog blog = ds.getValue(Blog.class);
                     listOfBlogs.add(blog);
                 }
-
 
 
                 blogsAdapter.notifyDataSetChanged();
@@ -88,6 +82,14 @@ public class CategoryBlogsViewActivity extends AppCompatActivity implements View
 
     }
 
+    //This part adds the three dots on the top right
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.app_files_menu, menu);
+        return true;
+    }
+
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(this, AddNewBlogActivity.class);
@@ -100,14 +102,14 @@ public class CategoryBlogsViewActivity extends AppCompatActivity implements View
         finish();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onBackPressed();
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                break;
-        }
-        return true;
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        super.onBackPressed();
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                this.finish();
+//                break;
+//        }
+//        return true;
+//    }
 }

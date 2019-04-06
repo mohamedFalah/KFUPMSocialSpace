@@ -17,7 +17,7 @@ import com.example.android.kfupmsocialspace.model.MarketItem;
 import com.example.android.kfupmsocialspace.presenter.MarketItemPresenter;
 import com.squareup.picasso.Picasso;
 
-public class ReservedItemViewActivity extends AppCompatActivity implements MarketitemContract.IView {
+public class BasketItemViewActivity extends AppCompatActivity implements MarketitemContract.IView {
 
 
     private ImageView itemImage;
@@ -33,7 +33,7 @@ public class ReservedItemViewActivity extends AppCompatActivity implements Marke
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reserved_item_view);
+        setContentView(R.layout.activity_basket_item_view);
 
 
         //presnter
@@ -91,12 +91,12 @@ public class ReservedItemViewActivity extends AppCompatActivity implements Marke
             public void onClick(View v) {
 
                 marketItemPresenter.CancelReservation(marketItem.getItemID());
-                Toast.makeText(ReservedItemViewActivity.this, "Reservation Cancelled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BasketItemViewActivity.this, "Reservation Cancelled", Toast.LENGTH_SHORT).show();
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent intent = new Intent(getApplicationContext(), ReservedItemsActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), BasketItemsActivity.class);
                         startActivity(intent);
                     }
                 }, 400);

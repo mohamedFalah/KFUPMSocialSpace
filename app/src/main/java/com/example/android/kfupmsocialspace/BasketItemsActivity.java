@@ -20,7 +20,7 @@ import com.example.android.kfupmsocialspace.presenter.userPresenter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservedItemsActivity extends AppCompatActivity implements MarketitemContract.IView {
+public class BasketItemsActivity extends AppCompatActivity implements MarketitemContract.IView {
 
 
     List<MarketItem> ReservedItemsList = new ArrayList<>();
@@ -33,7 +33,7 @@ public class ReservedItemsActivity extends AppCompatActivity implements Marketit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reserved_items);
+        setContentView(R.layout.activity_basket_items);
 
 
         marketItemPresenter = new MarketItemPresenter(this);
@@ -52,7 +52,7 @@ public class ReservedItemsActivity extends AppCompatActivity implements Marketit
             public void onItemClick(int position) {
 
                 MarketItem marketItem = ReservedItemsList.get(position);
-                Intent intent = new Intent(getApplicationContext(), ReservedItemViewActivity.class);
+                Intent intent = new Intent(getApplicationContext(), BasketItemViewActivity.class);
                 intent.putExtra("clickedItem", marketItem);
                 startActivity(intent);
 

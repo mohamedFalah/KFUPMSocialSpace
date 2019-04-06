@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.android.kfupmsocialspace.ImageZoomActivity;
@@ -68,6 +68,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         } else {
             holder.senderMessageHolder.setVisibility(View.INVISIBLE);
 
+            //https://stackoverflow.com/questions/27743339/strange-behaviour-of-images-in-recyclerview
+            holder.senderImage.setImageDrawable(null);
+
+
             if (message.getType().equals("text")) {
 
                 textMessage(holder, message, "receiver");
@@ -79,6 +83,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             } else if (message.getType().equals("document")) {
 
                 DocumentMessage(holder, message, "receiver");
+            } else {
+                //https://stackoverflow.com/questions/27743339/strange-behaviour-of-images-in-recyclerview
+                holder.receiverImage.setImageDrawable(null);
             }
         }
     }
@@ -137,7 +144,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 holder.senderMessageTime.setText(message.getTimestamp());
                 holder.senderDoc.setVisibility(View.GONE);
                 holder.senderImage.setVisibility(View.VISIBLE);
-                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.senderImage);
+                Picasso.with(context).load(Uri.parse(message.getMedia())).into(holder.senderImage);
                 holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
 
                 holder.senderImage.setOnClickListener(new View.OnClickListener() {
@@ -162,7 +169,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 holder.receiverDoc.setVisibility(View.GONE);
                 holder.receiverMessageTime.setText(message.getTimestamp());
                 holder.receiverImage.setVisibility(View.VISIBLE);
-                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.receiverImage);
+                Picasso.with(context).load(Uri.parse(message.getMedia())).into(holder.receiverImage);
 
                 holder.receiverImage.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -226,7 +233,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public class MessageViewHolder extends RecyclerView.ViewHolder {
 
         public TextView senderMessage, senderMessageTime, receiverName, receiverMessage, receiverMessageTime;
-        public LinearLayout senderMessageHolder, receiverMessageHolder;
+        public RelativeLayout senderMessageHolder, receiverMessageHolder;
         public ImageView senderImage, receiverImage;
         public Button senderDoc, receiverDoc;
 
