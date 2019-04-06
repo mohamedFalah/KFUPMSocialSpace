@@ -14,13 +14,10 @@ import com.example.android.kfupmsocialspace.presenter.userPresenter;
 public class ViewContactInformationActivity extends AppCompatActivity {
 
 
-
+    boolean resever = false;
     private TextView name, email, Phone;
     private MarketItem marketItem;
     private User user;
-
-    boolean resever = false;
-
     private userPresenter userPresenter;
     private MarketItemPresenter marketItemPresenter;
 
@@ -34,12 +31,11 @@ public class ViewContactInformationActivity extends AppCompatActivity {
         marketItemPresenter = new MarketItemPresenter();
 
 
-
         //intilization
 
         name = findViewById(R.id.contact_information_student_name);
-        email =findViewById(R.id.contact_information_student_email);
-        Phone =findViewById(R.id.contact_information_student_phone);
+        email = findViewById(R.id.contact_information_student_email);
+        Phone = findViewById(R.id.contact_information_student_phone);
 
         //recive data
         Bundle data = getIntent().getExtras();
@@ -48,52 +44,37 @@ public class ViewContactInformationActivity extends AppCompatActivity {
         //to check from where the item recieved
         boolean resever = data.getBoolean("showReseverinfo");
 
-        if(!resever) {
+        if (resever) {
             userPresenter.getUserObject(marketItem.getOwnerID());
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    user = userPresenter.getUserModel();
 
-                    name.setText(user.getUserFullName());
-                    email.setText(user.getEmail());
-
-                    if (user.getPhone() != null)
-                        Phone.setText(user.getPhone());
-                    else
-                        Phone.setText("user has no phone number");
-
-                }
-            }, 400);
 
         } else {
             marketItemPresenter.getReserverID(marketItem);
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    user = userPresenter.getUserModel();
-
-                    name.setText(user.getUserFullName());
-                    email.setText(user.getEmail());
-
-                    if (user.getPhone() != null)
-                        Phone.setText(user.getPhone());
-                    else
-                        Phone.setText("user has no phone number");
-
-                }
-            }, 600);
-
+            user = userPresenter.getUserModel();
         }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                user = userPresenter.getUserModel();
+
+                name.setText(user.getUserFullName());
+                email.setText(user.getEmail());
+
+                if (user.getPhone() != null)
+                    Phone.setText(user.getPhone());
+                else
+                    Phone.setText("user has no phone number");
+
+            }
+        }, 400);
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
-
-
 
 
     }
