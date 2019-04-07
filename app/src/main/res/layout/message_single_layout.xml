@@ -33,6 +33,7 @@
             android:visibility="gone" />
 
         <TextView
+            android:textIsSelectable="true"
             android:id="@+id/receiver_student_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,6 +87,7 @@
             android:visibility="gone" />
 
         <TextView
+            android:textIsSelectable="true"
             android:id="@+id/receiver_instructor_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -139,6 +141,7 @@
             android:visibility="gone" />
 
         <TextView
+            android:textIsSelectable="true"
             android:id="@+id/sender_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
