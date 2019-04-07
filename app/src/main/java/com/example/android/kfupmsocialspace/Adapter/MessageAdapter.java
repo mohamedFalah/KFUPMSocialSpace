@@ -48,45 +48,47 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         String fromUserID = message.getSenderID();
 
-
-        holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
-
         if (fromUserID != null && fromUserID.equals(messageSenderID)) {
-            holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
-            if (message.getType().equals("text")) {
+            holder.receiverMessageHolder.setVisibility(View.GONE);
+            holder.receiverImage.setImageDrawable(null);
+            holder.receiverDoc.setVisibility(View.GONE);
 
-                textMessage(holder, message, "sender");
+            switch (message.getType()) {
+                case "text":
+                    textMessage(holder, message, "sender");
+                    break;
 
-            } else if (message.getType().equals("image")) {
+                case "image":
+                    ImageMessage(holder, message, "sender");
+                    break;
 
-                ImageMessage(holder, message, "sender");
-
-            } else if (message.getType().equals("document")) {
-
-                DocumentMessage(holder, message, "sender");
+                case "document":
+                    DocumentMessage(holder, message, "sender");
+                    break;
             }
         } else {
-            holder.senderMessageHolder.setVisibility(View.INVISIBLE);
+            holder.senderMessageHolder.setVisibility(View.GONE);
 
             //https://stackoverflow.com/questions/27743339/strange-behaviour-of-images-in-recyclerview
             holder.senderImage.setImageDrawable(null);
 
+            switch (message.getType()) {
+                case "text":
+                    textMessage(holder, message, "receiver");
+                    break;
 
-            if (message.getType().equals("text")) {
+                case "image":
+                    ImageMessage(holder, message, "receiver");
+                    break;
 
-                textMessage(holder, message, "receiver");
-
-            } else if (message.getType().equals("image")) {
-
-                ImageMessage(holder, message, "receiver");
-
-            } else if (message.getType().equals("document")) {
-
-                DocumentMessage(holder, message, "receiver");
-            } else {
-                //https://stackoverflow.com/questions/27743339/strange-behaviour-of-images-in-recyclerview
-                holder.receiverImage.setImageDrawable(null);
+                case "document":
+                    DocumentMessage(holder, message, "receiver");
+                    break;
             }
+
+            holder.senderMessageHolder.setVisibility(View.GONE);
+            holder.senderImage.setImageDrawable(null);
+            holder.senderDoc.setVisibility(View.GONE);
         }
     }
 

@@ -57,7 +57,66 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/receiver_message"
-            android:layout_alignRight="@+id/receiver_message"
+            android:layout_alignEnd="@+id/receiver_message"
+            android:maxLines="1"
+            android:text="time" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/instructor_message_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/receiver_message_holder"
+        android:background="@drawable/instructor_message"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="4dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/instructor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="dummy text"
+            android:textColor="@android:color/holo_green_light"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/instructor_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/instructor_name"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/instructor_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/instructor_image"
+            android:text="dummy text"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/instructor_Doc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/instructor_message"
+            android:text="View Doc"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/instructor_message_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/instructor_message"
+            android:layout_alignRight="@+id/instructor_message"
             android:text="time" />
 
 
@@ -106,8 +165,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/sender_message"
-            android:layout_alignRight="@id/sender_message"
+            android:layout_alignEnd="@id/sender_message"
             android:layout_gravity="end"
+            android:maxLines="1"
             android:text="time" />
 
     </RelativeLayout>
