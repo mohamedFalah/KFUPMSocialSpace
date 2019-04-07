@@ -5,149 +5,136 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
 
-    <!--https://stackoverflow.com/questions/39168252/using-selectableitembackground-with-a-white-background-color-->
-    <!--For the foreground att-->
-    <RelativeLayout
+    <!--The students message Layout-->
+    <LinearLayout
         android:id="@+id/receiver_message_holder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/received_message"
         android:clickable="true"
+        android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
-        android:padding="4dp">
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <TextView
-            android:id="@+id/receiver_name"
+            android:id="@+id/receiver_student_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:text="dummy text"
             android:textColor="@android:color/holo_green_light"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/receiver_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/receiver_name"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
+            android:id="@+id/receiver_student_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/receiver_message"
+            android:id="@+id/receiver_student_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/receiver_image"
             android:text="dummy text"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/receiver_Doc"
+            android:id="@+id/receiver_student_Doc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/receiver_message"
             android:text="View Doc"
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/receiver_message_time"
+            android:id="@+id/receiver_student_message_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/receiver_message"
-            android:layout_alignEnd="@+id/receiver_message"
-            android:maxLines="1"
+            android:layout_gravity="end"
             android:text="time" />
 
+    </LinearLayout>
 
-    </RelativeLayout>
-
-    <RelativeLayout
+    <!--The Instructor message Layout-->
+    <!--visibility is gone by default-->
+    <LinearLayout
         android:id="@+id/instructor_message_holder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/receiver_message_holder"
-        android:background="@drawable/instructor_message"
+        android:layout_below="@+id/receiver_message_holder"
+        android:background="@drawable/received_message"
         android:clickable="true"
         android:foreground="?attr/selectableItemBackground"
-        android:padding="4dp"
+        android:orientation="vertical"
+        android:padding="8dp"
         android:visibility="gone">
 
         <TextView
             android:id="@+id/instructor_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:text="dummy text"
             android:textColor="@android:color/holo_green_light"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/instructor_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/instructor_name"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
+            android:id="@+id/receiver_instructor_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/instructor_message"
+            android:id="@+id/receiver_instructor_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/instructor_image"
             android:text="dummy text"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/instructor_Doc"
+            android:id="@+id/receiver_instructor_Doc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/instructor_message"
             android:text="View Doc"
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/instructor_message_time"
+            android:id="@+id/receiver_instructor_message_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/instructor_message"
-            android:layout_alignRight="@+id/instructor_message"
+            android:layout_gravity="end"
             android:text="time" />
 
+    </LinearLayout>
 
-    </RelativeLayout>
-
-    <RelativeLayout
+    <!--The user(you/me) message Layout-->
+    <LinearLayout
         android:id="@+id/sender_message_holder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:background="@drawable/sender_message"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         android:orientation="vertical"
-        android:padding="4dp">
+        android:padding="8dp">
 
         <ImageView
             android:id="@+id/sender_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:contentDescription="TODO"
+            android:scaleType="centerCrop"
             android:visibility="gone" />
 
         <Button
             android:id="@+id/sender_Doc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/sender_image"
             android:text="View Doc"
             android:visibility="gone" />
 
@@ -155,7 +142,6 @@
             android:id="@+id/sender_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/sender_Doc"
             android:text="dummy text"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
@@ -164,12 +150,9 @@
             android:id="@+id/sender_message_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/sender_message"
-            android:layout_alignEnd="@id/sender_message"
             android:layout_gravity="end"
-            android:maxLines="1"
             android:text="time" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>
