@@ -3,18 +3,15 @@
     android:id="@+id/card_view_chat"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
-    android:clickable="true">
+
+    android:clickable="true"
+    android:focusable="true">
 
     <RelativeLayout
         android:id="@+id/enter_chat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:addStatesFromChildren="true"
-        android:background="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:duplicateParentState="true"
-        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
         android:padding="8dp">
 
         <LinearLayout
@@ -24,8 +21,8 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Medium"
                 android:id="@+id/chat_name"
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxWidth="?attr/actionBarSize"
@@ -39,8 +36,8 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/TextAppearance.AppCompat.Small"
                     android:id="@+id/last_sender_name"
+                    style="@style/TextAppearance.AppCompat.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Last Sender Name" />
@@ -51,8 +48,8 @@
                     android:text=": " />
 
                 <TextView
-                    style="@style/TextAppearance.AppCompat.Small"
                     android:id="@+id/message_string"
+                    style="@style/TextAppearance.AppCompat.Small"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxWidth="?attr/actionBarSize"

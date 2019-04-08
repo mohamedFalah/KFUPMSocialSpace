@@ -8,13 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.example.android.kfupmsocialspace.Adapter.ChatRoomsAdapter;
 import com.example.android.kfupmsocialspace.model.ChatRoom;
@@ -24,12 +22,12 @@ import java.util.List;
 
 public class ChatsFragment extends Fragment implements View.OnClickListener {
 
-   // private TextView senderName, lastMessage, lastMessageTime;
+    // private TextView senderName, lastMessage, lastMessageTime;
 
     private final List<ChatRoom> chatRooms = new ArrayList<>();
+    GridLayoutManager gridLayoutManager;
     private ChatRoomsAdapter chatRoomsAdapter;
     private RecyclerView chatRoomsList;
-    GridLayoutManager gridLayoutManager;
     private LinearLayoutManager linearLayoutManager;
 
 
@@ -53,10 +51,9 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
-       RelativeLayout ongoing = view.findViewById(R.id.enter_chat);
 
         ///add one Room
-        ChatRoom section2 = new ChatRoom("1","section2","2");
+        ChatRoom section2 = new ChatRoom("1", "section2", "2");
         chatRooms.add(section2);
 
         chatRoomsList = view.findViewById(R.id.courses_chats_recyclerview);
@@ -69,24 +66,15 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
 
 
         //click event
-        chatRoomsAdapter.SetOnItemClickListener(new ChatRoomsAdapter.OnItemClickListener(){
+        chatRoomsAdapter.SetOnItemClickListener(new ChatRoomsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 //will be used later
                 //ChatRoom chatRoom = chatRooms.get(position);
 
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
-                Log.i("hbihbihbhuby uhbhb"," here");
                 startActivity(intent);
 
-            }
-        });
-
-
-        ongoing.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ChatActivity.class);
-                startActivity(intent);
             }
         });
     }

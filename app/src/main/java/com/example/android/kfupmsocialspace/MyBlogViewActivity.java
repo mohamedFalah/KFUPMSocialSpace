@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-public class ReservedItemViewActivity extends AppCompatActivity {
+public class MyBlogViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reserved_item_view);
+        setContentView(R.layout.activity_my_blog_view);
     }
 
     @Override

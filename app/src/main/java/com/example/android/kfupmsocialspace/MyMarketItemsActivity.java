@@ -16,7 +16,7 @@ public class MyMarketItemsActivity extends AppCompatActivity {
 
         Button myUnreservedItemsButton = findViewById(R.id.my_placed_items_button);
         Button myReservedItems = findViewById(R.id.my_reserved_items_button);
-        Button reservedItems = findViewById(R.id.reserved_item_button);
+        Button reservedItems = findViewById(R.id.basket_item_button);
 
         myUnreservedItemsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +37,7 @@ public class MyMarketItemsActivity extends AppCompatActivity {
         reservedItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), ReservedItemsActivity.class);
+                Intent intent = new Intent(getBaseContext(), BasketItemsActivity.class);
                 startActivity(intent);
             }
         });

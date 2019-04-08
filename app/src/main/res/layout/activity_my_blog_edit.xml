@@ -8,11 +8,11 @@
     android:background="@drawable/bg"
     android:fillViewport="true"
     android:scrollbarStyle="outsideInset"
-    tools:context=".AddNewBlogActivity">
+    tools:context=".MyBlogEditActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"
@@ -104,7 +104,7 @@
             app:layout_constraintVertical_bias="1.0">
 
             <Button
-                android:id="@+id/add_blog"
+                android:id="@+id/save_blog_changes"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Add"
+                android:text="Save Changes"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

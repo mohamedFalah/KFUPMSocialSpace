@@ -21,7 +21,7 @@
             android:layout_alignBottom="@id/item_image_id"
             android:layout_centerHorizontal="true"
             android:layout_margin="8dp"
-            android:background="@drawable/fade_in_black">
+            android:background="@drawable/fade_in">
 
             <TextView
                 android:id="@+id/categoryName"

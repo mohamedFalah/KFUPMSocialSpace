@@ -1,5 +1,6 @@
 package com.example.android.kfupmsocialspace;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,7 @@ public class MyReservedItemsActivity extends AppCompatActivity implements Market
     MarketItemPresenter marketItemPresenter;
     userPresenter userPresenter;
     private RecyclerView MyReservedItems;
+
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference reservationRef = database.getReference("ReservedItems");
     private DatabaseReference marketItemsRef = database.getReference("Market Item");
@@ -48,6 +50,19 @@ public class MyReservedItemsActivity extends AppCompatActivity implements Market
         MyReservedItems.setAdapter(myReservedItemsAdapter);
         myReservedItemsAdapter.notifyDataSetChanged();
 
+
+        myReservedItemsAdapter.SetOnItemClickListener(new MarketRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+                MarketItem marketItem = myReservedItemsList.get(position);
+                Intent intent = new Intent(getApplicationContext(), MyReservedItemViewActivity.class);
+                intent.putExtra("clickedItem", marketItem);
+                startActivity(intent);
+
+            }
+        });
+
     }
 
 
@@ -55,12 +70,13 @@ public class MyReservedItemsActivity extends AppCompatActivity implements Market
     public void onStart() {
         super.onStart();
 
-        marketItemPresenter.myReservedItems();
+        marketItemPresenter.MyItemsReserved();
 
+        myReservedItemsList.clear();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                myReservedItemsList.addAll(marketItemPresenter.myReservedItemsList);
+                myReservedItemsList.addAll(marketItemPresenter.MyItemsList);
                 Log.i("items", "kllkjlkjlkjljlkjlkjlkj myitems acti" + myReservedItemsList.size());
                 myReservedItemsAdapter.notifyDataSetChanged();
 

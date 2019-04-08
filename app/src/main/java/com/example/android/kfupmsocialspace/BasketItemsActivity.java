@@ -20,81 +20,80 @@ import com.example.android.kfupmsocialspace.presenter.userPresenter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyUnreservedItemsActivity extends AppCompatActivity implements MarketitemContract.IView {
+public class BasketItemsActivity extends AppCompatActivity implements MarketitemContract.IView {
 
 
-    List<MarketItem> MyItemsList = new ArrayList<>();
-    MarketRecyclerViewAdapter myItemsAdapter;
+    List<MarketItem> ReservedItemsList = new ArrayList<>();
+    MarketRecyclerViewAdapter ReservedItemsAdapter;
     GridLayoutManager gridLayoutManager;
     MarketItemPresenter marketItemPresenter;
     userPresenter userPresenter;
-    private RecyclerView MyItems;
+    private RecyclerView ReservedItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_unreserved_items);
+        setContentView(R.layout.activity_basket_items);
 
 
         marketItemPresenter = new MarketItemPresenter(this);
         userPresenter = new userPresenter();
 
-        MyItems = findViewById(R.id.my_unreserved_items_recyclerview);
-        myItemsAdapter = new MarketRecyclerViewAdapter(MyItemsList, this);
+        ReservedItems = findViewById(R.id.reserved_items_recyclerview);
+        ReservedItemsAdapter = new MarketRecyclerViewAdapter(ReservedItemsList, this);
         gridLayoutManager = new GridLayoutManager(this, 2);
-        MyItems.setLayoutManager(gridLayoutManager);
-        MyItems.setAdapter(myItemsAdapter);
-        myItemsAdapter.notifyDataSetChanged();
+        ReservedItems.setLayoutManager(gridLayoutManager);
+        ReservedItems.setAdapter(ReservedItemsAdapter);
+        ReservedItemsAdapter.notifyDataSetChanged();
 
-        myItemsAdapter.SetOnItemClickListener(new MarketRecyclerViewAdapter.OnItemClickListener() {
+
+        ReservedItemsAdapter.SetOnItemClickListener(new MarketRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
 
-                MarketItem marketItem = MyItemsList.get(position);
-                Intent intent = new Intent(getApplicationContext(), MyMarketItemEditActivity.class);
+                MarketItem marketItem = ReservedItemsList.get(position);
+                Intent intent = new Intent(getApplicationContext(), BasketItemViewActivity.class);
                 intent.putExtra("clickedItem", marketItem);
                 startActivity(intent);
 
             }
         });
 
+
+
     }
 
 
     @Override
-    public void onStart() {
+    protected void onStart() {
         super.onStart();
 
-        MyItemsList.clear();
-        marketItemPresenter.MyItems();
+
+
+        marketItemPresenter.ReservedItems();
+
+        ReservedItemsList.clear();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                MyItemsList.addAll(marketItemPresenter.MyItemsList);
-                Log.i("items", "kllkjlkjlkjljlkjlkjlkj myitems acti" + MyItemsList.size());
-                myItemsAdapter.notifyDataSetChanged();
+                ReservedItemsList.addAll(marketItemPresenter.myReservedItemsList);
+                Log.i("items", "kllkjlkjlkjljlkjlkjlkj myitems acti" + ReservedItemsList.size());
+                ReservedItemsAdapter.notifyDataSetChanged();
 
-                if (MyItemsList.size() == 0) {
+                if (ReservedItemsList.size() == 0) {
                     //No items
-                    TextView myView = findViewById(R.id.no_unreserved_items_textview);
-//                     double size = MyItemsList.size();
-//                     myView.setText(size + "");
+                    TextView myView = findViewById(R.id.no_reserved_items_textview);
                     myView.setVisibility(View.VISIBLE);
                 }
+
             }
-        }, 400);
+        }, 900);
 
 
-    }
 
 
-    //not used funtions
-    @Override
-    public void progressBarValue(int progress) {
-    }
 
-    @Override
-    public void reservationStatus(boolean status) {
     }
 
     @Override
@@ -112,5 +111,15 @@ public class MyUnreservedItemsActivity extends AppCompatActivity implements Mark
     public void onBackPressed() {
         super.onBackPressed();
         this.finish();
+    }
+
+    @Override
+    public void progressBarValue(int progress) {
+
+    }
+
+    @Override
+    public void reservationStatus(boolean status) {
+
     }
 }

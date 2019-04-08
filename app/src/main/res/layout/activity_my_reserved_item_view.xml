@@ -130,7 +130,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="0.5"
-                android:text="Remove reservation"
+                android:text="Re-list the Item"
                 android:textAllCaps="false" />
 
             <Button
