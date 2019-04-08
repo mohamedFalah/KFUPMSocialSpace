@@ -36,7 +36,7 @@ public class InstructorMain extends AppCompatActivity implements NavigationView.
             Fragment selectedFragment = null;
             switch (item.getItemId()) {
                 case (R.id.navigation_chats):
-                    selectedFragment = new ChatsFragment();
+                    selectedFragment = new instructor_chat_fragment();
                     break;
                 case (R.id.navigation_blogs):
                     selectedFragment = new BlogsFragment();

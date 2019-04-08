@@ -109,4 +109,5 @@
     <string name="title_news">News</string>
     <string name="courses_chats">Courses Chats</string>
     <string name="club_chat">Club Chat</string>
+    <string name="title_activity_instructor_add_section">Instructor_add_section</string>
 </resources>
