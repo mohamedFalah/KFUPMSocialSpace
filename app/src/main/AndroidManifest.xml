@@ -173,7 +173,8 @@
         </service>
 
         <activity android:name=".InstructorSignUp" />
-        <activity android:name=".InstructorMain" />
+        <activity android:name=".InstructorMain"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".instructorAddSection"
             android:label="Add section"

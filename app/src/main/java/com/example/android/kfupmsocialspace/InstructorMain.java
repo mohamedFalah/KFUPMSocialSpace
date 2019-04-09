@@ -115,7 +115,7 @@ public class InstructorMain extends AppCompatActivity implements NavigationView.
 
         //Since we removed the default action bar we have to tell the app to use the toolbar we created and select the 7th Toolbar
         //https://stackoverflow.com/questions/31096275/how-to-remove-app-title-from-toolbar
-        Toolbar toolbar = findViewById(R.id.instructor_toolBar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.instructor_toolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         //toolbar.setNavigationIcon(R.drawable.ic_toolbar);
