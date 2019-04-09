@@ -1,8 +1,11 @@
 package com.example.android.kfupmsocialspace;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class FilesActivity extends AppCompatActivity {
 
@@ -23,16 +26,20 @@ public class FilesActivity extends AppCompatActivity {
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        super.onBackPressed();
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-//                this.finish();
-//                break;
-//        }
-//        return true;
-//    }
+    // Handle action bar item clicks here.
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = null;
+        switch (item.getItemId()) {
+            case R.id.my_files:
+                intent = new Intent(this, MyFilesActivity.class);
+                break;
+        }
+        if (intent != null) {
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onBackPressed() {

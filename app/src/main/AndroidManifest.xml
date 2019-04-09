@@ -19,6 +19,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".MyFilesActivity"
+            android:label="@string/title_activity_utilities"
+            android:parentActivityName=".FilesActivity" />
+        <activity
             android:name=".ChatGroupFilesActivity"
             android:parentActivityName=".ChatGroupActivity" />
         <activity
@@ -29,8 +33,6 @@
             android:parentActivityName=".MyBlogsActivity" />
         <activity android:name=".ViewContactInformationActivity" />
         <activity android:name=".BasketItemViewActivity" />
-        <activity android:name=".ViewContactInformationActivity" />
-        <activity android:name=".ReservedItemViewActivity" />
         <activity
             android:name=".MyReservedItemViewActivity"
             android:parentActivityName=".MyReservedItemsActivity" />
@@ -173,11 +175,9 @@
         <activity android:name=".InstructorSignUp" />
         <activity android:name=".InstructorMain" />
         <activity
-            android:name=".Instructor_add_section"
-            android:label="@string/title_activity_instructor_add_section"
+            android:name=".instructorAddSection"
+            android:label="Add section"
             android:theme="@style/AppTheme" />
-        <activity android:name=".instructorAddSection" />
-        <activity android:name=".instructor_chat_fragment"></activity>
     </application>
 
 </manifest>
