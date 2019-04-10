@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
@@ -197,7 +199,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                     public void onClick(View v) {
                         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
                         CustomTabsIntent customTabsIntent = builder.build();
-                        customTabsIntent.launchUrl(context, Uri.parse(docUrl));
+                        String url= null;
+                        try {
+                            url = URLEncoder.encode(docUrl,"UTF-8");
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        customTabsIntent.launchUrl(context, Uri.parse("http://docs.google.com/gview?embedded=true&url="+url));
                     }
                 });
                 holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
@@ -214,7 +222,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                     public void onClick(View v) {
                         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
                         CustomTabsIntent customTabsIntent = builder.build();
-                        customTabsIntent.launchUrl(context, Uri.parse(docUrl));
+                        String url= null;
+                        try {
+                            url = URLEncoder.encode(docUrl,"UTF-8");
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        customTabsIntent.launchUrl(context, Uri.parse("http://docs.google.com/gview?embedded=true&url="+url));
                     }
                 });
                 holder.receiverMessageTime.setText(message.getTimestamp());
