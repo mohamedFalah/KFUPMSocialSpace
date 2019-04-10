@@ -46,7 +46,7 @@ public class AddCourseActivity extends AppCompatActivity implements RoomChatRequ
 
         departmentSpinner = findViewById(R.id.departments_spinner);
         departmentCoursesSpinner = findViewById(R.id.department_courses_spinner);
-        RequestButton = findViewById(R.id.request_button);
+        RequestButton = findViewById(R.id.create_button);
 
         RequestButton.setOnClickListener(this);
 
