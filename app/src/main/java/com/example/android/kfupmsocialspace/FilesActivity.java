@@ -1,8 +1,10 @@
 package com.example.android.kfupmsocialspace;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 
 public class FilesActivity extends AppCompatActivity {
@@ -13,15 +15,30 @@ public class FilesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_files);
     }
 
+    //Insert Code here
+
+
+    //This part adds the three dots on the top right
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onBackPressed();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.app_files_menu, menu);
+        return true;
+    }
+
+    // Handle action bar item clicks here.
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = null;
         switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
+            case R.id.my_files:
+                intent = new Intent(this, MyFilesActivity.class);
                 break;
         }
-        return true;
+        if (intent != null) {
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.android.kfupmsocialspace.ImageSize;
 import com.example.android.kfupmsocialspace.ImageZoomActivity;
 import com.example.android.kfupmsocialspace.R;
 import com.example.android.kfupmsocialspace.model.Message;
@@ -50,38 +51,47 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         String fromUserID = message.getSenderID();
 
-
-        holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
-
         if (fromUserID != null && fromUserID.equals(messageSenderID)) {
-            holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
-            if (message.getType().equals("text")) {
+            holder.receiverMessageHolder.setVisibility(View.GONE);
+            holder.receiverImage.setImageDrawable(null);
+            holder.receiverDoc.setVisibility(View.GONE);
 
-                textMessage(holder, message, "sender");
+            switch (message.getType()) {
+                case "text":
+                    textMessage(holder, message, "sender");
+                    break;
 
-            } else if (message.getType().equals("image")) {
+                case "image":
+                    ImageMessage(holder, message, "sender");
+                    break;
 
-                ImageMessage(holder, message, "sender");
-
-            } else if (message.getType().equals("document")) {
-
-                DocumentMessage(holder, message, "sender");
+                case "document":
+                    DocumentMessage(holder, message, "sender");
+                    break;
             }
         } else {
-            holder.senderMessageHolder.setVisibility(View.INVISIBLE);
+            holder.senderMessageHolder.setVisibility(View.GONE);
 
-            if (message.getType().equals("text")) {
+            //https://stackoverflow.com/questions/27743339/strange-behaviour-of-images-in-recyclerview
+            holder.senderImage.setImageDrawable(null);
 
-                textMessage(holder, message, "receiver");
+            switch (message.getType()) {
+                case "text":
+                    textMessage(holder, message, "receiver");
+                    break;
 
-            } else if (message.getType().equals("image")) {
+                case "image":
+                    ImageMessage(holder, message, "receiver");
+                    break;
 
-                ImageMessage(holder, message, "receiver");
-
-            } else if (message.getType().equals("document")) {
-
-                DocumentMessage(holder, message, "receiver");
+                case "document":
+                    DocumentMessage(holder, message, "receiver");
+                    break;
             }
+
+            holder.senderMessageHolder.setVisibility(View.GONE);
+            holder.senderImage.setImageDrawable(null);
+            holder.senderDoc.setVisibility(View.GONE);
         }
     }
 
@@ -100,7 +110,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         return userMessageList.size();
     }
 
-    public void textMessage(MessageViewHolder holder, Message message, String who) {
+    private void textMessage(MessageViewHolder holder, Message message, String who) {
 
         switch (who) {
 
@@ -130,16 +140,23 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     }
 
-    public void ImageMessage(MessageViewHolder holder, final Message message, String who) {
+    private void ImageMessage(MessageViewHolder holder, final Message message, String who) {
+        //This part here adjusts the ImageView Sizes.
+        //Can Change second parameter to ImageSize.getImageHeight()
+        LinearLayout.LayoutParams vp = new LinearLayout.LayoutParams(ImageSize.getImageWidth(), ImageSize.getImageHeight());
+
         switch (who) {
 
             case "sender":
+                holder.senderImage.setLayoutParams(vp);
+//                holder.senderImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
                 holder.senderMessageHolder.setVisibility(View.VISIBLE);
                 holder.senderMessage.setVisibility(View.INVISIBLE);
                 holder.senderMessageTime.setText(message.getTimestamp());
                 holder.senderDoc.setVisibility(View.GONE);
                 holder.senderImage.setVisibility(View.VISIBLE);
-                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.senderImage);
+                Picasso.with(context).load(Uri.parse(message.getMedia())).into(holder.senderImage);
                 holder.receiverMessageHolder.setVisibility(View.INVISIBLE);
 
                 holder.senderImage.setOnClickListener(new View.OnClickListener() {
@@ -155,16 +172,20 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                         context.startActivity(intent);
                     }
                 });
+
                 break;
 
             case "receiver":
+                holder.receiverImage.setLayoutParams(vp);
+                holder.receiverImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
                 holder.receiverMessageHolder.setVisibility(View.VISIBLE);
                 holder.receiverName.setText(message.getSenderName());
                 holder.receiverMessage.setVisibility(View.INVISIBLE);
                 holder.receiverDoc.setVisibility(View.GONE);
                 holder.receiverMessageTime.setText(message.getTimestamp());
                 holder.receiverImage.setVisibility(View.VISIBLE);
-                Picasso.with(context).load(Uri.parse(message.getMedia())).fit().centerCrop().into(holder.receiverImage);
+                Picasso.with(context).load(Uri.parse(message.getMedia())).into(holder.receiverImage);
 
                 holder.receiverImage.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -181,9 +202,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 });
                 break;
         }
+
     }
 
-    public void DocumentMessage(MessageViewHolder holder, Message message, String who) {
+    private void DocumentMessage(MessageViewHolder holder, Message message, String who) {
 
         final String docUrl = message.getMedia();
 
@@ -237,14 +259,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         }
     }
 
-    public class MessageViewHolder extends RecyclerView.ViewHolder {
+    class MessageViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView senderMessage, senderMessageTime, receiverName, receiverMessage, receiverMessageTime;
-        public LinearLayout senderMessageHolder, receiverMessageHolder;
-        public ImageView senderImage, receiverImage;
-        public Button senderDoc, receiverDoc;
+        TextView senderMessage, senderMessageTime, receiverName, receiverMessage, receiverMessageTime;
+        LinearLayout senderMessageHolder, receiverMessageHolder;
+        ImageView senderImage, receiverImage;
+        Button senderDoc, receiverDoc;
 
-        public MessageViewHolder(@NonNull View itemView) {
+        MessageViewHolder(@NonNull View itemView) {
             super(itemView);
 
             //sender
@@ -257,11 +279,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
             //reciever
             receiverMessageHolder = itemView.findViewById(R.id.receiver_message_holder);
-            receiverName = itemView.findViewById(R.id.receiver_name);
-            receiverMessage = itemView.findViewById(R.id.receiver_message);
-            receiverMessageTime = itemView.findViewById(R.id.receiver_message_time);
-            receiverImage = itemView.findViewById(R.id.receiver_image);
-            receiverDoc = itemView.findViewById(R.id.receiver_Doc);
+            receiverName = itemView.findViewById(R.id.receiver_student_name);
+            receiverMessage = itemView.findViewById(R.id.receiver_student_message);
+            receiverMessageTime = itemView.findViewById(R.id.receiver_student_message_time);
+            receiverImage = itemView.findViewById(R.id.receiver_student_image);
+            receiverDoc = itemView.findViewById(R.id.receiver_student_Doc);
         }
     }
 }

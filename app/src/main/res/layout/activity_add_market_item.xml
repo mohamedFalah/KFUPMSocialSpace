@@ -5,7 +5,7 @@
     style="@android:style/Widget.ScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_google_signin_btn_text_dark_default"
+    android:background="@drawable/bg"
     android:fillViewport="true"
     android:scrollbarStyle="outsideInset"
     android:visibility="visible"
@@ -70,13 +70,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
                     android:hint="e.g. 16"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:maxLength="4" />
 
                 <TextView
                     style="@style/TextAppearance.AppCompat.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(In Riyals)" />
+                    android:text="(In Saudi Riyals)" />
             </LinearLayout>
 
             <TextView

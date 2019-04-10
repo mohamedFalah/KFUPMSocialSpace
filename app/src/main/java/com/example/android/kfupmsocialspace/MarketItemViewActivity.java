@@ -4,12 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,7 +16,6 @@ import com.example.android.kfupmsocialspace.contract.MarketitemContract;
 import com.example.android.kfupmsocialspace.firebaseServices.FirebaseService;
 import com.example.android.kfupmsocialspace.model.MarketItem;
 import com.example.android.kfupmsocialspace.presenter.MarketItemPresenter;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
 
 //https://www.youtube.com/watch?v=SD2t75T5RdY
@@ -124,7 +120,7 @@ public class MarketItemViewActivity extends AppCompatActivity implements View.On
                         Toast.makeText(MarketItemViewActivity.this, "Item reserved", Toast.LENGTH_SHORT).show();
                         reserveItem.setEnabled(false);
 
-                         Intent intent = new Intent(getApplicationContext(), ReservedItemViewActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), BasketItemViewActivity.class);
                          intent.putExtra("clickedItem", marketItem);
                          startActivity(intent);
                 }

@@ -13,12 +13,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.Toast;
 
 import com.example.android.kfupmsocialspace.Adapter.CategoryAdapter;
-import com.example.android.kfupmsocialspace.Adapter.MarketRecyclerViewAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -63,7 +59,7 @@ public class BlogsFragment extends Fragment implements View.OnClickListener {
             public void onItemClick(int position) {
                 String categoryClicked = categoryList.get(position);
                 Intent intent = new Intent(getActivity(), CategoryBlogsViewActivity.class);
-                intent.putExtra("clickedCategory",categoryClicked );
+                intent.putExtra("clickedCategory", categoryClicked);
 
                 startActivity(intent);
             }
@@ -87,13 +83,13 @@ public class BlogsFragment extends Fragment implements View.OnClickListener {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     String category = ds.getKey();
                     categoryList.add(category);
-                    Log.i("happened", "this is done added " +category);
+                    Log.i("happened", "this is done added " + category);
                     Log.i("happened", "this is done added");
                 }
 
                 categoryAdapter.notifyDataSetChanged();
-                Log.i("happened", "this is done added"+ categoryList.size());
-                Log.i("happened", "this is done added "+ dataSnapshot.getChildrenCount());
+                Log.i("happened", "this is done added" + categoryList.size());
+                Log.i("happened", "this is done added " + dataSnapshot.getChildrenCount());
 
             }
 
@@ -114,7 +110,7 @@ public class BlogsFragment extends Fragment implements View.OnClickListener {
         menu.findItem(R.id.my_roommate_request).setVisible(false);
         menu.findItem(R.id.my_market_items).setVisible(false);
         menu.findItem(R.id.my_blogs).setVisible(true);
-        menu.findItem(R.id.blogs_search_top_bar_icon).setVisible(true);
+        menu.findItem(R.id.blogs_search_top_bar_icon).setVisible(false);
         menu.findItem(R.id.roommate_search_top_bar_icon).setVisible(false);
         menu.findItem(R.id.market_search_top_bar_icon).setVisible(false);
     }
