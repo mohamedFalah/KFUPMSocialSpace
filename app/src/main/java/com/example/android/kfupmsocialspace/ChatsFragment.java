@@ -3,7 +3,6 @@ package com.example.android.kfupmsocialspace;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,8 +35,10 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.chats_fragment, container, false);
-        FloatingActionButton fab = view.findViewById(R.id.floating_btn_add_course);
-        fab.setOnClickListener(this);
+        com.github.clans.fab.FloatingActionButton course_fab = view.findViewById(R.id.floating_btn_add_course);
+        com.github.clans.fab.FloatingActionButton chat_fab = view.findViewById(R.id.floating_btn_add_club);
+        course_fab.setOnClickListener(this);
+        chat_fab.setOnClickListener(this);
 
         setHasOptionsMenu(true);//Make sure you have this line of code.
 
@@ -46,7 +47,15 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(getContext(), AddCourseActivity.class);
+        Intent intent = null;
+        switch (view.getId()) {
+            case R.id.floating_btn_add_course:
+                intent = new Intent(getContext(), AddCourseActivity.class);
+                break;
+            case R.id.floating_btn_add_club:
+                intent = new Intent(getContext(), AddClubActivity.class);
+                break;
+        }
         startActivity(intent);
     }
 

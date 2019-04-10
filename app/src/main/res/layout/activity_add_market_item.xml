@@ -87,6 +87,7 @@
                 android:text="Category" />
 
             <Spinner
+                android:background="@android:drawable/btn_dropdown"
                 android:id="@+id/itemCategory"
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"

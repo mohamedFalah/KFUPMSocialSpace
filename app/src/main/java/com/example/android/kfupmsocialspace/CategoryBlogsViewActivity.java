@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.android.kfupmsocialspace.Adapter.BlogRecyclerViewAdapter;
@@ -102,14 +103,17 @@ public class CategoryBlogsViewActivity extends AppCompatActivity implements View
         finish();
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        super.onBackPressed();
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-//                this.finish();
-//                break;
-//        }
-//        return true;
-//    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onBackPressed();
+        switch (item.getItemId()) {
+            case R.id.blogs_search_top_bar_icon:
+                break;
+
+            case android.R.id.home:
+                this.finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

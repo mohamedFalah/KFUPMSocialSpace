@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -19,19 +18,37 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".MyRoommateRequestEditActivity"
+            android:parentActivityName=".MyPlacedRoommateRequestActivity"></activity>
+        <activity
+            android:name=".ViewRoommateContactInformationActivity"
+            android:parentActivityName=".MyRoommateRequestActivity" />
+        <activity
+            android:name=".MyPlacedRoommateRequestActivity"
+            android:parentActivityName=".MyRoommateRequestActivity" />
+        <activity
+            android:name=".AddClubActivity"
+            android:label="Request club chat"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MyFilesActivity"
-            android:label="@string/title_activity_utilities"
+            android:label="My Files"
             android:parentActivityName=".FilesActivity" />
         <activity
             android:name=".ChatGroupFilesActivity"
+            android:label="Chat Group"
             android:parentActivityName=".ChatGroupActivity" />
         <activity
             android:name=".MyBlogEditActivity"
+            android:label="Blog Edit"
             android:parentActivityName=".MyBlogViewActivity" />
         <activity
             android:name=".MyBlogViewActivity"
+            android:label="Blog View"
             android:parentActivityName=".MyBlogsActivity" />
-        <activity android:name=".ViewContactInformationActivity" />
+        <activity
+            android:name=".ViewContactInformationActivity"
+            android:label="Contact Information" />
         <activity android:name=".BasketItemViewActivity" />
         <activity
             android:name=".MyReservedItemViewActivity"
@@ -173,8 +190,9 @@
         </service>
 
         <activity android:name=".InstructorSignUp" />
-        <activity android:name=".InstructorMain"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".InstructorMain"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".instructorAddSection"
             android:label="Add section"
