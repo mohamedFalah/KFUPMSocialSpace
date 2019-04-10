@@ -141,31 +141,38 @@
         </activity> <!-- https://stackoverflow.com/questions/28100472/how-can-i-create-an-android-activity-with-back-arrow-as-shown-in-the-picture -->
         <activity
             android:name=".AddCourseActivity"
+            android:label="Request Course Chat"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".ProfileActivity"
+            android:label="Profile"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".FilesActivity"
+            android:label="Files"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ChatActivity"
+            android:label="Chat"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ChatInfoActivity"
+            android:label="Chat Information"
             android:parentActivityName=".ChatActivity" />
         <activity
             android:name=".ChatFilesActivity"
+            android:label="Chat Files"
             android:parentActivityName=".ChatActivity" />
         <activity
             android:name=".ChatGroupActivity"
+            android:label="Group"
             android:parentActivityName=".ChatActivity" />
         <activity
             android:name=".UtilitiesActivity"
-            android:label="@string/title_activity_utilities"
+            android:label="Utilities"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -174,9 +181,11 @@
         </activity>
         <activity
             android:name=".EditProfileActivity"
+            android:label="Edit Profile"
             android:parentActivityName=".ProfileActivity" />
         <activity
             android:name=".AddMarketItemActivity"
+            android:label="Add Market Item"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Placeholder"
