@@ -155,7 +155,7 @@ public class MyBlogsActivity extends AppCompatActivity implements blogContract.I
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                blogPresenter.deleteBlog(blog);
+                blogPresenter.deleteBlog(blog,"removal");
                 Toast.makeText(MyBlogsActivity.this, "Blog deleted", Toast.LENGTH_SHORT).show();
                 onStart();
                 dialog.cancel();

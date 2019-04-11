@@ -60,6 +60,11 @@ public class BlogPresenter implements blogContract.IPresenter {
     }
 
 
+    public void updateBlog(Blog blog){
+
+        dbRef.child(blog.getCategory()).child(blog.getBlog_id()).setValue(blog);
+    }
+
     public void sendComment(String commentText, String blogID) {
 
         if (checkEmptyText(commentText)) {
@@ -104,10 +109,14 @@ public class BlogPresenter implements blogContract.IPresenter {
 
 
     //delete blog
-    public void deleteBlog(Blog blog){
+    public void deleteBlog(Blog blog, String typeOfDelete){
 
-        dbRef.child(blog.getCategory()).child(blog.getBlog_id()).removeValue();
-        dbRef2.child(blog.getBlog_id()).removeValue();
+        if(typeOfDelete.equals("update")) {
+            dbRef.child(blog.getCategory()).child(blog.getBlog_id()).removeValue();
+        }else {
+            dbRef.child(blog.getCategory()).child(blog.getBlog_id()).removeValue();
+            dbRef2.child(blog.getBlog_id()).removeValue();
+        }
 
     }
 

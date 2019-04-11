@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.android.kfupmsocialspace.BlogViewActivity;
+import com.example.android.kfupmsocialspace.MyBlogViewActivity;
+import com.example.android.kfupmsocialspace.MyBlogsActivity;
 import com.example.android.kfupmsocialspace.R;
 import com.example.android.kfupmsocialspace.model.Blog;
 
@@ -47,12 +49,23 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(mContext, BlogViewActivity.class);
-                Blog blog = blogList.get(i);
-                // passing data to the BlogViewActivity
-                intent.putExtra("clickedBlog", blog);
-                // start the activity
-                mContext.startActivity(intent);
+                if (mContext instanceof MyBlogsActivity) {
+
+                    Intent intent = new Intent(mContext, MyBlogViewActivity.class);
+                    Blog blog = blogList.get(i);
+                    // passing data to the BlogViewActivity
+                    intent.putExtra("clickedBlog", blog);
+                    // start the activity
+                    mContext.startActivity(intent);
+
+                } else {
+                    Intent intent = new Intent(mContext, BlogViewActivity.class);
+                    Blog blog = blogList.get(i);
+                    // passing data to the BlogViewActivity
+                    intent.putExtra("clickedBlog", blog);
+                    // start the activity
+                    mContext.startActivity(intent);
+                }
             }
         });
     }
