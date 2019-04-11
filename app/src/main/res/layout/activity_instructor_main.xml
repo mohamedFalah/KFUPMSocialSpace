@@ -5,7 +5,9 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".InstructorMain">
+
 
     <!--Thanks https://stackoverflow.com/questions/47328243/bottom-bar-navigation-and-navigation-drawer-in-same-app-->
     <android.support.design.widget.CoordinatorLayout
@@ -21,6 +23,7 @@
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
 
         <FrameLayout
             android:id="@+id/fragment_container"
