@@ -206,6 +206,7 @@
             android:name=".instructorAddSection"
             android:label="Add section"
             android:theme="@style/AppTheme" />
+        <activity android:name=".instructor_profile"></activity>
     </application>
 
 </manifest>

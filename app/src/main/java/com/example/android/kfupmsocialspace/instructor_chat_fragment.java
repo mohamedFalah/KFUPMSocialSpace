@@ -6,7 +6,7 @@ package com.example.android.kfupmsocialspace;
         import android.content.Intent;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
-        import android.support.design.widget.FloatingActionButton;
+        //import android.support.design.widget.FloatingActionButton;
         import android.support.v4.app.Fragment;
         import android.support.v7.widget.GridLayoutManager;
         import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +16,8 @@ package com.example.android.kfupmsocialspace;
         import android.view.MenuInflater;
         import android.view.View;
         import android.view.ViewGroup;
+        import com.github.clans.fab.FloatingActionButton;
+
 
         import com.example.android.kfupmsocialspace.Adapter.ChatRoomsAdapter;
         import com.example.android.kfupmsocialspace.model.ChatRoom;
@@ -38,9 +40,9 @@ public class instructor_chat_fragment extends Fragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.chats_fragment, container, false);
-        FloatingActionButton fab = view.findViewById(R.id.floating_btn_add_course);
-        fab.setOnClickListener(this);
+        View view = inflater.inflate(R.layout.activity_instructor_chat_fragment, container, false);
+        com.github.clans.fab.FloatingActionButton course_fab = view.findViewById(R.id.floating_btn_add_section);
+        course_fab.setOnClickListener(this);
 
         setHasOptionsMenu(true);//Make sure you have this line of code.
 
