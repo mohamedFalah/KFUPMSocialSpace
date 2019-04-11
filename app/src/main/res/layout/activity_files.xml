@@ -27,18 +27,7 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-    <!--android:id="@+id/floating_btn_add_app_file"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginEnd="16dp"-->
-    <!--android:layout_marginBottom="16dp"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:srcCompat="@android:drawable/ic_menu_add" />-->
-
     <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/menu_red"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
@@ -46,34 +35,42 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
+        fab:menu_colorNormal="@color/colorPrimary"
+        fab:menu_colorPressed="@color/colorPrimary"
         fab:menu_backgroundColor="#ccffffff"
-        fab:menu_fab_label="Menu label"
+        fab:menu_fab_label="Share files"
         fab:menu_labels_ellipsize="end"
         fab:menu_labels_singleLine="true">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab1"
+            android:id="@+id/floating_btn_add_file_image_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_add_image_icon"
-            fab:fab_label="Disabled"
+            android:src="@drawable/ic_camera_white"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimary"
+            fab:fab_label="Camera"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab2"
+            android:id="@+id/floating_btn_add_file_image_gallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_document"
-            fab:fab_label="Remove button"
+            android:src="@drawable/ic_image_white"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_colorPressed="@color/colorPrimary"
+            fab:fab_label="Gallery"
             fab:fab_size="mini" />
 
-        <!--<com.github.clans.fab.FloatingActionButton-->
-        <!--android:id="@+id/fab3"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@drawable/ic_edit"-->
-        <!--fab:fab_size="mini"-->
-        <!--fab:fab_label="Restore Button" />-->
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/floating_btn_add_file_document"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_document_white"
+            fab:fab_colorNormal="@color/colorPrimary"
+            android:layout_height="wrap_content"
+            fab:fab_colorPressed="@color/colorPrimary"
+            fab:fab_label="Document"
+            fab:fab_size="mini" />
 
     </com.github.clans.fab.FloatingActionMenu>
 

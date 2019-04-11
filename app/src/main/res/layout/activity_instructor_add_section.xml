@@ -120,12 +120,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button3"/>
 
         <EditText
             android:id="@+id/editText"
-            android:layout_width="118dp"
-            android:layout_height="31dp"
+            android:layout_width="372dp"
+            android:layout_height="27dp"
             android:layout_marginTop="4dp"
             android:ems="10"
             android:inputType="number"
@@ -136,8 +137,9 @@
 
         <EditText
             android:id="@+id/editText3"
-            android:layout_width="334dp"
-            android:layout_height="98dp"
+            android:layout_width="361dp"
+            android:layout_height="91dp"
+            android:layout_marginStart="1dp"
             android:ems="10"
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"

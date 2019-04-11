@@ -52,7 +52,7 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
     ////////recording
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference dbRef = database.getReference("Message");
+    private DatabaseReference dbRef = database.getReference("ChatRooms");
     //private FirebaseAuth mAuth = FirebaseAuth.getInstance();
    // private String currentUserId = mAuth.getCurrentUser().getUid();
     private LinearLayoutManager linearLayoutManager;
@@ -139,7 +139,7 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
             }
         });
 
-        dbRef.child("section2").addChildEventListener(new ChildEventListener() {
+        dbRef.child("Rooms").child("ARE 301").child("30").child("Messages").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 

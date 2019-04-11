@@ -39,6 +39,7 @@ public class ChatPresenter implements ChatContract.IPresenter {
     //database
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference("Message");
+    private DatabaseReference dbRef2 = database.getReference("ChatRooms");
     private StorageReference stRef = FirebaseStorage.getInstance().getReference("ChatImages");
     private StorageReference stRefDoc = FirebaseStorage.getInstance().getReference("ChatDocs");
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -81,8 +82,9 @@ public class ChatPresenter implements ChatContract.IPresenter {
             message =  new Message(userID,userName,messageText,getCurrentTime(),"text", "");
 
             message.setMessageID(messageID);
+
             //send the message
-            dbRef.child("section2").child(messageID).setValue(message);
+            dbRef2.child("Rooms").child("ARE 301").child("30").child("Messages").child(messageID).setValue(message);
 
         }
     }

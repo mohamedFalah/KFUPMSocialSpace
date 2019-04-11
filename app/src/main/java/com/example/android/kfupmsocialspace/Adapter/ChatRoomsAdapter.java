@@ -27,7 +27,7 @@ public class ChatRoomsAdapter extends RecyclerView.Adapter<ChatRoomsAdapter.Chat
 
     //here for the now
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference dbRef = database.getReference("Message");
+    private DatabaseReference dbRef = database.getReference("ChatRooms");
 
     public ChatRoomsAdapter(List<ChatRoom> chatRoomsList) {
         this.chatRoomsList = chatRoomsList;
@@ -114,7 +114,7 @@ public class ChatRoomsAdapter extends RecyclerView.Adapter<ChatRoomsAdapter.Chat
         //get the last message  this could somewhere else (chat presenter)
         void lastMessage(String chatRoomName) {
 
-            dbRef.child(chatRoomName).orderByKey().limitToLast(1).addValueEventListener(new ValueEventListener() {
+            dbRef.child("Rooms").child("ARE 301").child("30").child("Messages").orderByKey().limitToLast(1).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

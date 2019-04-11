@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:scrollbarStyle="outsideInset"
-    tools:context=".ViewContactInformationActivity">
+    tools:context=".ViewRoommateContactInformationActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/view_owner_contact_information_button"
+            app:layout_constraintBottom_toTopOf="@id/view_contacted_roommate_contact_information_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
@@ -88,6 +88,72 @@
                 app:layout_constraintTop_toBottomOf="@+id/email_label" />
 
             <TextView
+                android:id="@+id/roommate_contact_information_student_city_label"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="City:"
+                android:textIsSelectable="true"
+                app:layout_constraintEnd_toEndOf="@+id/phone_label"
+                app:layout_constraintTop_toBottomOf="@+id/phone_label" />
+
+            <TextView
+                android:id="@+id/roommate_contact_information_student_city"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Student_city"
+                android:textIsSelectable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/roommate_contact_information_student_city_label"
+                app:layout_constraintStart_toEndOf="@+id/roommate_contact_information_student_city_label" />
+
+            <TextView
+                android:id="@+id/roommate_contact_information_student_major_label"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Major:"
+                android:textIsSelectable="true"
+                app:layout_constraintEnd_toEndOf="@+id/roommate_contact_information_student_city_label"
+                app:layout_constraintTop_toBottomOf="@+id/roommate_contact_information_student_city_label" />
+
+            <TextView
+                android:id="@+id/roommate_contact_information_student_major"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Student_major"
+                android:textIsSelectable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/roommate_contact_information_student_major_label"
+                app:layout_constraintStart_toEndOf="@+id/roommate_contact_information_student_major_label" />
+
+            <TextView
+                android:id="@+id/roommate_contact_information_student_year_label"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Year:"
+                android:textIsSelectable="true"
+                app:layout_constraintEnd_toEndOf="@+id/roommate_contact_information_student_major_label"
+                app:layout_constraintTop_toBottomOf="@+id/roommate_contact_information_student_major_label" />
+
+            <TextView
+                android:id="@+id/roommate_contact_information_student_year"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Student_year"
+                android:textIsSelectable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/roommate_contact_information_student_year_label"
+                app:layout_constraintStart_toEndOf="@+id/roommate_contact_information_student_year_label" />
+
+            <TextView
                 android:id="@+id/contact_information_student_phone"
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
@@ -103,7 +169,7 @@
 
 
         <Button
-            android:id="@+id/view_owner_contact_information_button"
+            android:id="@+id/view_contacted_roommate_contact_information_button"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -112,18 +178,18 @@
             android:layout_marginBottom="8dp"
             android:text="View contact information"
             android:textAllCaps="false"
-            app:layout_constraintBottom_toTopOf="@+id/reserver_remove_item_reservation"
+            app:layout_constraintBottom_toTopOf="@+id/remove_roommate_request"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/reserver_remove_item_reservation"
+            android:id="@+id/remove_roommate_request"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Remove reservation"
+            android:text="Remove contact"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
