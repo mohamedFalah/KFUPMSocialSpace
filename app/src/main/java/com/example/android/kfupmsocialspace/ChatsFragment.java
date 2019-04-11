@@ -62,7 +62,8 @@ public class ChatsFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         ///add one Room
-        ChatRoom section2 = new ChatRoom("1", "section2", "2");
+        ChatRoom section2 = new ChatRoom("1", "Section" + "30", "30");
+        chatRooms.add(section2);
         chatRooms.add(section2);
 
         chatRoomsList = view.findViewById(R.id.courses_chats_recyclerview);
