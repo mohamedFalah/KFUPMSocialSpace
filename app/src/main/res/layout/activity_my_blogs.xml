@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".MyBlogsActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="matrix"
+        android:src="@drawable/bg" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/myBlogs"

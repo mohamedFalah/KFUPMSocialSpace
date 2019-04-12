@@ -3,27 +3,26 @@
 
 package com.example.android.kfupmsocialspace;
 
-        import android.content.Intent;
-        import android.os.Bundle;
-        import android.support.annotation.Nullable;
-        //import android.support.design.widget.FloatingActionButton;
-        import android.support.v4.app.Fragment;
-        import android.support.v7.widget.GridLayoutManager;
-        import android.support.v7.widget.LinearLayoutManager;
-        import android.support.v7.widget.RecyclerView;
-        import android.view.LayoutInflater;
-        import android.view.Menu;
-        import android.view.MenuInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import com.github.clans.fab.FloatingActionButton;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.example.android.kfupmsocialspace.Adapter.ChatRoomsAdapter;
+import com.example.android.kfupmsocialspace.model.ChatRoom;
 
-        import com.example.android.kfupmsocialspace.Adapter.ChatRoomsAdapter;
-        import com.example.android.kfupmsocialspace.model.ChatRoom;
+import java.util.ArrayList;
+import java.util.List;
 
-        import java.util.ArrayList;
-        import java.util.List;
+//import android.support.design.widget.FloatingActionButton;
 
 public class instructor_chat_fragment extends Fragment implements View.OnClickListener {
 
@@ -90,7 +89,7 @@ public class instructor_chat_fragment extends Fragment implements View.OnClickLi
         menu.findItem(R.id.my_roommate_request).setVisible(false);
         menu.findItem(R.id.my_market_items).setVisible(false);
         menu.findItem(R.id.my_blogs).setVisible(false);
-        menu.findItem(R.id.blogs_search_top_bar_icon).setVisible(false);
+//        menu.findItem(R.id.blogs_search_top_bar_icon).setVisible(false);
         menu.findItem(R.id.roommate_search_top_bar_icon).setVisible(false);
         menu.findItem(R.id.market_search_top_bar_icon).setVisible(false);
     }

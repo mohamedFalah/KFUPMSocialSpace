@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/blogs_search_top_bar_icon"
-        android:icon="@drawable/ic_search"
-        android:title="Search"
-        app:actionViewClass="android.support.v7.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView" />
-
-    <item
         android:id="@+id/roommate_search_top_bar_icon"
         android:icon="@drawable/ic_search"
         android:title="Search"
