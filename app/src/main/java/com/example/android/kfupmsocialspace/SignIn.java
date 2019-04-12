@@ -43,7 +43,17 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
         // check if the user already logged in
         if (firebaseUser != null) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            if(firebaseAuth.getCurrentUser().isEmailVerified()) {
+
+                Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
+
+
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "please verify your email address", Toast.LENGTH_SHORT).show();
+            }
+            //startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
         setContentView(R.layout.activity_sign_in);
@@ -92,13 +102,18 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()) {
+                    if(firebaseAuth.getCurrentUser().isEmailVerified()) {
 
-                    Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Logged in successfully", Toast.LENGTH_SHORT).show();
 
 
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                   else {
+                        Toast.makeText(getApplicationContext(), "please verify your email address", Toast.LENGTH_SHORT).show();
+                    }
 
                 } else {
                     Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
