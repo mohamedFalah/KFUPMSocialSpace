@@ -56,9 +56,10 @@ public class instructor_chat_fragment extends Fragment implements View.OnClickLi
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        ///add one Room
-        ChatRoom section2 = new ChatRoom("1", "section2", "2");
-        chatRooms.add(section2);
+        ///add Room
+        chatRooms.add(new ChatRoom("1", "ARE 301", "30"));
+        chatRooms.add(new ChatRoom("2", "ARE 301", "33"));
+        chatRooms.add(new ChatRoom("3", "ENGL 101", "01"));
 
         chatRoomsList = view.findViewById(R.id.courses_chats_recyclerview);
         chatRoomsAdapter = new ChatRoomsAdapter(chatRooms);
@@ -73,10 +74,18 @@ public class instructor_chat_fragment extends Fragment implements View.OnClickLi
         chatRoomsAdapter.SetOnItemClickListener(new ChatRoomsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                //will be used later
-                //ChatRoom chatRoom = chatRooms.get(position);
+
+                ChatRoom chatRoom = chatRooms.get(position);
+
 
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
+
+                // Sending choosing room info to next Activity
+                Bundle bundle = new Bundle();
+                bundle.putString("roomName" , chatRoom.getRoomName());
+                bundle.putString("sectionNumber" , chatRoom.getSectionNumber());
+                intent.putExtra("bundle", bundle);
+
                 startActivity(intent);
 
             }
