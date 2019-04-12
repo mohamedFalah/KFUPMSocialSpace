@@ -171,7 +171,7 @@ public class instructorAddSection extends AppCompatActivity implements RoomChatR
         sectionNumValue = sectionNum.getText().toString();
         studentsIDsValue = studentIDs.getText().toString();
 
-        if (CourseSpinnerValue != null &&  sectionNumValue != null && studentsIDsValue != null) {
+        if (CourseSpinnerValue != null &&  sectionNumValue != null && studentsIDsValue != null && !CourseSpinnerValue.equals("Choose course")) {
             roomChatCreatePresenter.CreateRoomchat(CourseSpinnerValue ,sectionNumValue , studentsIDsValue );
             Toast.makeText(this, "Created", Toast.LENGTH_SHORT).show();
             this.finish();

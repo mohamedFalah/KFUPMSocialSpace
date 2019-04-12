@@ -162,11 +162,11 @@ public class AddCourseActivity extends AppCompatActivity implements RoomChatRequ
     @Override
     public void onClick(View v) {
 
-        if (CourseSpinnerValue != null) {
+        if (CourseSpinnerValue != null && !CourseSpinnerValue.equals("Choose course") ) {
             roomChatRequestPresenter.CreateRoomchatJoinRequest(CourseSpinnerValue);
             Toast.makeText(this, "requested", Toast.LENGTH_SHORT).show();
             this.finish();
         } else
-            Toast.makeText(this, "Choose course and department", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please Fill All Fields", Toast.LENGTH_SHORT).show();
     }
 }
