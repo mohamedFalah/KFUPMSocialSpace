@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.android.kfupmsocialspace.ImageSize;
 import com.example.android.kfupmsocialspace.R;
-import com.example.android.kfupmsocialspace.model.Message;
 import com.example.android.kfupmsocialspace.model.News;
-import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -72,10 +72,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int i) {
 
         News news = newsList.get(i);
+        RelativeLayout.LayoutParams vp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ImageSize.getNewsImageHeight());
+        holder.NewsImage.setLayoutParams(vp);
 
         Picasso.with(mContext).load(news.getImage()).into(holder.NewsImage);
         holder.NewsTitle.setText(news.getTitle());
-
 
 
     }

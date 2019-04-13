@@ -36,6 +36,9 @@ public class ChatPresenter implements ChatContract.IPresenter {
     private Message message = new Message();
     private ChatContract.IView View;
 
+    private String roomName ;
+    private String sectionNumber;
+
     //database
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference("Message");
@@ -63,7 +66,7 @@ public class ChatPresenter implements ChatContract.IPresenter {
             send text message
      */
 
-    public void sendMsg(String messageText) {
+    public void sendMsg(String messageText ,String roomName,String sectionNumber ) {
 
         //to get the user name
         String userID = userpresenter.getUserID();
@@ -84,7 +87,7 @@ public class ChatPresenter implements ChatContract.IPresenter {
             message.setMessageID(messageID);
 
             //send the message
-            dbRef2.child("Rooms").child("ARE 301").child("30").child("Messages").child(messageID).setValue(message);
+            dbRef2.child("Rooms").child(roomName).child(sectionNumber).child("Messages").child(messageID).setValue(message);
 
         }
     }
@@ -219,7 +222,7 @@ public class ChatPresenter implements ChatContract.IPresenter {
         DatabaseReference push = dbRef.push();
         String messageID = push.getKey();
         if (messageID != null) {
-            dbRef.child("section2").child(messageID).setValue(message);
+            dbRef.child("Rooms").child(roomName).child(sectionNumber).child("Messages").child(messageID).setValue(message);
         }
 
     }

@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -83,14 +82,6 @@ public class CategoryBlogsViewActivity extends AppCompatActivity implements View
 
     }
 
-    //This part adds the three dots on the top right
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.app_files_menu, menu);
-        return true;
-    }
-
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(this, AddNewBlogActivity.class);
@@ -107,13 +98,10 @@ public class CategoryBlogsViewActivity extends AppCompatActivity implements View
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onBackPressed();
         switch (item.getItemId()) {
-            case R.id.blogs_search_top_bar_icon:
-                break;
-
             case android.R.id.home:
                 this.finish();
                 break;
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 }

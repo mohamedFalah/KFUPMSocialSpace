@@ -3,8 +3,8 @@
     android:id="@+id/card_view_chat"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     android:clickable="true"
+    android:layout_margin="4dp"
     android:focusable="true">
 
     <RelativeLayout
@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:maxWidth="?attr/actionBarSize"
                 android:maxLines="2"
-                android:text="Course-Name-101" />
+                android:text="Course Name" />
 
             <LinearLayout
                 android:id="@+id/child_linear_layout"
@@ -40,7 +40,7 @@
                     style="@style/TextAppearance.AppCompat.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Last Sender Name" />
+                    android:text="Last Sender" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -53,8 +53,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxWidth="?attr/actionBarSize"
-                    android:maxLines="1"
-                    android:text="Message-String" />
+                    android:maxLength="33"
+                    android:maxLines="1" />
             </LinearLayout>
         </LinearLayout>
 

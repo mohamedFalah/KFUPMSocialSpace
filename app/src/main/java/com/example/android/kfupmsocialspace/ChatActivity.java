@@ -45,6 +45,10 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
     static final int PICK_IMAGE_REQUEST = 1;
     static final int PICK_DOC_REQUEST = 2;
 
+    private String roomName ;
+    private String sectionNumber ;
+
+
 
     ///for recording
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
@@ -72,6 +76,12 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
         setContentView(R.layout.activity_chat);
 
 
+        // Getting choosing chat room info from ChatsFragment
+        Bundle bundle = getIntent().getBundleExtra("bundle");
+        roomName = bundle.getString("roomName");
+        sectionNumber = bundle.getString("sectionNumber");
+
+
         messageAdapter = new MessageAdapter(messageList,this);
         userMessagesList = findViewById(R.id.messages_list);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -96,7 +106,7 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
             public void onClick(View v) {
 
                 String messageText = chatMsgField.getText().toString().trim();
-                chatPresenter.sendMsg(messageText);
+                chatPresenter.sendMsg(messageText , roomName, sectionNumber);
 
                 chatMsgField.setText("");
             }
@@ -139,7 +149,7 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
             }
         });
 
-        dbRef.child("Rooms").child("ARE 301").child("30").child("Messages").addChildEventListener(new ChildEventListener() {
+        dbRef.child("Rooms").child(roomName).child(sectionNumber).child("Messages").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
@@ -243,6 +253,14 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
 
     private void FromGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+
+        // Sending choosing room info to next Activity
+        Bundle bundle = new Bundle();
+        bundle.putString("roomName" , roomName);
+        bundle.putString("sectionNumber" , sectionNumber);
+        intent.putExtra("bundle", bundle);
+
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
@@ -253,6 +271,13 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.IVie
      */
     private void FromCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        // Sending choosing room info to next Activity
+        Bundle bundle = new Bundle();
+        bundle.putString("roomName" , roomName);
+        bundle.putString("sectionNumber" , sectionNumber);
+        intent.putExtra("bundle", bundle);
+
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 

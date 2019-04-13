@@ -26,4 +26,8 @@ public class ImageSize {
     public static int getScreenHeight() {
         return Resources.getSystem().getDisplayMetrics().heightPixels;
     }
+
+    public static int getNewsImageHeight() {
+        return getScreenWidth() / 2;
+    }
 }
